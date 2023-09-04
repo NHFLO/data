@@ -12,7 +12,7 @@ data:
       description_long: Bodemlagen van PWN rondom pompstation Bergen
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [4.5, 52.5, 5.5, 53.5]
+      extent: [-7000, 289000, 300000, 629000]
       paths:
         local: bodemlagen_pwn_bergen/v1.0.0
         nhflo_server: /data/bodemlagen_pwn_bergen/v1.0.0
@@ -29,7 +29,7 @@ data:
       description_long: Bodemlagen van PWN van de zuidelijke helft van het Noord-Hollands Duin
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [4.5, 52.5, 5.5, 53.5]
+      extent: [-7000, 289000, 300000, 629000]
       paths:
         local: bodemlagen_pwn_nhdz/v1.0.0
         nhflo_server: /data/bodemlagen_pwn_nhdz/v1.0.0
@@ -46,11 +46,28 @@ data:
       description_long: Koppeltabel voor regis/geotop en pwn bodemlagen
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [4.5, 52.5, 5.5, 53.5]
+      extent: [-7000, 289000, 300000, 629000]
       paths:
         local: bodemlagen_pwn_regis_koppeltabel/v1.0.0
         nhflo_server: /data/bodemlagen_pwn_regis_koppeltabel/v1.0.0
         mockup: mockup/bodemlagen_pwn_regis_koppeltabel/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: ""
+  oppervlaktewater_pwn_shapes_panden:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2021-04-12"
+      version_owner: "1.0.0"
+      description_short: Shapes van de panden van PWN
+      description_long: Shapes van de panden van PWN
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-7000, 289000, 300000, 629000]
+      paths:
+        local: oppervlaktewater_pwn_shapes_panden/v1.0.0
+        nhflo_server: /data/oppervlaktewater_pwn_shapes_panden/v1.0.0
+        mockup: mockup/oppervlaktewater_pwn_shapes_panden/v1.0.0
       changelog:
         previous_version: "0.0.0"
         log: ""
