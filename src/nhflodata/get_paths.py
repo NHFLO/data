@@ -28,6 +28,13 @@ def get_abs_data_path(
             If local, defining parent folder is required.
         - "nhflo_server" is the data set on the nhflo server. Format is correct
             and the data is unaltered. Used for working on the nhflo server.
+    local_parent_folder : str, optional
+        Parent folder of the local data set. Required if location is "local".
+
+    Returns
+    -------
+    str
+        Absolute path to the data set.
     """
     if location == "get_from_env":
         if "NHFLODATA_LOCATION" not in os.environ:
