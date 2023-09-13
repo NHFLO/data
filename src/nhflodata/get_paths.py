@@ -1,3 +1,4 @@
+import logging
 import os
 
 import yaml
@@ -76,6 +77,7 @@ def get_abs_data_path(
     elif location == "nhflo_server":
         abs_path = rep[name][version_index]["paths"][location]
 
+    logging.info(f"Data path prompted is: {abs_path}")
     return abs_path
 
 
