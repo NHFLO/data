@@ -38,6 +38,22 @@ data:
         previous_version: "0.0.0"
         log: ""
   bodemlagen_pwn_regis_koppeltabel:
+    - version_nhflo: "1.1.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2023-11-20"
+      version_owner: "1.0.0"
+      description_short: Koppeltabel voor regisII en pwn bodemlagen
+      description_long: Koppeltabel voor regisII en pwn bodemlagen
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-7000, 289000, 300000, 629000]
+      paths:
+        local: bodemlagen_pwn_regis_koppeltabel/v1.1.0
+        nhflo_server: /data/bodemlagen_pwn_regis_koppeltabel/v1.1.0
+        mockup: mockup/bodemlagen_pwn_regis_koppeltabel/v1.1.0
+      changelog:
+        previous_version: "1.1.0"
+        log: "Prev version only allowed one to one mapping, now one to many. Explicitly assigned all intermediate layers in an arbitrairy manner, needs to be checked."
     - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
       owner: PWN
       publication_date: "2021-09-22"
