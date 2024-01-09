@@ -87,3 +87,88 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: ""
+  bodemlagen_nh_geotop:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: Artesia
+      publication_date: "2023-08-14"
+      version_owner: "1.0.0"
+      description_short: Voorbewerkte versie van geotop
+      description_long: Voorbewerkte versie van geotop gemaakt met geotop versie v01r5, d.d. 5 februari 2023 (TNO)
+      contact: o.ebbens@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent: [96500, 151000, 487000, 555000]
+      paths:
+        local: modelbestanden_nhflozz/v1.0.0
+        nhflo_server: /data/bodemlagen_nh_geotop/v1.0.0
+        mockup: mockup/bodemlagen_nh_geotop/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: ""
+  3dchloride_lhm:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: Artesia
+      publication_date: "2020-02-13"
+      version_owner: "1.0.0"
+      description_short: Landelijke chlorideverdeling
+      description_long: chlorideverdeling bepaalt met het Landelijk Hydrologisch Instrumentarium (Delsman et al. 2020)
+      contact: d.brakenhoff@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent: [0, 300000, 300000, 625000]
+      paths:
+        local: chloride/v1.0.0
+        nhflo_server: /data/chloride/v1.0.0
+        mockup: mockup/chloride/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: ""
+  onttrekkingen_pwn:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2023-05-26"
+      version_owner: "1.0.0"
+      description_short: Onttrekkingen PWN
+      description_long: Onttrekkingen PWN
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [101277, 107635, 502007, 521656]
+      paths:
+        local: onttrekkingen_pwn/v1.0.0
+        nhflo_server: /data/onttrekkingen_pwn/v1.0.0
+        mockup: mockup/onttrekkingen_pwn/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: ""
+  onttrekkingen_tata:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2023-08-10"
+      version_owner: "1.0.0"
+      description_short: Onttrekkingen TATA steel
+      description_long: Onttrekkingen TATA steel
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [100737, 103206, 498760, 500969]
+      paths:
+        local: onttrekkingen_tata/v1.0.0
+        nhflo_server: /data/onttrekkingen_tata/v1.0.0
+        mockup: mockup/onttrekkingen_tata/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: ""
+  oppervlaktewater_hhnk:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: HHNK
+      publication_date: "2023-05-22"
+      version_owner: "1.0.0"
+      description_short: legger HHNK 2022
+      description_long: legger HHNK 2022 opgehaald op 22 mei 2023
+      contact: o.ebbens@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent: [102631, 487433, 148892, 577317]
+      paths:
+        local: oppervlaktewater_hhnk/v1.0.0
+        nhflo_server: /data/oppervlaktewater_hhnk/v1.0.0
+        mockup: mockup/oppervlaktewater_hhnk/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: ""
