@@ -12,7 +12,7 @@ data:
       description_long: Bodemlagen van PWN rondom pompstation Bergen
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [-7000, 289000, 300000, 629000]
+      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
       paths:
         local: bodemlagen_pwn_bergen/v1.0.0
         nhflo_server: /data/bodemlagen_pwn_bergen/v1.0.0
@@ -87,3 +87,20 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: ""
+  nhi_chloride_concentration:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: NHI, Deltares, Arcadis.
+      publication_date: "2020-06-16"
+      version_owner: "1.0.0"
+      description_short: NHI chloride concentration. Actualisatie zout in het NHI, Delsman et.al., 2020.
+      description_long: Selection made available with reduced precision. Delsman, Joost & Oude Essink, Gualbert & Huizer, S. & Bootsma, Huite & Mulder, Tobias & Zitman, Pieter & Romero Verastegui, Betsy & Janssen, Gijs. (2020). Actualisatie zout in het NHI; Toolbox NHI zoet-zout modellering en landelijk model. 10.13140/RG.2.2.17077.09447. 
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [0, 300000, 300000, 625000]  # minx, miny, maxx, maxy
+      paths:
+        local: nhi_chloride_concentration/v1.0.0
+        nhflo_server: /data/nhi_chloride_concentration/v1.0.0
+        mockup: mockup/nhi_chloride_concentration/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Only p50 made available. p25 and p75 are omitted for now. Precision reduced using the acompanying Python file to reduce the file size from gigabytes to 30-40 megabytes."
