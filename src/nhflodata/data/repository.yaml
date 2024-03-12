@@ -104,3 +104,20 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: "Only p50 made available. p25 and p75 are omitted for now. Precision reduced using the acompanying Python file to reduce the file size from gigabytes to 30-40 megabytes."
+  wells_pwn:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2021-04-12"
+      version_owner: "1.0.0"
+      description_short: Wells of PWN
+      description_long: Wells of PWN. Extraction rates are negative and infiltration positive. All rates in m3/h.
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-500, 146500, 100, 562300]
+      paths:
+        local: wells_pwn/v1.0.0
+        nhflo_server: /data/wells_pwn/v1.0.0
+        mockup: mockup/wells_pwn/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Based on the dawaco data of 05-03-2024 and plenty data until 23-01-2024."
