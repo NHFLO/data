@@ -4,11 +4,8 @@ import os
 import yaml
 
 
-def get_abs_data_path(
-    name="", version="latest", location="get_from_env", local_parent_folder=""
-):
+def get_abs_data_path(name="", version="latest", location="get_from_env", local_parent_folder=""):
     """Returns the absolute path to the data directory from data/repository.yaml
-
 
     Parameters
     ----------
@@ -39,9 +36,7 @@ def get_abs_data_path(
     """
     if location == "get_from_env":
         if "NHFLODATA_LOCATION" not in os.environ:
-            print(
-                "NHFLODATA_LOCATION environment variable not found. Setting to 'mockup'"
-            )
+            print("NHFLODATA_LOCATION environment variable not found. Setting to 'mockup'")
 
         location = os.environ.get("NHFLODATA_LOCATION", "mockup")
 
@@ -96,7 +91,7 @@ def get_repository_path():
 
 def get_repository_data():
     """Returns the data from the repository.yaml file"""
-    with open(get_repository_path(), "r") as file:
+    with open(get_repository_path()) as file:
         data = yaml.load(file, Loader=yaml.FullLoader)["data"]
     return data
 

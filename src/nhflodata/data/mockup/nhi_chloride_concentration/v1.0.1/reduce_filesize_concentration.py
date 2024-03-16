@@ -1,6 +1,7 @@
 # Created by: bas.des.tombe@pwn.nl
 
 import os
+
 import nlmod
 import xarray as xr
 
@@ -17,7 +18,7 @@ for p in cl.percentile.values:
         "complevel": 5,
         "fletcher32": True,  # Store checksums to detect corruption
     }
-    dval_max = 5.
+    dval_max = 5.0
     assert nlmod.dims.attributes_encodings.is_int16_allowed(vmin, vmax, dval_max), "Store as float instead"
     width = 32766 + 32767
     scale_factor = (vmax - vmin) / width
@@ -33,4 +34,5 @@ for p in cl.percentile.values:
     conc2 = xr.open_dataset(fp_out)[f"chloride_{p}"].compute()
 
     import numpy as np
-    print(np.nanmax(np.abs(conc.values - conc2.values))) # ~0.1 mg/l
+
+    print(np.nanmax(np.abs(conc.values - conc2.values)))  # ~0.1 mg/l
