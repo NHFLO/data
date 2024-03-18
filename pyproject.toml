@@ -4,19 +4,15 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nhflodata"
-version = "0.2.0"
-description = "Priporitory data part of the NHFLO modeling environment owned by HHNK, Artesia, and PWN."
+version = "1.0.0"
+description = "Data part of the NHFLO modeling environment owned by HHNK, Artesia, and PWN."
 readme = "README.md"
 license = {file = "LICENSE.txt"}
 requires-python = ">=3.9"
 authors = [
-  {name = "Onno Ebbens", email = "o.ebbens@artesia-water.nl"},
-  {name = "Davíd Brakenhoff", email = "d.brakenhoff@artesia-water.nl"},
   {name = "Bas des Tombe", email = "bas.des.tombe@pwn.nl"},
 ]
 maintainers = [
-  {name = "Onno Ebbens", email = "o.ebbens@artesia-water.nl"},
-  {name = "Davíd Brakenhoff", email = "d.brakenhoff@artesia-water.nl"},
   {name = "Bas des Tombe", email = "bas.des.tombe@pwn.nl"},
 ]
 keywords = [
