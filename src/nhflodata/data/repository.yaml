@@ -137,7 +137,7 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: "Based on the dawaco data of 05-03-2024 and plenty data until 23-01-2024."
-  tata_wells:
+  wells_tata:
     - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
       owner: PWN, TATA.
       publication_date: "2024-03-18"
@@ -148,9 +148,9 @@ data:
       timezone: Europe/Amsterdam
       extent: [100737,  498760, 103206, 500969]
       paths:
-        local: tata_wells/v1.0.0
-        nhflo_server: /data/tata_wells/v1.0.0
-        mockup: mockup/tata_wells/v1.0.0
+        local: wells_tata/v1.0.0
+        nhflo_server: /data/wells_tata/v1.0.0
+        mockup: mockup/wells_tata/v1.0.0
       changelog:
         previous_version: "0.0.0"
         log: "Based on personal communication with TATA."
