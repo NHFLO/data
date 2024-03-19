@@ -5,7 +5,19 @@ import yaml
 
 
 def get_abs_data_path(name="", version="latest", location="get_from_env", local_parent_folder=""):
-    """Returns the absolute path to the data directory from data/repository.yaml
+    """Returns the absolute path to the data directory from data/repository.yaml.
+
+    Sets the location of the data set. Can be "mockup", "local", "nhflo_server", or "get_from_env".
+    - "get_from_env" is the default. The function will return the look for the value of the
+        environment variable NHFLODATA_LOCATION. If not found, it will default to "mockup".
+    - "mockup" is a mockup of the data set. Format is correct but data is
+        altered. It is packaged with the nhflodata package.
+    - "local" is the path to the local data set. Format is correct and data is unaltered,
+        but is not shipped with the nhflodata package. Please reach out to
+        the data set owner listed in repository.yaml to obtain the data set.
+        If local, defining parent folder is required.
+    - "nhflo_server" is the data set on the nhflo server. Format is correct
+        and the data is unaltered. Used for working on the nhflo.com server.
 
     Parameters
     ----------
@@ -34,11 +46,9 @@ def get_abs_data_path(name="", version="latest", location="get_from_env", local_
     str
         Absolute path to the data set.
     """
-    if location == "get_from_env":
-        if "NHFLODATA_LOCATION" not in os.environ:
-            print("NHFLODATA_LOCATION environment variable not found. Setting to 'mockup'")
-
-        location = os.environ.get("NHFLODATA_LOCATION", "mockup")
+    if location == "get_from_env" and "NHFLODATA_LOCATION" in os.environ:
+        local_parent_folder = os.environ.get("NHFLODATA_LOCATION", "mockup")
+        location = "local"
 
     assert location in [
         "mockup",
@@ -73,6 +83,10 @@ def get_abs_data_path(name="", version="latest", location="get_from_env", local_
         abs_path = rep[name][version_index]["paths"][location]
 
     logging.info(f"Data path prompted is: {abs_path}")
+        
+    if not os.path.exists(abs_path):
+        logging.warning(f"Path does not exist: {abs_path}")
+
     return abs_path
 
 
