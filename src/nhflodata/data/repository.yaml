@@ -154,3 +154,37 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: "Based on personal communication with TATA."
+  geotop:
+    - version_nhflo: "1.5"  # Semantic version
+      owner: TNO
+      publication_date: "2023-02-05"
+      version_owner: "v01r5"  # Version used by data owner
+      description_short: Geotop versie 1.5
+      description_long: Geotop versie 1.5
+      contact: o.ebbens@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
+      paths:
+        local: geotop/v1.5
+        nhflo_server: /data/geotop/v1.5
+        mockup: mockup/geotop/v1.5
+      changelog:
+        previous_version: "0.0.0"
+        log: ""
+  peilgebieden_hhnk:
+    - version_nhflo: "1.0.0"  # Semantic version
+      owner: HHNK
+      publication_date: "2023-05-22"
+      version_owner: "1.0.0"  # Version used by data owner
+      description_short: Water level areas HHNK
+      description_long: Water level areas HHNK
+      contact: o.ebbens@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent: [102631, 487433, 148893, 577317]  # minx, miny, maxx, maxy
+      paths:
+        local: peilgebieden_hhnk/v1.0.0
+        nhflo_server: /data/peilgebieden_hhnk/v1.0.0
+        mockup: mockup/peilgebieden_hhnk/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: ""
