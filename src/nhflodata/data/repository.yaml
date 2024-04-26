@@ -12,7 +12,7 @@ data:
       description_long: Bodemlagen van PWN rondom pompstation Bergen
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [-7000, 289000, 300000, 629000]
+      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
       paths:
         local: bodemlagen_pwn_bergen/v1.0.0
         nhflo_server: /data/bodemlagen_pwn_bergen/v1.0.0
@@ -87,88 +87,104 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: ""
-  bodemlagen_nh_geotop:
+  nhi_chloride_concentration:
+    - version_nhflo: "1.0.1"  # Semantic version of the data in NHFLO
+      owner: NHI, Deltares, Arcadis.
+      publication_date: "2020-06-16"
+      version_owner: "1.0.1"
+      description_short: NHI chloride concentration. Actualisatie zout in het NHI, Delsman et.al., 2020.
+      description_long: Selection made available with reduced precision. Delsman, Joost & Oude Essink, Gualbert & Huizer, S. & Bootsma, Huite & Mulder, Tobias & Zitman, Pieter & Romero Verastegui, Betsy & Janssen, Gijs. (2020). Actualisatie zout in het NHI; Toolbox NHI zoet-zout modellering en landelijk model. 10.13140/RG.2.2.17077.09447. 
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [0, 300000, 300000, 625000]  # minx, miny, maxx, maxy
+      paths:
+        local: nhi_chloride_concentration/v1.0.1
+        nhflo_server: /data/nhi_chloride_concentration/v1.0.1
+        mockup: mockup/nhi_chloride_concentration/v1.0.1
+      changelog:
+        previous_version: "1.0.0"
+        log: "Bug in the compression algorithm fixed. Fix also pushed to nlmod."
     - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-      owner: Artesia
-      publication_date: "2023-08-14"
+      owner: NHI, Deltares, Arcadis.
+      publication_date: "2020-06-16"
       version_owner: "1.0.0"
-      description_short: Voorbewerkte versie van geotop
-      description_long: Voorbewerkte versie van geotop gemaakt met geotop versie v01r5, d.d. 5 februari 2023 (TNO)
+      description_short: NHI chloride concentration. Actualisatie zout in het NHI, Delsman et.al., 2020.
+      description_long: Selection made available with reduced precision. Delsman, Joost & Oude Essink, Gualbert & Huizer, S. & Bootsma, Huite & Mulder, Tobias & Zitman, Pieter & Romero Verastegui, Betsy & Janssen, Gijs. (2020). Actualisatie zout in het NHI; Toolbox NHI zoet-zout modellering en landelijk model. 10.13140/RG.2.2.17077.09447. 
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [0, 300000, 300000, 625000]  # minx, miny, maxx, maxy
+      paths:
+        local: nhi_chloride_concentration/v1.0.0
+        nhflo_server: /data/nhi_chloride_concentration/v1.0.0
+        mockup: mockup/nhi_chloride_concentration/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Only p50 made available. p25 and p75 are omitted for now. Precision reduced to 0.1mg/l using the acompanying Python file, thereby reduced the file size from gigabytes to 30-40 megabytes."
+  wells_pwn:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2021-04-12"
+      version_owner: "1.0.0"
+      description_short: Wells of PWN
+      description_long: Wells of PWN. Extraction rates are negative and infiltration positive. All rates in m3/h.
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-500, 146500, 100, 562300]
+      paths:
+        local: wells_pwn/v1.0.0
+        nhflo_server: /data/wells_pwn/v1.0.0
+        mockup: mockup/wells_pwn/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Based on the dawaco data of 05-03-2024 and plenty data until 23-01-2024."
+  wells_tata:
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN, TATA.
+      publication_date: "2024-03-18"
+      version_owner: "1.0.0"
+      description_short: Approximate well data of Tata Steel
+      description_long: Wells of Tata Steel. Extraction rates are negative and infiltration positive. All rates in m3/h.
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [100737,  498760, 103206, 500969]
+      paths:
+        local: wells_tata/v1.0.0
+        nhflo_server: /data/wells_tata/v1.0.0
+        mockup: mockup/wells_tata/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Based on personal communication with TATA."
+  geotop:
+    - version_nhflo: "1.5"  # Semantic version
+      owner: TNO
+      publication_date: "2023-02-05"
+      version_owner: "v01r5"  # Version used by data owner
+      description_short: Geotop versie 1.5
+      description_long: Geotop versie 1.5
       contact: o.ebbens@artesia-water.nl
       timezone: Europe/Amsterdam
-      extent: [96500, 151000, 487000, 555000]
+      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
       paths:
-        local: modelbestanden_nhflozz/v1.0.0
-        nhflo_server: /data/bodemlagen_nh_geotop/v1.0.0
-        mockup: mockup/bodemlagen_nh_geotop/v1.0.0
+        local: geotop/v1.5
+        nhflo_server: /data/geotop/v1.5
+        mockup: mockup/geotop/v1.5
       changelog:
         previous_version: "0.0.0"
         log: ""
-  3dchloride_lhm:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-      owner: Artesia
-      publication_date: "2020-02-13"
-      version_owner: "1.0.0"
-      description_short: Landelijke chlorideverdeling
-      description_long: chlorideverdeling bepaalt met het Landelijk Hydrologisch Instrumentarium (Delsman et al. 2020)
-      contact: d.brakenhoff@artesia-water.nl
-      timezone: Europe/Amsterdam
-      extent: [0, 300000, 300000, 625000]
-      paths:
-        local: chloride/v1.0.0
-        nhflo_server: /data/chloride/v1.0.0
-        mockup: mockup/chloride/v1.0.0
-      changelog:
-        previous_version: "0.0.0"
-        log: ""
-  onttrekkingen_pwn:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-      owner: PWN
-      publication_date: "2023-05-26"
-      version_owner: "1.0.0"
-      description_short: Onttrekkingen PWN
-      description_long: Onttrekkingen PWN
-      contact: bas.des.tombe@pwn.nl
-      timezone: Europe/Amsterdam
-      extent: [101277, 107635, 502007, 521656]
-      paths:
-        local: onttrekkingen_pwn/v1.0.0
-        nhflo_server: /data/onttrekkingen_pwn/v1.0.0
-        mockup: mockup/onttrekkingen_pwn/v1.0.0
-      changelog:
-        previous_version: "0.0.0"
-        log: ""
-  onttrekkingen_tata:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-      owner: PWN
-      publication_date: "2023-08-10"
-      version_owner: "1.0.0"
-      description_short: Onttrekkingen TATA steel
-      description_long: Onttrekkingen TATA steel
-      contact: bas.des.tombe@pwn.nl
-      timezone: Europe/Amsterdam
-      extent: [100737, 103206, 498760, 500969]
-      paths:
-        local: onttrekkingen_tata/v1.0.0
-        nhflo_server: /data/onttrekkingen_tata/v1.0.0
-        mockup: mockup/onttrekkingen_tata/v1.0.0
-      changelog:
-        previous_version: "0.0.0"
-        log: ""
-  oppervlaktewater_hhnk:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+  peilgebieden_hhnk:
+    - version_nhflo: "1.0.0"  # Semantic version
       owner: HHNK
       publication_date: "2023-05-22"
-      version_owner: "1.0.0"
-      description_short: legger HHNK 2022
-      description_long: legger HHNK 2022 opgehaald op 22 mei 2023
+      version_owner: "1.0.0"  # Version used by data owner
+      description_short: Water level areas HHNK
+      description_long: Water level areas HHNK
       contact: o.ebbens@artesia-water.nl
       timezone: Europe/Amsterdam
-      extent: [102631, 487433, 148892, 577317]
+      extent: [102631, 487433, 148893, 577317]  # minx, miny, maxx, maxy
       paths:
-        local: oppervlaktewater_hhnk/v1.0.0
-        nhflo_server: /data/oppervlaktewater_hhnk/v1.0.0
-        mockup: mockup/oppervlaktewater_hhnk/v1.0.0
+        local: peilgebieden_hhnk/v1.0.0
+        nhflo_server: /data/peilgebieden_hhnk/v1.0.0
+        mockup: mockup/peilgebieden_hhnk/v1.0.0
       changelog:
         previous_version: "0.0.0"
         log: ""

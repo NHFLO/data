@@ -1,8 +1,6 @@
 import os
 
-from nhflodata.get_paths import get_abs_data_path
-from nhflodata.get_paths import get_repository_data
-from nhflodata.get_paths import is_valid_semver
+from nhflodata.get_paths import get_abs_data_path, get_repository_data, is_valid_semver
 
 
 def test_repository_yaml():

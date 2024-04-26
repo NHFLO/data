@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "B1", "Q_Mm3/a": 1.0, "Q_m3/d": 1.0 }, "geometry": { "type": "Point", "coordinates": [ 0.0, 1.0 ] } },
+{ "type": "Feature", "properties": { "Name": "B2", "Q_Mm3/a": 1.0, "Q_m3/d": 1.0 }, "geometry": { "type": "Point", "coordinates": [ 0.0, 1.0 ] } }
+]
+}
