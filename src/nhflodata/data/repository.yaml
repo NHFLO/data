@@ -180,7 +180,7 @@ data:
       description_long: Water level areas HHNK
       contact: o.ebbens@artesia-water.nl
       timezone: Europe/Amsterdam
-      extent: [102631, 487433, 148893, 577317]  # minx, miny, maxx, maxy
+      extent: [102631, 487433, 148892, 577317]  # minx, miny, maxx, maxy
       paths:
         local: peilgebieden_hhnk/v1.0.0
         nhflo_server: /data/peilgebieden_hhnk/v1.0.0
