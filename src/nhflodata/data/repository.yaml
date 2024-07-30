@@ -71,6 +71,22 @@ data:
         previous_version: "0.0.0"
         log: ""
   oppervlaktewater_pwn_shapes_panden:
+    - version_nhflo: "1.0.1"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2024-07-03"
+      version_owner: "1.0.1"
+      description_short: Shapes van de panden van PWN
+      description_long: Shapes van de panden van PWN
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-7000, 289000, 300000, 629000]
+      paths:
+        local: oppervlaktewater_pwn_shapes_panden/v1.0.1
+        nhflo_server: /data/oppervlaktewater_pwn_shapes_panden/v1.0.1
+        mockup: mockup/oppervlaktewater_pwn_shapes_panden/v1.0.1
+      changelog:
+        previous_version: "1.0.0"
+        log: "small addition of the bassin to the location of Mensink station"
     - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
       owner: PWN
       publication_date: "2021-04-12"
@@ -205,3 +221,71 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: ""
+  pwn_cropfactor:
+      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+        owner: PWN.
+        publication_date: "2024-07-03"
+        version_owner: "1.0.0"
+        description_short: Cropfactor maps
+        description_long: Cropfactor map deep (> 2m) groundwater and shallow groundwater (< 2m) both sourced from Triwaco model. Also a average groundwater depth derived from the PWN Vlotter NHFLO model.
+        contact: caspar.van.genuchten@pwn.nl
+        timezone: Europe/Amsterdam
+        extent: [99000,  497500, 110500, 509500]
+        paths:
+          local: pwn_cropfactor/v1.0.0
+          nhflo_server: /data/pwn_cropfactor/v1.0.0
+          mockup: mockup/pwn_cropfactor/v1.0.0
+        changelog:
+          previous_version: "0.0.0"
+          log: "Dataset was made for the PWN Vlotter NHFLO model."
+  Grid_refinement_Vlotter:
+      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+        owner: PWN.
+        publication_date: "2024-07-30"
+        version_owner: "1.0.0"
+        description_short: Grid refinement shapefile NHFLO Vlotter model
+        description_long: Shapefiles of the 4 levels of refinement that are used in the NHFLO Vlotter model
+        contact: caspar.van.genuchten@pwn.nl
+        timezone: Europe/Amsterdam
+        extent: [99000,  497500, 110500, 509500]
+        paths:
+          local: Grid_refinement_Vlotter/v1.0.0
+          nhflo_server: /data/Grid_refinement_Vlotter/v1.0.0
+          mockup: mockup/Grid_refinement_Vlotter/v1.0.0
+        changelog:
+          previous_version: "0.0.0"
+          log: "Dataset was made for the PWN Vlotter NHFLO model."
+  Oppervlaktewater_Vlotter:
+      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+        owner: PWN.
+        publication_date: "2024-07-30"
+        version_owner: "1.0.0"
+        description_short: oppervlaktewater gebruikt in NHFLO Vlotter model
+        description_long: the exact data for the Drain package that is used in de NHFLO Vlotter model
+        contact: caspar.van.genuchten@pwn.nl
+        timezone: Europe/Amsterdam
+        extent: [99000,  497500, 110500, 509500]
+        paths:
+          local: Oppervlaktewater_Vlotter/v1.0.0
+          nhflo_server: /data/Oppervlaktewater_Vlotter/v1.0.0
+          mockup: mockup/Oppervlaktewater_Vlotter/v1.0.0
+        changelog:
+          previous_version: "0.0.0"
+          log: "Dataset was made for the PWN Vlotter NHFLO model."
+  Lakes_Vlotter:
+      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+        owner: PWN.
+        publication_date: "2024-07-30"
+        version_owner: "1.0.0"
+        description_short: Lakes voor NHFLO model Vlotter
+        description_long: Input voor de Lakes (LAK) package in NHFLO Vlotter model
+        contact: caspar.van.genuchten@pwn.nl
+        timezone: Europe/Amsterdam
+        extent: [99000,  497500, 110500, 509500]
+        paths:
+          local: Lakes_Vlotter/v1.0.0
+          nhflo_server: /data/Lakes_Vlotter/v1.0.0
+          mockup: mockup/Lakes_Vlotter/v1.0.0
+        changelog:
+          previous_version: "0.0.0"
+          log: "Dataset was made for the PWN Vlotter NHFLO model."
