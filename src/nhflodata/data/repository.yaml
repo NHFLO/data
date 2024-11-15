@@ -295,7 +295,7 @@ data:
         publication_date: "2024-10-21"
         version_owner: "1.0.0"
         description_short: measurements used for calibrating the model
-        description_long: measurements used for calibrating the model, i2014-2018, 5 different locaties
+        description_long: measurements used for calibrating the model, 2014-2018, 5 different locaties
         contact: caspar.van.genuchten@pwn.nl
         timezone: Europe/Amsterdam
         extent: [99000,  497500, 110500, 509500]
@@ -303,6 +303,23 @@ data:
           local: Measurements_Vlotter/v1.0.0
           nhflo_server: /data/Measurements_Vlotter/v1.0.0
           mockup: mockup/Measurements_Vlotter/v1.0.0
+        changelog:
+          previous_version: "0.0.0"
+          log: "Dataset was made for the PWN Vlotter NHFLO model."
+  Stroomgebied_Vlotter:
+      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+        owner: PWN.
+        publication_date: "2024-10-29"
+        version_owner: "1.0.0"
+        description_short: catchment that contributes to the lake system in de Vlotter
+        description_long: catchment that contributes to the lake system in de Vlotter. Based on the AHN4 elevation data, manually filled and using the catchment analysis tool in Qgis.
+        contact: caspar.van.genuchten@pwn.nl
+        timezone: Europe/Amsterdam
+        extent: [99000,  497500, 110500, 509500]
+        paths:
+          local: Stroomgebied_Vlotter/v1.0.0
+          nhflo_server: /data/Stroomgebied_Vlotter/v1.0.0
+          mockup: mockup/Stroomgebied_Vlotter/v1.0.0
         changelog:
           previous_version: "0.0.0"
           log: "Dataset was made for the PWN Vlotter NHFLO model."
