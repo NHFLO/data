@@ -289,7 +289,7 @@ data:
         changelog:
           previous_version: "0.0.0"
           log: "Dataset was made for the PWN Vlotter NHFLO model."
-  Metingen_Vlotter:
+  Measurements_Vlotter:
       - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
         owner: PWN.
         publication_date: "2024-10-21"
