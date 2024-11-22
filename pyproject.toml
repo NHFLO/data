@@ -49,8 +49,15 @@ features = ["lintformat"]
 
 [tool.hatch.envs.lintformat.scripts]
 format = ["ruff check --fix --unsafe-fixes src/nhflodata/*.py tests", "ruff format src/nhflodata/*.py tests"]
-lint = ["ruff check src/nhflodata/*.py tests"]
+lint = ["ruff check src/nhflodata/*.py tests", "mypy src/nhflodata/*.py"]
 lintminimal = ["ruff check src/nhflodata/*.py tests --config \"lint.select=['E4', 'E7', 'E9', 'F']\""]
+
+[tool.hatch.envs.test]
+detached = false
+features = ["test"]
+
+[tool.hatch.envs.test.scripts]
+test = ["pytest tests -v"]
 
 [tool.hatch.envs.hatch-static-analysis]
 config-path = "ruff.toml"

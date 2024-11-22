@@ -1,0 +1,76 @@
+# NHFLO Data Repository Schema
+# Version: 1.0.0
+# This schema defines the structure and validation rules for the NHFLO data repository
+
+# Root level schema
+# - title: Name of the repository
+# - description: General description of the repository contents
+# - data: Map of dataset names to their versions
+title: str(required=True)
+description: str(required=True)
+data: map(include('dataset_name'), required=True)
+
+---
+# Schema for dataset name entries
+# Each dataset name (e.g., 'bodemlagen_pwn_bergen') contains a list of versions
+dataset_name: list(include('dataset_version'))
+
+---
+# Schema for a single dataset version
+# Defines all required fields and their validation patterns
+dataset_version:
+  # Must start with 'v' followed by semantic version (e.g., v1.0.0)
+  version_nhflo: regex(r'^\d+\.\d+\.\d+$', required=True)
+  
+  # Organization or person that owns the data
+  owner: str(required=True)
+  
+  # ISO format date (YYYY-MM-DD)
+  publication_date: regex(r'^\d{4}-\d{2}-\d{2}$', required=True)
+  
+  # Version used by the data owner
+  version_owner: str(required=True)
+  
+  # Brief description (one line)
+  description_short: str(required=True)
+  
+  # Detailed description
+  description_long: str(required=True)
+  
+  # Valid email address
+  contact: regex(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', required=True)
+  
+  # Must be valid timezone name
+  timezone: str(required=True)
+  
+  # Spatial extent [minx, miny, maxx, maxy]
+  extent: list(num(), length=4, required=True)
+  
+  # Path information
+  paths: include('paths', required=True)
+  
+  # Version history
+  changelog: include('changelog', required=True)
+
+---
+# Schema for paths
+# All paths must end with the same version_nhflo as specified above
+paths:
+  # Dataset name followed by version (e.g., wells_pwn/v1.0.0)
+  local: regex(r'^[a-zA-Z_]+[a-zA-Z0-9_]*/v\d+\.\d+\.\d+$', required=True)
+  
+  # Must start with /data/ (e.g., /data/wells_pwn/v1.0.0)
+  nhflo_server: regex(r'^/data/[a-zA-Z_]+[a-zA-Z0-9_]*/v\d+\.\d+\.\d+$', required=True)
+  
+  # Must start with mockup/ (e.g., mockup/wells_pwn/v1.0.0)
+  mockup: regex(r'^mockup/[a-zA-Z_]+[a-zA-Z0-9_]*/v\d+\.\d+\.\d+$', required=True)
+
+---
+# Schema for changelog
+# Tracks version history and changes
+changelog:
+  # Must start with 'v' followed by semantic version (e.g., v1.0.0)
+  previous_version: regex(r'^\d+\.\d+\.\d+$', required=True)
+  
+  # Description of changes from previous version
+  log: str(required=True)

@@ -5,6 +5,7 @@ import os
 import re
 
 import yaml
+from yaml.loader import SafeLoader
 
 
 def get_abs_data_path(name="", version="latest", location="get_from_env", local_parent_folder=""):
@@ -33,7 +34,8 @@ def get_abs_data_path(name="", version="latest", location="get_from_env", local_
     location : str, optional
         Location of the data set. Can be "mockup", "local", "nhflo_server", or "get_from_env".
         - "get_from_env" is the default. The function will return the look for the value of the
-            environment variable NHFLODATA_LOCATION.
+            environment variable NHFLODATA_LOCATION for the data path. mockup will be used if the
+            variable is not found.
         - "mockup" is a mockup of the data set. Format is correct but data is
             altered. It is packaged with the nhflodata package.
         - "local" is the local data set. Format is correct and data is unaltered,
@@ -51,10 +53,11 @@ def get_abs_data_path(name="", version="latest", location="get_from_env", local_
     str
         Absolute path to the data set.
     """
+    if local_parent_folder and location != "local":
+        msg = "local_parent_folder must be empty if location is 'get_from_env'"
+        raise ValueError(msg)
+
     if location == "get_from_env":
-        if local_parent_folder:
-            msg = "local_parent_folder must be empty if location is 'get_from_env'"
-            raise ValueError(msg)
         local_parent_folder = os.environ.get("NHFLODATA_LOCATION", "")
 
     if location not in {
@@ -117,7 +120,7 @@ def get_repository_path():
 def get_repository_data():
     """Return the data from the repository.yaml file."""
     with open(get_repository_path(), encoding="utf-8") as file:
-        return yaml.save_load(file)["data"]
+        return yaml.load(file, Loader=SafeLoader)["data"]
 
 
 def is_valid_semver(version):
