@@ -57,7 +57,8 @@ detached = false
 features = ["test"]
 
 [tool.hatch.envs.test.scripts]
-test = ["pytest tests -v"]
+test-repository-yaml = ["pytest tests/test_repository_yaml.py -v"]
+test-mockup-folder-structure = ["pytest tests/test_mockup_folder_structure.py -v"]
 
 [tool.hatch.envs.hatch-static-analysis]
 config-path = "ruff.toml"

@@ -19,7 +19,7 @@ dataset_name: list(include('dataset_version'))
 # Schema for a single dataset version
 # Defines all required fields and their validation patterns
 dataset_version:
-  # Must start with 'v' followed by semantic version (e.g., v1.0.0)
+  # Semantic version with three levels (e.g., v1.0.0)
   version_nhflo: regex(r'^\d+\.\d+\.\d+$', required=True)
   
   # Organization or person that owns the data
@@ -69,7 +69,7 @@ paths:
 # Schema for changelog
 # Tracks version history and changes
 changelog:
-  # Must start with 'v' followed by semantic version (e.g., v1.0.0)
+  # Semantic version (e.g., v1.0.0)
   previous_version: regex(r'^\d+\.\d+\.\d+$', required=True)
   
   # Description of changes from previous version
