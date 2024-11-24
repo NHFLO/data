@@ -10,7 +10,7 @@ on:
 
 jobs:
   lint:
-    name: Lint python files, repository.yaml, and folder structure
+    name: Lint python files, repository.yaml, and mockup folder structure
     runs-on: ubuntu-latest
     concurrency:
       # Cancel any previous runs with the same workflow name and branch
