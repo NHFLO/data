@@ -29,7 +29,8 @@ def get_abs_data_path(name="", version="latest", location="get_from_env", local_
     name : str
         Name of the data set.
     version : str
-        Version of the data set. Can be "latest" or a specific version number.
+        Version of the data set. Can be "latest" or a specific version number. Version numbers
+        must be a valid semantic version number: 1.0.0, 1.0.1, 1.1.0, etc.
         Corresponds to the verion_nhflo entry in repository.yaml.
     location : str, optional
         Location of the data set. Can be "mockup", "local", "nhflo_server", or "get_from_env".
