@@ -1,3 +1,4 @@
+name: Data validator
 on:
   push:
     branches:

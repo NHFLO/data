@@ -1,4 +1,4 @@
-name: Data repository
+name: Linter
 
 on:
   push:
