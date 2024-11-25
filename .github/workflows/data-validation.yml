@@ -1,16 +1,11 @@
-name: Linter
-
+name: Data validator
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
 jobs:
-  lint:
-    name: Lint python files, repository.yaml, and mockup folder structure
+  data-validation:
+    name: Test for forbidden file formats
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
@@ -29,7 +24,5 @@ jobs:
         uses: astral-sh/setup-uv@v3
       - name: Install hatch
         run: uv tool install hatch
-      - name: Lint Python files
-        run: hatch run lintformat:lint
-      - name: Lint repository.yaml and check mockup folder structure
-        run: hatch run test:pytest tests/test_repository_yaml.py tests/test_mockup_folder_structure.py -v
+      - name: Test for forbidden file formats
+        run: hatch run test:pytest tests/test_forbidden_file_formats.py -v
