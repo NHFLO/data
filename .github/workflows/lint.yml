@@ -32,4 +32,28 @@ jobs:
       - name: Lint Python files
         run: hatch run lintformat:lint
       - name: Lint repository.yaml and check mockup folder structure
-        run: hatch run test:test
+        run: hatch run test:pytest tests/test_repository_yaml.py tests/test_mockup_folder_structure.py -v
+
+  data-validation:
+    name: Test for forbidden file formats
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+      cancel-in-progress: true
+    strategy:
+      fail-fast: false
+    env:
+      HATCH_VERBOSE: 1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+      - name: Install hatch
+        run: uv tool install hatch
+      - name: Test for forbidden file formats
+        run: hatch run test:pytest tests/test_forbidden_file_formats.py -v
+

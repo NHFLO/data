@@ -60,6 +60,7 @@ features = ["test"]
 test = ["pytest tests -v"]
 test-repository-yaml = ["pytest tests/test_repository_yaml.py -v"]
 test-mockup-folder-structure = ["pytest tests/test_mockup_folder_structure.py -v"]
+test-test-forbidden-file-formats = ["pytest tests/test_forbidden_file_formats.py -v"]
 
 [tool.hatch.envs.hatch-static-analysis]
 config-path = "ruff.toml"
