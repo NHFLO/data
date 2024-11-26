@@ -105,7 +105,7 @@ def test_no_shapefile_or_geopackage():
         forbidden_files.extend(files)
 
     if forbidden_files:
-        files_str = "\n".join(str(f).split('mockup/')[-1] for f in forbidden_files)
+        files_str = "\n".join(str(f).split("mockup/")[-1] for f in forbidden_files)
         pytest.fail(
             f"Found prohibited geographic files:\n{files_str}\n\n"
             "Recommendation: Convert these files to GeoJSON format for better "
@@ -145,7 +145,7 @@ def test_no_excel_files():
         excel_files.extend(files)
 
     if excel_files:
-        files_str = "\n".join(str(f).split('mockup/')[-1] for f in excel_files)
+        files_str = "\n".join(str(f).split("mockup/")[-1] for f in excel_files)
         pytest.fail(
             f"Found Excel files:\n{files_str}\n\n"
             "Recommendation: Convert these files to CSV format for better "
