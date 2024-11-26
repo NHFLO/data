@@ -1,20 +1,17 @@
 """Test for forbidden file formats."""
+
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import pytest
 
+from nhflodata.get_paths import get_abs_data_path, get_repository_data
 
-def get_all_folders(root_dir: str = ".") -> list[Path]:
+
+def get_latest_data_paths() -> list[Path]:
     """
-    Get all folders in the given directory recursively.
-
-    Parameters
-    ----------
-    root_dir : str, optional
-        Root directory to start searching from, by default current directory (".")
+    Get paths to all latest data versions in the repository.
 
     Returns
     -------
@@ -23,11 +20,13 @@ def get_all_folders(root_dir: str = ".") -> list[Path]:
 
     Examples
     --------
-    >>> folders = get_all_folders("./data")
+    >>> folders = get_latest_data_paths()
     >>> print(folders[0])
-    ./data/subfolder1
+    ./data/subfolder1/v1.2.3
     """
-    return [Path(os.path.join(root, dir_name)) for root, dirs, _ in os.walk(root_dir) for dir_name in dirs]
+    dataset_names = sorted(get_repository_data().keys())
+    dataset_paths = [get_abs_data_path(name, version="latest", location="mockup") for name in dataset_names]
+    return [Path(path) for path in dataset_paths]
 
 
 def find_files_by_extension(folder: Path, extensions: set[str]) -> list[Path]:
@@ -76,6 +75,8 @@ def find_files_by_extension(folder: Path, extensions: set[str]) -> list[Path]:
 
 
 pytest.mark.xfail(strict=False)
+
+
 def test_no_shapefile_or_geopackage():
     """
     Test for absence of shapefile and geopackage formats.
@@ -98,7 +99,7 @@ def test_no_shapefile_or_geopackage():
     - Single file format instead of multiple files (like shapefiles)
     """
     forbidden_geo_extensions = {".shp", ".shx", ".dbf", ".prj", ".gpkg"}
-    folders = get_all_folders()
+    folders = get_latest_data_paths()
 
     forbidden_files = []
     for folder in folders:
@@ -115,6 +116,8 @@ def test_no_shapefile_or_geopackage():
 
 
 pytest.mark.xfail(strict=False)
+
+
 def test_no_excel_files():
     """
     Test for absence of Excel file formats.
@@ -138,7 +141,7 @@ def test_no_excel_files():
     - More universal compatibility
     """
     excel_extensions = {".xls", ".xlsx", ".xlsm"}
-    folders = get_all_folders()
+    folders = get_latest_data_paths()
 
     excel_files = []
     for folder in folders:
