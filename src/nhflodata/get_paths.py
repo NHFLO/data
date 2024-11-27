@@ -1,4 +1,5 @@
 """Functions to get paths to data sets."""
+from __future__ import annotations
 
 import logging
 import os
