@@ -1,5 +1,7 @@
 """Test for forbidden file formats."""
 
+from __future__ import annotations
+
 from pathlib import Path
 
 import pytest
@@ -40,7 +42,7 @@ def find_files_by_extension(folder: Path, extensions: set[str]) -> list[Path]:
     normalized_extensions = {(ext if ext.startswith(".") else f".{ext}").lower() for ext in extensions}
 
     # Get all files in the folder and its subfolders
-    all_files = folder.glob("**/*")
+    all_files = Path(folder).glob("**/*")
 
     # Check each file's extension case-insensitively
     for file_path in all_files:
