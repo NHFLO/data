@@ -2,31 +2,9 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
 import pytest
 
-from nhflodata.get_paths import get_abs_data_path, get_repository_data
-
-
-def get_latest_data_paths() -> list[Path]:
-    """
-    Get paths to all latest data versions in the repository.
-
-    Returns
-    -------
-    List[Path]
-        List of Path objects representing all found directories
-
-    Examples
-    --------
-    >>> folders = get_latest_data_paths()
-    >>> print(folders[0])
-    ./data/subfolder1/v1.2.3
-    """
-    dataset_names = sorted(get_repository_data().keys())
-    dataset_paths = [get_abs_data_path(name, version="latest", location="mockup") for name in dataset_names]
-    return [Path(path) for path in dataset_paths]
+from nhflodata.get_paths import get_latest_data_paths
 
 
 def find_files_by_extension(folder: Path, extensions: set[str]) -> list[Path]:
