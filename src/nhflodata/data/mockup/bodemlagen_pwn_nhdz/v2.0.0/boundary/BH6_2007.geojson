@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "BH6_2007",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": 0.0, "LINK": 2 }, "geometry": { "type": "Point", "coordinates": [ 100375.0, 514886.0 ] } },
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": -1.35, "LINK": 24 }, "geometry": { "type": "Point", "coordinates": [ 100019.0, 496755.0 ] } },
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": 0.0, "LINK": 25 }, "geometry": { "type": "Point", "coordinates": [ 95831.0, 496980.0 ] } },
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": -1.8, "LINK": 33 }, "geometry": { "type": "Point", "coordinates": [ 102100.0, 496705.0 ] } },
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": -2.6, "LINK": 34 }, "geometry": { "type": "Point", "coordinates": [ 109000.0, 497000.0 ] } },
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": -2.27, "LINK": 39 }, "geometry": { "type": "Point", "coordinates": [ 109000.0, 502000.0 ] } },
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": -1.87, "LINK": 43 }, "geometry": { "type": "Point", "coordinates": [ 109000.0, 506000.0 ] } },
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": -1.5, "LINK": 52 }, "geometry": { "type": "Point", "coordinates": [ 109000.0, 515000.0 ] } },
+{ "type": "Feature", "properties": { "BH6_2007_I": 1, "VALUE": -1.35, "LINK": 57 }, "geometry": { "type": "Point", "coordinates": [ 103705.0, 514975.0 ] } }
+]
+}
