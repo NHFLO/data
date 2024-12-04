@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "BH7basic",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+
+]
+}

@@ -1,0 +1,14 @@
+{
+"type": "FeatureCollection",
+"name": "zoetzout_org_point",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "ZOETZOUT_O": 109, "VALUE": -103.0 }, "geometry": { "type": "Point", "coordinates": [ 105416.0, 521974.0 ] } },
+{ "type": "Feature", "properties": { "ZOETZOUT_O": 110, "VALUE": -104.0 }, "geometry": { "type": "Point", "coordinates": [ 105879.0, 521502.0 ] } },
+{ "type": "Feature", "properties": { "ZOETZOUT_O": 111, "VALUE": -107.0 }, "geometry": { "type": "Point", "coordinates": [ 106462.0, 521637.0 ] } },
+{ "type": "Feature", "properties": { "ZOETZOUT_O": 112, "VALUE": -117.0 }, "geometry": { "type": "Point", "coordinates": [ 107189.0, 521938.0 ] } },
+{ "type": "Feature", "properties": { "ZOETZOUT_O": 118, "VALUE": -20.0 }, "geometry": { "type": "Point", "coordinates": [ 104045.0, 516207.0 ] } },
+{ "type": "Feature", "properties": { "ZOETZOUT_O": 119, "VALUE": -20.0 }, "geometry": { "type": "Point", "coordinates": [ 106589.0, 515571.0 ] } }
+]
+}

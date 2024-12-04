@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "C3",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "C3_": 1, "C3_ID": 1, "VALUE": 3000.0 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 108073.0, 531836.0 ], [ 115703.0, 522017.0 ], [ 113693.0, 511517.0 ], [ 106820.0, 508798.0 ], [ 99764.0, 509523.0 ], [ 103390.0, 531806.0 ], [ 108073.0, 531836.0 ] ] ] } }
+]
+}

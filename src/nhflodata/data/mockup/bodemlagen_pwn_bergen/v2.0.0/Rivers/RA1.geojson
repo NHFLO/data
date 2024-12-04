@@ -1,0 +1,22 @@
+{
+"type": "FeatureCollection",
+"name": "RA1",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 506 }, "geometry": { "type": "Point", "coordinates": [ 107130.0, 521567.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 501 }, "geometry": { "type": "Point", "coordinates": [ 107031.0, 521568.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 511 }, "geometry": { "type": "Point", "coordinates": [ 107000.0, 521565.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 512 }, "geometry": { "type": "Point", "coordinates": [ 107057.0, 521460.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 509 }, "geometry": { "type": "Point", "coordinates": [ 107185.0, 521571.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 502 }, "geometry": { "type": "Point", "coordinates": [ 107091.0, 521469.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 513 }, "geometry": { "type": "Point", "coordinates": [ 107171.0, 521527.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 503 }, "geometry": { "type": "Point", "coordinates": [ 107167.0, 521497.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 504 }, "geometry": { "type": "Point", "coordinates": [ 107288.0, 521483.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 505 }, "geometry": { "type": "Point", "coordinates": [ 107406.0, 521625.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 500 }, "geometry": { "type": "Point", "coordinates": [ 107508.0, 521679.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 507 }, "geometry": { "type": "Point", "coordinates": [ 107457.0, 521655.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 510 }, "geometry": { "type": "Point", "coordinates": [ 107460.0, 521653.0 ] } },
+{ "type": "Feature", "properties": { "RA1_ID": 1, "VALUE": 0.0, "LINK": 508 }, "geometry": { "type": "Point", "coordinates": [ 107457.0, 521650.0 ] } }
+]
+}

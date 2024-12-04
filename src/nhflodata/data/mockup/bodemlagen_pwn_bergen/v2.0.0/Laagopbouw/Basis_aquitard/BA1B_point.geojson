@@ -1,0 +1,24 @@
+{
+"type": "FeatureCollection",
+"name": "BA1B_point",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "BA1B_ID": 13, "VALUE": -5.5 }, "geometry": { "type": "Point", "coordinates": [ 104598.0, 526421.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 14, "VALUE": -7.7 }, "geometry": { "type": "Point", "coordinates": [ 104432.0, 525643.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 15, "VALUE": -8.2 }, "geometry": { "type": "Point", "coordinates": [ 104402.0, 525165.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 16, "VALUE": -4.0 }, "geometry": { "type": "Point", "coordinates": [ 104593.0, 524492.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 17, "VALUE": -5.8 }, "geometry": { "type": "Point", "coordinates": [ 104947.0, 525668.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 18, "VALUE": -9.0 }, "geometry": { "type": "Point", "coordinates": [ 105376.0, 524692.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 19, "VALUE": -7.0 }, "geometry": { "type": "Point", "coordinates": [ 105226.0, 524066.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 20, "VALUE": -4.0 }, "geometry": { "type": "Point", "coordinates": [ 105234.0, 523500.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 21, "VALUE": -7.5 }, "geometry": { "type": "Point", "coordinates": [ 106265.0, 524505.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 22, "VALUE": -4.5 }, "geometry": { "type": "Point", "coordinates": [ 106159.0, 523462.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 23, "VALUE": -7.5 }, "geometry": { "type": "Point", "coordinates": [ 107085.0, 525550.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 24, "VALUE": -4.5 }, "geometry": { "type": "Point", "coordinates": [ 107070.0, 524275.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 25, "VALUE": -5.5 }, "geometry": { "type": "Point", "coordinates": [ 107143.0, 523403.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 26, "VALUE": -6.0 }, "geometry": { "type": "Point", "coordinates": [ 108137.0, 524148.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 27, "VALUE": -6.0 }, "geometry": { "type": "Point", "coordinates": [ 108117.0, 523265.0 ] } },
+{ "type": "Feature", "properties": { "BA1B_ID": 28, "VALUE": -3.0 }, "geometry": { "type": "Point", "coordinates": [ 108432.0, 522875.0 ] } }
+]
+}
