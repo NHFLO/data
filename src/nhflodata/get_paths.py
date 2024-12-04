@@ -1,8 +1,10 @@
 """Functions to get paths to data sets."""
+from __future__ import annotations
 
 import logging
 import os
 import re
+from pathlib import Path
 
 import yaml
 from yaml.loader import SafeLoader
@@ -108,6 +110,26 @@ def get_abs_data_path(name="", version="latest", location="get_from_env", local_
 def get_data_dir():
     """Return the path to the data directory."""
     return os.path.join(os.path.dirname(__file__), "data")
+
+
+def get_latest_data_paths() -> list[Path]:
+    """
+    Get paths to all latest data versions in the repository.
+
+    Returns
+    -------
+    List[Path]
+        List of Path objects representing all found directories
+
+    Examples
+    --------
+    >>> folders = get_latest_data_paths()
+    >>> print(folders[0])
+    ./data/subfolder1/v1.2.3
+    """
+    dataset_names = sorted(get_repository_data().keys())
+    dataset_paths = [get_abs_data_path(name, version="latest", location="mockup") for name in dataset_names]
+    return [Path(path) for path in dataset_paths]
 
 
 def get_repository_path():
