@@ -165,4 +165,3 @@ def bump_semver(version, level):
         return f"{vstart}{major}.{minor}.{patch + 1}"
     msg = "unsupported value for 'level'"
     raise ValueError(msg)
-
