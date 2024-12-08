@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "doorsnedes",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "index": "A", "name": "A" }, "geometry": { "type": "LineString", "coordinates": [ [ 96500.0, 502701.0 ], [ 151000.0, 502701.0 ] ] } },
+{ "type": "Feature", "properties": { "index": "B", "name": "B" }, "geometry": { "type": "LineString", "coordinates": [ [ 96500.0, 529001.0 ], [ 151000.0, 529001.0 ] ] } },
+{ "type": "Feature", "properties": { "index": "C", "name": "C" }, "geometry": { "type": "LineString", "coordinates": [ [ 121001.0, 555000.0 ], [ 121001.0, 487000.0 ] ] } },
+{ "type": "Feature", "properties": { "index": "D", "name": "D" }, "geometry": { "type": "LineString", "coordinates": [ [ 130273.0, 552068.0 ], [ 130273.0, 527871.0 ] ] } },
+{ "type": "Feature", "properties": { "index": "E", "name": "E" }, "geometry": { "type": "LineString", "coordinates": [ [ 116548.0, 539289.0 ], [ 141011.0, 539289.0 ] ] } }
+]
+}
