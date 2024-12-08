@@ -224,7 +224,7 @@ data:
     - version_nhflo: "2.0.0"  # Semantic version
       owner: Artesia
       publication_date: "2024-12-08"
-      version_owner: "1.0.0"  # Version used by data owner
+      version_owner: "2.0.0"  # Version used by data owner
       description_short: Doorsnedelijnen t.b.v. plots
       description_long: Doorsnedelijnen in Noord-Holland die worden gebruikt om dwarsdoorsnedes te tekenen.
       contact: o.ebbens@artesia-water.nl
