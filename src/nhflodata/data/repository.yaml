@@ -231,9 +231,9 @@ data:
       timezone: Europe/Amsterdam
       extent: [96500, 151000, 487000, 555000]  # minx, miny, maxx, maxy
       paths:
-        local: doorsnedes_nh/v1.0.0
-        nhflo_server: /data/doorsnedes_nh/v1.0.0
-        mockup: mockup/doorsnedes_nh/v1.0.0
+        local: doorsnedes_nh/v2.0.0
+        nhflo_server: /data/doorsnedes_nh/v2.0.0
+        mockup: mockup/doorsnedes_nh/v2.0.0
       changelog:
         previous_version: "1.0.0"
         log: "Converted shapes to geojson"
