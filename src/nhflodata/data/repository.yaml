@@ -2,6 +2,24 @@ title: NHFLO data repository
 description: Repository of NHFLO containing the data structure of the propitary data of NHFLO
 
 data:
+  bodemlagen_pwn_2024:
+    # Latest version of the data first
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2024-12-09"
+      version_owner: "2024-12-09"  # Version used by data owner
+      description_short: Bodemlagen van NHDZ en Bergen
+      description_long: Bodemlagen van NHDZ en Bergen
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
+      paths:
+        local: bodemlagen_pwn_2024/v1.0.0
+        nhflo_server: /data/bodemlagen_pwn_2024/v1.0.0
+        mockup: mockup/bodemlagen_pwn_2024/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Vincent Post (Edinsi) has merged the bodemlagen of NHDZ and Bergen into one dataset."
   bodemlagen_pwn_bergen:
     # Latest version of the data first
     - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
