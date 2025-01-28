@@ -2,6 +2,24 @@ title: NHFLO data repository
 description: Repository of NHFLO containing the data structure of the propitary data of NHFLO
 
 data:
+  bodemlagen_pwn_2024:
+    # Latest version of the data first
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2024-12-09"
+      version_owner: "2024-12-09"  # Version used by data owner
+      description_short: Bodemlagen van NHDZ en Bergen
+      description_long: Bodemlagen van NHDZ en Bergen
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
+      paths:
+        local: bodemlagen_pwn_2024/v1.0.0
+        nhflo_server: /data/bodemlagen_pwn_2024/v1.0.0
+        mockup: mockup/bodemlagen_pwn_2024/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Vincent Post (Edinsi) has merged the bodemlagen of NHDZ and Bergen into one dataset."
   bodemlagen_pwn_bergen:
     # Latest version of the data first
     - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
@@ -109,7 +127,7 @@ data:
       publication_date: "2020-06-16"
       version_owner: "1.0.1"
       description_short: NHI chloride concentration. Actualisatie zout in het NHI, Delsman et.al., 2020.
-      description_long: Selection made available with reduced precision. Delsman, Joost & Oude Essink, Gualbert & Huizer, S. & Bootsma, Huite & Mulder, Tobias & Zitman, Pieter & Romero Verastegui, Betsy & Janssen, Gijs. (2020). Actualisatie zout in het NHI; Toolbox NHI zoet-zout modellering en landelijk model. 10.13140/RG.2.2.17077.09447. 
+      description_long: Selection made available with reduced precision. Delsman, Joost & Oude Essink, Gualbert & Huizer, S. & Bootsma, Huite & Mulder, Tobias & Zitman, Pieter & Romero Verastegui, Betsy & Janssen, Gijs. (2020). Actualisatie zout in het NHI; Toolbox NHI zoet-zout modellering en landelijk model. 10.13140/RG.2.2.17077.09447.
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
       extent: [0, 300000, 300000, 625000]  # minx, miny, maxx, maxy
@@ -117,22 +135,6 @@ data:
         local: nhi_chloride_concentration/v1.0.1
         nhflo_server: /data/nhi_chloride_concentration/v1.0.1
         mockup: mockup/nhi_chloride_concentration/v1.0.1
-      changelog:
-        previous_version: "1.0.0"
-        log: "Bug in the compression algorithm fixed. Fix also pushed to nlmod."
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-      owner: NHI, Deltares, Arcadis.
-      publication_date: "2020-06-16"
-      version_owner: "1.0.0"
-      description_short: NHI chloride concentration. Actualisatie zout in het NHI, Delsman et.al., 2020.
-      description_long: Selection made available with reduced precision. Delsman, Joost & Oude Essink, Gualbert & Huizer, S. & Bootsma, Huite & Mulder, Tobias & Zitman, Pieter & Romero Verastegui, Betsy & Janssen, Gijs. (2020). Actualisatie zout in het NHI; Toolbox NHI zoet-zout modellering en landelijk model. 10.13140/RG.2.2.17077.09447. 
-      contact: bas.des.tombe@pwn.nl
-      timezone: Europe/Amsterdam
-      extent: [0, 300000, 300000, 625000]  # minx, miny, maxx, maxy
-      paths:
-        local: nhi_chloride_concentration/v1.0.0
-        nhflo_server: /data/nhi_chloride_concentration/v1.0.0
-        mockup: mockup/nhi_chloride_concentration/v1.0.0
       changelog:
         previous_version: "0.0.0"
         log: "Only p50 made available. p25 and p75 are omitted for now. Precision reduced to 0.1mg/l using the acompanying Python file, thereby reduced the file size from gigabytes to 30-40 megabytes."
@@ -162,7 +164,7 @@ data:
       description_long: Wells of Tata Steel. Extraction rates are negative and infiltration positive. All rates in m3/h.
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [100737,  498760, 103206, 500969]
+      extent: [100737, 498760, 103206, 500969]
       paths:
         local: wells_tata/v1.0.0
         nhflo_server: /data/wells_tata/v1.0.0
@@ -171,7 +173,7 @@ data:
         previous_version: "0.0.0"
         log: "Based on personal communication with TATA."
   geotop:
-    - version_nhflo: "1.5"  # Semantic version
+    - version_nhflo: "1.5.0"  # Semantic version
       owner: TNO
       publication_date: "2023-02-05"
       version_owner: "v01r5"  # Version used by data owner
@@ -181,9 +183,9 @@ data:
       timezone: Europe/Amsterdam
       extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
       paths:
-        local: geotop/v1.5
-        nhflo_server: /data/geotop/v1.5
-        mockup: mockup/geotop/v1.5
+        local: geotop/v1.5.0
+        nhflo_server: /data/geotop/v1.5.0
+        mockup: mockup/geotop/v1.5.0
       changelog:
         previous_version: "0.0.0"
         log: ""
@@ -222,90 +224,90 @@ data:
         previous_version: "0.0.0"
         log: ""
   pwn_cropfactor:
-      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-        owner: PWN.
-        publication_date: "2024-07-03"
-        version_owner: "1.0.0"
-        description_short: Cropfactor maps
-        description_long: Cropfactor map deep (> 2m) groundwater and shallow groundwater (< 2m) both sourced from Triwaco model. Also a average groundwater depth derived from the PWN Vlotter NHFLO model.
-        contact: caspar.van.genuchten@pwn.nl
-        timezone: Europe/Amsterdam
-        extent: [99000,  497500, 110500, 509500]
-        paths:
-          local: pwn_cropfactor/v1.0.0
-          nhflo_server: /data/pwn_cropfactor/v1.0.0
-          mockup: mockup/pwn_cropfactor/v1.0.0
-        changelog:
-          previous_version: "0.0.0"
-          log: "Dataset was made for the PWN Vlotter NHFLO model."
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN.
+      publication_date: "2024-07-03"
+      version_owner: "1.0.0"
+      description_short: Cropfactor maps
+      description_long: Cropfactor map deep (> 2m) groundwater and shallow groundwater (< 2m) both sourced from Triwaco model. Also a average groundwater depth derived from the PWN Vlotter NHFLO model.
+      contact: caspar.van.genuchten@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [99000, 497500, 110500, 509500]
+      paths:
+        local: pwn_cropfactor/v1.0.0
+        nhflo_server: /data/pwn_cropfactor/v1.0.0
+        mockup: mockup/pwn_cropfactor/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Dataset was made for the PWN Vlotter NHFLO model."
   Grid_refinement_Vlotter:
-      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-        owner: PWN.
-        publication_date: "2024-07-30"
-        version_owner: "1.0.0"
-        description_short: Grid refinement shapefile NHFLO Vlotter model
-        description_long: Shapefiles of the 4 levels of refinement that are used in the NHFLO Vlotter model
-        contact: caspar.van.genuchten@pwn.nl
-        timezone: Europe/Amsterdam
-        extent: [99000,  497500, 110500, 509500]
-        paths:
-          local: Grid_refinement_Vlotter/v1.0.0
-          nhflo_server: /data/Grid_refinement_Vlotter/v1.0.0
-          mockup: mockup/Grid_refinement_Vlotter/v1.0.0
-        changelog:
-          previous_version: "0.0.0"
-          log: "Dataset was made for the PWN Vlotter NHFLO model."
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN.
+      publication_date: "2024-07-30"
+      version_owner: "1.0.0"
+      description_short: Grid refinement shapefile NHFLO Vlotter model
+      description_long: Shapefiles of the 4 levels of refinement that are used in the NHFLO Vlotter model
+      contact: caspar.van.genuchten@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [99000, 497500, 110500, 509500]
+      paths:
+        local: Grid_refinement_Vlotter/v1.0.0
+        nhflo_server: /data/Grid_refinement_Vlotter/v1.0.0
+        mockup: mockup/Grid_refinement_Vlotter/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Dataset was made for the PWN Vlotter NHFLO model."
   Oppervlaktewater_Vlotter:
-      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-        owner: PWN.
-        publication_date: "2024-07-30"
-        version_owner: "1.0.0"
-        description_short: oppervlaktewater gebruikt in NHFLO Vlotter model
-        description_long: the exact data for the Drain package that is used in de NHFLO Vlotter model
-        contact: caspar.van.genuchten@pwn.nl
-        timezone: Europe/Amsterdam
-        extent: [99000,  497500, 110500, 509500]
-        paths:
-          local: Oppervlaktewater_Vlotter/v1.0.0
-          nhflo_server: /data/Oppervlaktewater_Vlotter/v1.0.0
-          mockup: mockup/Oppervlaktewater_Vlotter/v1.0.0
-        changelog:
-          previous_version: "0.0.0"
-          log: "Dataset was made for the PWN Vlotter NHFLO model."
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN.
+      publication_date: "2024-07-30"
+      version_owner: "1.0.0"
+      description_short: oppervlaktewater gebruikt in NHFLO Vlotter model
+      description_long: the exact data for the Drain package that is used in de NHFLO Vlotter model
+      contact: caspar.van.genuchten@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [99000, 497500, 110500, 509500]
+      paths:
+        local: Oppervlaktewater_Vlotter/v1.0.0
+        nhflo_server: /data/Oppervlaktewater_Vlotter/v1.0.0
+        mockup: mockup/Oppervlaktewater_Vlotter/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Dataset was made for the PWN Vlotter NHFLO model."
   Lakes_Vlotter:
-      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-        owner: PWN.
-        publication_date: "2024-07-30"
-        version_owner: "1.0.0"
-        description_short: Lakes voor NHFLO model Vlotter
-        description_long: Input voor de Lakes (LAK) package in NHFLO Vlotter model
-        contact: caspar.van.genuchten@pwn.nl
-        timezone: Europe/Amsterdam
-        extent: [99000,  497500, 110500, 509500]
-        paths:
-          local: Lakes_Vlotter/v1.0.0
-          nhflo_server: /data/Lakes_Vlotter/v1.0.0
-          mockup: mockup/Lakes_Vlotter/v1.0.0
-        changelog:
-          previous_version: "0.0.0"
-          log: "Dataset was made for the PWN Vlotter NHFLO model."
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN.
+      publication_date: "2024-07-30"
+      version_owner: "1.0.0"
+      description_short: Lakes voor NHFLO model Vlotter
+      description_long: Input voor de Lakes (LAK) package in NHFLO Vlotter model
+      contact: caspar.van.genuchten@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [99000, 497500, 110500, 509500]
+      paths:
+        local: Lakes_Vlotter/v1.0.0
+        nhflo_server: /data/Lakes_Vlotter/v1.0.0
+        mockup: mockup/Lakes_Vlotter/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Dataset was made for the PWN Vlotter NHFLO model."
   Measurements_Vlotter:
-      - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
-        owner: PWN.
-        publication_date: "2024-10-21"
-        version_owner: "1.0.0"
-        description_short: measurements used for calibrating the model
-        description_long: measurements used for calibrating the model, 2014-2018, 5 different locaties
-        contact: caspar.van.genuchten@pwn.nl
-        timezone: Europe/Amsterdam
-        extent: [99000,  497500, 110500, 509500]
-        paths:
-          local: Measurements_Vlotter/v1.0.0
-          nhflo_server: /data/Measurements_Vlotter/v1.0.0
-          mockup: mockup/Measurements_Vlotter/v1.0.0
-        changelog:
-          previous_version: "0.0.0"
-          log: "Dataset was made for the PWN Vlotter NHFLO model."
+    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN.
+      publication_date: "2024-10-21"
+      version_owner: "1.0.0"
+      description_short: measurements used for calibrating the model
+      description_long: measurements used for calibrating the model, 2014-2018, 5 different locaties
+      contact: caspar.van.genuchten@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [99000, 497500, 110500, 509500]
+      paths:
+        local: Measurements_Vlotter/v1.0.0
+        nhflo_server: /data/Measurements_Vlotter/v1.0.0
+        mockup: mockup/Measurements_Vlotter/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Dataset was made for the PWN Vlotter NHFLO model."
   Stroomgebied_Vlotter:
       - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
         owner: PWN.
