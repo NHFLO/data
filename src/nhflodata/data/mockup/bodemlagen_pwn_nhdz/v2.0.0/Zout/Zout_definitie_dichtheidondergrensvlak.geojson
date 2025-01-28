@@ -1,0 +1,18 @@
+{
+"type": "FeatureCollection",
+"name": "Zout_definitie_dichtheidondergrensvlak",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "VALUE": 25.0 }, "geometry": { "type": "Point", "coordinates": [ 99838.0, 515029.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 25.0 }, "geometry": { "type": "Point", "coordinates": [ 99095.0, 510643.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 25.0 }, "geometry": { "type": "Point", "coordinates": [ 98165.0, 506014.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 25.0 }, "geometry": { "type": "Point", "coordinates": [ 97106.0, 501786.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 25.0 }, "geometry": { "type": "Point", "coordinates": [ 95554.0, 496804.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 10.0 }, "geometry": { "type": "Point", "coordinates": [ 109364.0, 515076.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 10.0 }, "geometry": { "type": "Point", "coordinates": [ 109290.0, 510429.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 10.0 }, "geometry": { "type": "Point", "coordinates": [ 109318.0, 505810.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 10.0 }, "geometry": { "type": "Point", "coordinates": [ 109318.0, 501293.0 ] } },
+{ "type": "Feature", "properties": { "VALUE": 10.0 }, "geometry": { "type": "Point", "coordinates": [ 109262.0, 496823.0 ] } }
+]
+}

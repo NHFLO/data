@@ -1,0 +1,22 @@
+{
+"type": "FeatureCollection",
+"name": "BA1D_point",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "BA1D_POINT": 11, "VALUE": -17.0 }, "geometry": { "type": "Point", "coordinates": [ 109131.0, 529594.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 12, "VALUE": -20.0 }, "geometry": { "type": "Point", "coordinates": [ 104513.0, 526397.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 15, "VALUE": -20.0 }, "geometry": { "type": "Point", "coordinates": [ 104350.0, 524533.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 16, "VALUE": -20.0 }, "geometry": { "type": "Point", "coordinates": [ 104293.0, 523956.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 17, "VALUE": -22.0 }, "geometry": { "type": "Point", "coordinates": [ 104265.0, 523585.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 18, "VALUE": -20.0 }, "geometry": { "type": "Point", "coordinates": [ 104227.0, 523154.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 22, "VALUE": -21.0 }, "geometry": { "type": "Point", "coordinates": [ 105389.0, 524659.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 23, "VALUE": -28.0 }, "geometry": { "type": "Point", "coordinates": [ 105681.0, 526227.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 24, "VALUE": -27.0 }, "geometry": { "type": "Point", "coordinates": [ 106310.0, 524362.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 25, "VALUE": -21.0 }, "geometry": { "type": "Point", "coordinates": [ 107124.0, 525520.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 26, "VALUE": -27.0 }, "geometry": { "type": "Point", "coordinates": [ 107193.0, 525853.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 27, "VALUE": -21.0 }, "geometry": { "type": "Point", "coordinates": [ 108226.0, 525189.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 28, "VALUE": -25.0 }, "geometry": { "type": "Point", "coordinates": [ 108518.0, 524894.0 ] } },
+{ "type": "Feature", "properties": { "BA1D_POINT": 29, "VALUE": -27.0 }, "geometry": { "type": "Point", "coordinates": [ 108598.0, 524370.0 ] } }
+]
+}

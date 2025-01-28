@@ -150,3 +150,18 @@ def is_valid_semver(version):
     """Return True if the version is a valid semantic version number."""
     pattern = re.compile(r"^\d+\.\d+\.\d+$")
     return pattern.match(version) is not None
+
+
+def bump_semver(version, level):
+    """Bump the semver."""
+    vstart = "v" if version[0] == "v" else ""
+    major, minor, patch = map(int, version.split("."))
+
+    if level == "major":
+        return f"{vstart}{major + 1}.{minor}.{patch}"
+    if level == "minor":
+        return f"{vstart}{major}.{minor + 1}.{patch}"
+    if level == "patch":
+        return f"{vstart}{major}.{minor}.{patch + 1}"
+    msg = "unsupported value for 'level'"
+    raise ValueError(msg)

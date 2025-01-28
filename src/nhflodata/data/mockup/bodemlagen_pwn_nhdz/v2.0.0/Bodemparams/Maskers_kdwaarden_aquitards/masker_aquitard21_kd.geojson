@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "masker_aquitard21_kd",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": { "type": "GeometryCollection", "geometries": [ { "type": "Polygon", "coordinates": [ [ [ 97525.0, 504794.0 ], [ 99749.0, 515494.0 ], [ 109654.0, 515562.0 ], [ 109829.0, 503366.0 ], [ 110058.0, 496385.0 ], [ 95073.0, 496385.0 ], [ 97525.0, 504794.0 ] ] ] }, { "type": "MultiLineString", "coordinates": [ [ [ 109829.0, 503366.0 ], [ 103051.0, 503312.0 ] ], [ [ 103051.0, 503312.0 ], [ 102417.0, 504323.0 ] ], [ [ 102417.0, 504323.0 ], [ 97525.0, 504794.0 ] ] ] } ] } },
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 110058.0, 496385.0 ], [ 95073.0, 496385.0 ], [ 97525.0, 504794.0 ], [ 102417.0, 504323.0 ], [ 103051.0, 503312.0 ], [ 109829.0, 503366.0 ], [ 110058.0, 496385.0 ] ] ] } }
+]
+}

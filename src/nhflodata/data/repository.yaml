@@ -22,6 +22,22 @@ data:
         log: "Vincent Post (Edinsi) has merged the bodemlagen of NHDZ and Bergen into one dataset."
   bodemlagen_pwn_bergen:
     # Latest version of the data first
+    - version_nhflo: "2.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2024-12-04"
+      version_owner: "2024-12-04"  # Version used by data owner
+      description_short: Bodemlagen van PWN rondom pompstation Bergen
+      description_long: Bodemlagen van PWN rondom pompstation Bergen
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
+      paths:
+        local: bodemlagen_pwn_bergen/v2.0.0
+        nhflo_server: /data/bodemlagen_pwn_bergen/v2.0.0
+        mockup: mockup/bodemlagen_pwn_bergen/v2.0.0
+      changelog:
+        previous_version: "1.0.0"
+        log: "Converted shapes to geojson"
     - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
       owner: PWN
       publication_date: "2023-08-20"
@@ -39,6 +55,22 @@ data:
         previous_version: "0.0.0"
         log: ""
   bodemlagen_pwn_nhdz:
+    - version_nhflo: "2.0.0"  # Semantic version of the data in NHFLO
+      owner: PWN
+      publication_date: "2024-12-04"
+      version_owner: "2024-12-04"
+      description_short: Bodemlagen van PWN vd zuidelijke helft van het NHD
+      description_long: Bodemlagen van PWN van de zuidelijke helft van het Noord-Hollands Duin
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [-7000, 289000, 300000, 629000]
+      paths:
+        local: bodemlagen_pwn_nhdz/v2.0.0
+        nhflo_server: /data/bodemlagen_pwn_nhdz/v2.0.0
+        mockup: mockup/bodemlagen_pwn_nhdz/v2.0.0
+      changelog:
+        previous_version: "1.0.0"
+        log: "Converted shapes to geojsons"
     - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
       owner: PWN
       publication_date: "2023-08-20"
@@ -207,6 +239,22 @@ data:
         previous_version: "0.0.0"
         log: ""
   doorsnedes_nh:
+    - version_nhflo: "2.0.0"  # Semantic version
+      owner: Artesia
+      publication_date: "2024-12-08"
+      version_owner: "2.0.0"  # Version used by data owner
+      description_short: Doorsnedelijnen t.b.v. plots
+      description_long: Doorsnedelijnen in Noord-Holland die worden gebruikt om dwarsdoorsnedes te tekenen.
+      contact: o.ebbens@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent: [96500, 151000, 487000, 555000]  # minx, miny, maxx, maxy
+      paths:
+        local: doorsnedes_nh/v2.0.0
+        nhflo_server: /data/doorsnedes_nh/v2.0.0
+        mockup: mockup/doorsnedes_nh/v2.0.0
+      changelog:
+        previous_version: "1.0.0"
+        log: "Converted shapes to geojson"
     - version_nhflo: "1.0.0"  # Semantic version
       owner: Artesia
       publication_date: "2023-08-16"

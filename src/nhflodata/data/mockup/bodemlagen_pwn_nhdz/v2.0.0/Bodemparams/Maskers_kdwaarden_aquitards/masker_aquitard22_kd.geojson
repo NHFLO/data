@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "masker_aquitard22_kd",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "MASKER_AQU": 1, "VALUE": 2.0 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 110503.0, 496385.0 ], [ 93887.0, 496425.0 ], [ 98806.0, 515629.0 ], [ 110260.0, 515818.0 ], [ 110503.0, 496385.0 ] ] ] } }
+]
+}

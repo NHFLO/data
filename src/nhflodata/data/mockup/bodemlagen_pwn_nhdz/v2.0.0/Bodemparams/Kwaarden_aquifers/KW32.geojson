@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "KW32",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "KW32_": 1, "KW32_ID": 1, "VALUE": 30.0 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 96582.0, 516627.0 ], [ 110153.0, 516681.0 ], [ 110905.0, 497298.0 ], [ 112492.0, 496052.0 ], [ 112827.0, 486503.0 ], [ 106796.0, 477122.0 ], [ 100765.0, 475447.0 ], [ 88704.0, 481645.0 ], [ 96160.0, 498779.0 ], [ 96582.0, 516627.0 ] ] ] } }
+]
+}

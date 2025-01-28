@@ -1,0 +1,32 @@
+{
+"type": "FeatureCollection",
+"name": "Rq2_2008",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.1,
+"features": [
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -3526.0901, "LINK": 21100 }, "geometry": { "type": "Point", "coordinates": [ 102470.0, 507330.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -6263.8301, "LINK": 21200 }, "geometry": { "type": "Point", "coordinates": [ 102750.0, 507383.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -3209.1499, "LINK": 21300 }, "geometry": { "type": "Point", "coordinates": [ 102915.0, 507686.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -6047.5, "LINK": 21400 }, "geometry": { "type": "Point", "coordinates": [ 102894.0, 507297.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -5323.29, "LINK": 21500 }, "geometry": { "type": "Point", "coordinates": [ 103044.0, 507225.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -4055.6399, "LINK": 21600 }, "geometry": { "type": "Point", "coordinates": [ 103216.0, 506875.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -3956.7, "LINK": 22100 }, "geometry": { "type": "Point", "coordinates": [ 102156.0, 506486.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -8563.25, "LINK": 22200 }, "geometry": { "type": "Point", "coordinates": [ 102530.0, 506575.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -5492.25, "LINK": 22300 }, "geometry": { "type": "Point", "coordinates": [ 102697.0, 506661.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -7249.6899, "LINK": 22400 }, "geometry": { "type": "Point", "coordinates": [ 102871.0, 506719.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -7334.6602, "LINK": 22500 }, "geometry": { "type": "Point", "coordinates": [ 103046.0, 506820.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -2729.02, "LINK": 22600 }, "geometry": { "type": "Point", "coordinates": [ 103127.0, 505969.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -2887.5, "LINK": 9100 }, "geometry": { "type": "Point", "coordinates": [ 101334.0, 502590.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -4833.3999, "LINK": 9200 }, "geometry": { "type": "Point", "coordinates": [ 101464.0, 502609.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -4767.2998, "LINK": 9300 }, "geometry": { "type": "Point", "coordinates": [ 101555.0, 502642.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -3672.7, "LINK": 9400 }, "geometry": { "type": "Point", "coordinates": [ 101649.0, 502661.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -4279.2002, "LINK": 9500 }, "geometry": { "type": "Point", "coordinates": [ 101739.0, 502679.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -1739.6, "LINK": 9600 }, "geometry": { "type": "Point", "coordinates": [ 101904.0, 502912.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -1982.4, "LINK": 10100 }, "geometry": { "type": "Point", "coordinates": [ 101334.0, 503148.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -4209.7002, "LINK": 10200 }, "geometry": { "type": "Point", "coordinates": [ 101457.0, 503153.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -3765.3, "LINK": 10300 }, "geometry": { "type": "Point", "coordinates": [ 101563.0, 503171.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -3224.3, "LINK": 10400 }, "geometry": { "type": "Point", "coordinates": [ 101644.0, 503132.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -3734.7, "LINK": 10500 }, "geometry": { "type": "Point", "coordinates": [ 101753.0, 503142.0 ] } },
+{ "type": "Feature", "properties": { "RQ2_2008_I": 1, "VALUE": -3852.8, "LINK": 10600 }, "geometry": { "type": "Point", "coordinates": [ 101809.0, 502884.0 ] } }
+]
+}
