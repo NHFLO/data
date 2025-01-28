@@ -4,10 +4,10 @@ description: Repository of NHFLO containing the data structure of the propitary 
 data:
   bodemlagen_pwn_2024:
     # Latest version of the data first
-    - version_nhflo: "1.0.0" # Symentec versioning
+    - version_nhflo: "1.0.0"  # Symentec versioning
       owner: PWN
       publication_date: "2024-12-09"
-      version_owner: "2024-12-09" # Version used by data owner
+      version_owner: "2024-12-09"  # Version used by data owner
       description_short: Bodemlagen van NHDZ en Bergen
       description_long: Bodemlagen van NHDZ en Bergen
       contact: bas.des.tombe@pwn.nl
