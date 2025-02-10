@@ -341,20 +341,3 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: "Dataset was made for the PWN Vlotter NHFLO model."
-  Fix_HLc_6_gaps:
-    - version_nhflo: "1.0.0"
-      owner: PWN.
-      publication_date: "2025-01-14"
-      version_owner: "1.0.0"
-      description_short: area in layer HLc_6 that has holes in it
-      description_long: Area in layer HLc_6 that has holes in it, which is filled and restored to the default 22.000 days in the 10Vlotter model.
-      contact: caspar.van.genuchten@pwn.nl
-      timezone: Europe/Amsterdam
-      extent: [99000, 497500, 110500, 509500]
-      paths:
-        local: HLc_6_aanpassing_Vlotter/v1.0.0
-        nhflo_server: /data/HLc_6_aanpassing_Vlotter/v1.0.0
-        mockup: mockup/HLc_6_aanpassing_Vlotter/v1.0.0
-      changelog:
-        previous_version: "0.0.0"
-        log: "Dataset was made for the PWN Vlotter NHFLO model."
