@@ -35,7 +35,7 @@ def test_repository_yaml_file_validation():
     if result.errors:
         error_msg = "\nSchema validation problems found:\n"
         for error in result.errors:
-            error_msg += f"Line {error.line}: {error.message}\n"
+            error_msg += error
         pytest.fail(error_msg)
 
 
