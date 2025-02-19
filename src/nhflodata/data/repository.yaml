@@ -348,9 +348,9 @@ data:
       version_owner: "1.0.0"  # Version used by data owner
       description_short: tabel BOFEK 2020
       description_long: Bodemfysische schematisatie van Nederland; Update bodemfysische eenhedenkaart. https://www.wur.nl/nl/show/bodemfysische-eenhedenkaart-bofek2020.htm
-      contact: Wageningen Environmental Research
+      contact: info@wur.nl
       timezone: Europe/Amsterdam
-      extent: n.v.t.
+      extent: [-7000, 289000, 300000, 629000]
       paths:
         local: bofek/v1.0.0
         nhflo_server: /data/bofek/v1.0.0
