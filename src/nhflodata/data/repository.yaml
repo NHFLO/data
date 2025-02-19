@@ -4,7 +4,7 @@ description: Repository of NHFLO containing the data structure of the propitary 
 data:
   bodemlagen_pwn_2024:
     # Latest version of the data first
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"  # Symentec versioning
       owner: PWN
       publication_date: "2024-12-09"
       version_owner: "2024-12-09"  # Version used by data owner
@@ -12,7 +12,7 @@ data:
       description_long: Bodemlagen van NHDZ en Bergen
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
+      extent: [-7000, 289000, 300000, 629000]
       paths:
         local: bodemlagen_pwn_2024/v1.0.0
         nhflo_server: /data/bodemlagen_pwn_2024/v1.0.0
@@ -21,16 +21,15 @@ data:
         previous_version: "0.0.0"
         log: "Vincent Post (Edinsi) has merged the bodemlagen of NHDZ and Bergen into one dataset."
   bodemlagen_pwn_bergen:
-    # Latest version of the data first
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN
       publication_date: "2023-08-20"
-      version_owner: "2020-04-06"  # Version used by data owner
+      version_owner: "2020-04-06"
       description_short: Bodemlagen van PWN rondom pompstation Bergen
       description_long: Bodemlagen van PWN rondom pompstation Bergen
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
+      extent: [-7000, 289000, 300000, 629000]
       paths:
         local: bodemlagen_pwn_bergen/v1.0.0
         nhflo_server: /data/bodemlagen_pwn_bergen/v1.0.0
@@ -39,7 +38,7 @@ data:
         previous_version: "0.0.0"
         log: ""
   bodemlagen_pwn_nhdz:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN
       publication_date: "2023-08-20"
       version_owner: "2018-06-11"
@@ -56,7 +55,7 @@ data:
         previous_version: "0.0.0"
         log: ""
   bodemlagen_pwn_regis_koppeltabel:
-    - version_nhflo: "1.1.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.1.0"
       owner: PWN
       publication_date: "2023-11-20"
       version_owner: "1.0.0"
@@ -72,7 +71,7 @@ data:
       changelog:
         previous_version: "1.1.0"
         log: "Prev version only allowed one to one mapping, now one to many. Explicitly assigned all intermediate layers in an arbitrairy manner, needs to be checked."
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN
       publication_date: "2021-09-22"
       version_owner: "1.0.0"
@@ -89,7 +88,7 @@ data:
         previous_version: "0.0.0"
         log: ""
   oppervlaktewater_pwn_shapes_panden:
-    - version_nhflo: "1.0.1"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.1"
       owner: PWN
       publication_date: "2024-07-03"
       version_owner: "1.0.1"
@@ -105,7 +104,7 @@ data:
       changelog:
         previous_version: "1.0.0"
         log: "small addition of the bassin to the location of Mensink station"
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN
       publication_date: "2021-04-12"
       version_owner: "1.0.0"
@@ -122,7 +121,7 @@ data:
         previous_version: "0.0.0"
         log: ""
   nhi_chloride_concentration:
-    - version_nhflo: "1.0.1"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.1"
       owner: NHI, Deltares, Arcadis.
       publication_date: "2020-06-16"
       version_owner: "1.0.1"
@@ -130,7 +129,7 @@ data:
       description_long: Selection made available with reduced precision. Delsman, Joost & Oude Essink, Gualbert & Huizer, S. & Bootsma, Huite & Mulder, Tobias & Zitman, Pieter & Romero Verastegui, Betsy & Janssen, Gijs. (2020). Actualisatie zout in het NHI; Toolbox NHI zoet-zout modellering en landelijk model. 10.13140/RG.2.2.17077.09447.
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [0, 300000, 300000, 625000]  # minx, miny, maxx, maxy
+      extent: [0, 300000, 300000, 625000]
       paths:
         local: nhi_chloride_concentration/v1.0.1
         nhflo_server: /data/nhi_chloride_concentration/v1.0.1
@@ -139,7 +138,7 @@ data:
         previous_version: "0.0.0"
         log: "Only p50 made available. p25 and p75 are omitted for now. Precision reduced to 0.1mg/l using the acompanying Python file, thereby reduced the file size from gigabytes to 30-40 megabytes."
   wells_pwn:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN
       publication_date: "2021-04-12"
       version_owner: "1.0.0"
@@ -156,7 +155,7 @@ data:
         previous_version: "0.0.0"
         log: "Based on the dawaco data of 05-03-2024 and plenty data until 23-01-2024."
   wells_tata:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN, TATA.
       publication_date: "2024-03-18"
       version_owner: "1.0.0"
@@ -173,15 +172,15 @@ data:
         previous_version: "0.0.0"
         log: "Based on personal communication with TATA."
   geotop:
-    - version_nhflo: "1.5.0"  # Semantic version
+    - version_nhflo: "1.5.0"
       owner: TNO
       publication_date: "2023-02-05"
-      version_owner: "v01r5"  # Version used by data owner
+      version_owner: "v01r5"
       description_short: Geotop versie 1.5
       description_long: Geotop versie 1.5
       contact: o.ebbens@artesia-water.nl
       timezone: Europe/Amsterdam
-      extent: [-7000, 289000, 300000, 629000]  # minx, miny, maxx, maxy
+      extent: [-7000, 289000, 300000, 629000]
       paths:
         local: geotop/v1.5.0
         nhflo_server: /data/geotop/v1.5.0
@@ -190,15 +189,15 @@ data:
         previous_version: "0.0.0"
         log: ""
   peilgebieden_hhnk:
-    - version_nhflo: "1.0.0"  # Semantic version
+    - version_nhflo: "1.0.0"
       owner: HHNK
       publication_date: "2023-05-22"
-      version_owner: "1.0.0"  # Version used by data owner
+      version_owner: "1.0.0"
       description_short: Water level areas HHNK
       description_long: Water level areas HHNK
       contact: o.ebbens@artesia-water.nl
       timezone: Europe/Amsterdam
-      extent: [102631, 487433, 148892, 577317]  # minx, miny, maxx, maxy
+      extent: [102631, 487433, 148892, 577317]
       paths:
         local: peilgebieden_hhnk/v1.0.0
         nhflo_server: /data/peilgebieden_hhnk/v1.0.0
@@ -207,15 +206,15 @@ data:
         previous_version: "0.0.0"
         log: ""
   doorsnedes_nh:
-    - version_nhflo: "1.0.0"  # Semantic version
+    - version_nhflo: "1.0.0"
       owner: Artesia
       publication_date: "2023-08-16"
-      version_owner: "1.0.0"  # Version used by data owner
+      version_owner: "1.0.0"
       description_short: Doorsnedelijnen t.b.v. plots
       description_long: Doorsnedelijnen in Noord-Holland die worden gebruikt om dwarsdoorsnedes te tekenen.
       contact: o.ebbens@artesia-water.nl
       timezone: Europe/Amsterdam
-      extent: [96500, 151000, 487000, 555000]  # minx, miny, maxx, maxy
+      extent: [96500, 151000, 487000, 555000]
       paths:
         local: doorsnedes_nh/v1.0.0
         nhflo_server: /data/doorsnedes_nh/v1.0.0
@@ -224,7 +223,7 @@ data:
         previous_version: "0.0.0"
         log: ""
   pwn_cropfactor:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN.
       publication_date: "2024-07-03"
       version_owner: "1.0.0"
@@ -241,7 +240,7 @@ data:
         previous_version: "0.0.0"
         log: "Dataset was made for the PWN Vlotter NHFLO model."
   Grid_refinement_Vlotter:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN.
       publication_date: "2024-07-30"
       version_owner: "1.0.0"
@@ -258,7 +257,7 @@ data:
         previous_version: "0.0.0"
         log: "Dataset was made for the PWN Vlotter NHFLO model."
   Oppervlaktewater_Vlotter:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN.
       publication_date: "2024-07-30"
       version_owner: "1.0.0"
@@ -275,7 +274,7 @@ data:
         previous_version: "0.0.0"
         log: "Dataset was made for the PWN Vlotter NHFLO model."
   Lakes_Vlotter:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN.
       publication_date: "2024-07-30"
       version_owner: "1.0.0"
@@ -292,7 +291,7 @@ data:
         previous_version: "0.0.0"
         log: "Dataset was made for the PWN Vlotter NHFLO model."
   Measurements_Vlotter:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN.
       publication_date: "2024-10-21"
       version_owner: "1.0.0"
@@ -309,7 +308,7 @@ data:
         previous_version: "0.0.0"
         log: "Dataset was made for the PWN Vlotter NHFLO model."
   Stroomgebied_Vlotter:
-    - version_nhflo: "1.0.0"  # Semantic version of the data in NHFLO
+    - version_nhflo: "1.0.0"
       owner: PWN.
       publication_date: "2024-10-29"
       version_owner: "1.0.0"
@@ -359,3 +358,20 @@ data:
       changelog:
         previous_version: "0.0.0"
         log: ""
+  HLc_6_aanpassing_Vlotter:
+    - version_nhflo: "1.0.0"
+      owner: PWN.
+      publication_date: "2025-01-14"
+      version_owner: "1.0.0"
+      description_short: area in layer HLc_6 that has a too high resistance
+      description_long: Area in layer HLc_6 that has a too high resistance, which is lowered in the 10Vlotter model from the default 22.000 days.
+      contact: caspar.van.genuchten@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [99000, 497500, 110500, 509500]
+      paths:
+        local: HLc_6_aanpassing_Vlotter/v1.0.0
+        nhflo_server: /data/HLc_6_aanpassing_Vlotter/v1.0.0
+        mockup: mockup/HLc_6_aanpassing_Vlotter/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
+        log: "Dataset was made for the PWN Vlotter NHFLO model."
