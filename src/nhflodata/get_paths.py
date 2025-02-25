@@ -191,7 +191,7 @@ def create_new_dataset(name, version="1.0.0", location="mockup", makedirs=True, 
         "changelog": {"previous_version": "0.0.0", "log": "Initial version"},
     }
     new_entry.update(kwargs)
-    rep[name] = new_entry
+    rep[name] = [new_entry]
 
     # create mockup directory for new dataset
     if makedirs and location == "mockup":
