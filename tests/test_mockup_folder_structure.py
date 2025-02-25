@@ -31,10 +31,12 @@ def test_mockup_folder_structure():
             if version["paths"]["mockup"] != f"mockup/{name}/v{version['version_nhflo']}":
                 pytest.fail(f"Path in repository.yaml does not match the expected path: {version['paths']['mockup']}")
 
-            path = get_abs_data_path(
-                name=name,
-                version=version["version_nhflo"],
-                location="mockup",
+            path = str(
+                get_abs_data_path(
+                    name=name,
+                    version=version["version_nhflo"],
+                    location="mockup",
+                )
             )
             if not path.endswith(version["paths"]["mockup"]):
                 pytest.fail(f"Path in repository.yaml does not match the expected path: {version['paths']['mockup']}")
