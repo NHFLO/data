@@ -5,11 +5,12 @@ from __future__ import annotations
 import logging
 import os
 import re
+from datetime import datetime
 from pathlib import Path
 
 import yaml
-from pandas import Timestamp
 from yaml.loader import SafeLoader
+from zoneinfo import ZoneInfo
 
 logger = logging.getLogger(__name__)
 
@@ -175,7 +176,7 @@ def create_new_dataset(name, version="1.0.0", location="mockup", makedirs=True, 
     new_entry = {
         "version_nhflo": version,
         "owner": None,
-        "publication_date": Timestamp.today().strftime("%Y-%m-%d"),
+        "publication_date": datetime.now(tz=ZoneInfo("Europe/Amsterdam")).strftime("%Y-%m-%d"),
         "version_owner": version,
         "description_short": None,
         "description_long": None,
