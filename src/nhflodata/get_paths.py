@@ -156,7 +156,7 @@ def is_valid_semver(version):
     return pattern.match(version) is not None
 
 
-def create_new_dataset(name, version="1.0.0", location="mockup", makedirs=True, **kwargs):
+def create_new_dataset(name, version="1.0.0", location="mockup", makedirs=True, **kwargs):  # noqa: FBT002
     """Create a new data set in the repository.yaml file."""
     rep = get_repository_data()
 
