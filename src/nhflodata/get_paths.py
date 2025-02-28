@@ -1,13 +1,18 @@
 """Functions to get paths to data sets."""
+
 from __future__ import annotations
 
 import logging
 import os
 import re
+from datetime import datetime
 from pathlib import Path
 
 import yaml
 from yaml.loader import SafeLoader
+from zoneinfo import ZoneInfo
+
+logger = logging.getLogger(__name__)
 
 
 def get_abs_data_path(name="", version="latest", location="get_from_env", local_parent_folder=""):
@@ -99,12 +104,12 @@ def get_abs_data_path(name="", version="latest", location="get_from_env", local_
     elif location == "nhflo_server":
         abs_path = rep[name][version_index]["paths"]["nhflo_server"]
 
-    logging.info("Data path prompted is: %s", abs_path)
+    logger.info("Data path prompted is: %s", abs_path)
 
     if not os.path.exists(abs_path):
-        logging.warning("Path does not exist: %s", abs_path)
+        logger.warning("Path does not exist: %s", abs_path)
 
-    return abs_path
+    return Path(abs_path)
 
 
 def get_data_dir():
@@ -150,3 +155,54 @@ def is_valid_semver(version):
     """Return True if the version is a valid semantic version number."""
     pattern = re.compile(r"^\d+\.\d+\.\d+$")
     return pattern.match(version) is not None
+
+
+def create_new_dataset(name, version="1.0.0", location="mockup", makedirs=True, **kwargs):  # noqa: FBT002
+    """Create a new data set in the repository.yaml file."""
+    rep = get_repository_data()
+
+    if name in rep:
+        msg = "Data set already exists in repository.yaml"
+        raise ValueError(msg)
+
+    if location not in {"mockup", "local"}:
+        msg = "Location must be 'mockup' or 'local'"
+        raise ValueError(msg)
+
+    if not is_valid_semver(version):
+        msg = "Version must be a valid semantic version number"
+        raise ValueError(msg)
+
+    new_entry = {
+        "version_nhflo": version,
+        "owner": None,
+        "publication_date": datetime.now(tz=ZoneInfo("Europe/Amsterdam")).strftime("%Y-%m-%d"),
+        "version_owner": version,
+        "description_short": None,
+        "description_long": None,
+        "contact": None,
+        "timezone": "Europe/Amsterdam",
+        "extent": "",
+        "paths": {
+            "local": f"{name}/v{version}",
+            "nhflo_server": f"/data/{name}/v{version}",
+            "mockup": f"mockup/{name}/v{version}",
+        },
+        "changelog": {"previous_version": "0.0.0", "log": "Initial version"},
+    }
+    new_entry.update(kwargs)
+    rep[name] = [new_entry]
+
+    # create mockup directory for new dataset
+    if makedirs and location == "mockup":
+        datadir = Path(get_data_dir())
+        (datadir / "mockup" / name / f"v{version}").mkdir(parents=True, exist_ok=True)
+
+    # write repository.yaml with added dataset
+    with open(get_repository_path(), "w", encoding="utf-8") as file:
+        rep_yml = {
+            "title": "NHFLO data repository",
+            "description": "Repository of NHFLO containing the data structure of the proprietary data of NHFLO",
+            "data": rep,
+        }
+        yaml.dump(rep_yml, file, allow_unicode=True, sort_keys=False)
