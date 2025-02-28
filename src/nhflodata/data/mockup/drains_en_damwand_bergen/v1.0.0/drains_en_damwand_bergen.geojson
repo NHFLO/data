@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "drains_en_damwand_bergen",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0, "naam": "damwand_pompgebouw", "diepte_van": -5.0, "diepte_tot": -5.0, "diam_drain": 0.0, "opmerking": null }, "geometry": { "type": "LineString", "coordinates": [ [ 107280.337425142584834, 521589.561706945416518 ], [ 107511.140000000639702, 521619.630000002391171 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "naam": "drain_dwk", "diepte_van": 0.73, "diepte_tot": 0.73, "diam_drain": 200.0, "opmerking": "wordt met pomp bemalen" }, "geometry": { "type": "LineString", "coordinates": [ [ 107080.873107910330873, 521548.538391121430323 ], [ 107253.514160156308208, 521590.541015632334165 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "naam": "drain_pomgebouw_ZUID", "diepte_van": -0.32, "diepte_tot": -0.62, "diam_drain": 125.0, "opmerking": "via put uitloop op -0.5mNAP" }, "geometry": { "type": "LineString", "coordinates": [ [ 107342.29516602314834, 521639.184753418317996 ], [ 107341.81909179694776, 521617.277160646568518 ], [ 107394.20654297627334, 521617.912292479886673 ], [ 107406.430419921918656, 521627.278564460459165 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "naam": "drain_pomgebouw_NRD", "diepte_van": -0.8, "diepte_tot": -0.8, "diam_drain": 160.0, "opmerking": "via put uitloop op -0.5mNAP" }, "geometry": { "type": "LineString", "coordinates": [ [ 107347.057678222743561, 521643.153564461972564 ], [ 107398.492858886762406, 521643.62982177635422 ], [ 107407.065368659852538, 521635.69226074940525 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "naam": "drain_dienstgebouw", "diepte_van": -0.57, "diepte_tot": -0.844, "diam_drain": 200.0, "opmerking": "uitloop onder water op -0.5mNAP" }, "geometry": { "type": "LineString", "coordinates": [ [ 107453.896728515683208, 521636.009704595257062 ], [ 107453.737915039149811, 521620.293334963615052 ], [ 107436.116577148524811, 521619.658447276626248 ], [ 107422.940307624769048, 521629.183532714145258 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "naam": "damwand_dwk", "diepte_van": 0.0, "diepte_tot": -5.0, "diam_drain": 0.0, "opmerking": "tot in veenlaag (0mNAP) OF SDL dieper (-5mNAP)" }, "geometry": { "type": "LineString", "coordinates": [ [ 107034.605162844134611, 521642.412333473330364 ], [ 107058.748440302937524, 521592.472129427886102 ], [ 107070.985443942336133, 521536.909518300613854 ], [ 107280.337425142584834, 521589.561706945416518 ] ] } }
+]
+}
