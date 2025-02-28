@@ -449,6 +449,23 @@ data:
         mockup: mockup/seapage_nh/v1.0.0
       changelog:
         previous_version: "0.0.0"
+        log: "Dataset was made for the PWN Vlotter NHFLO model."
+  seapage_nh:
+    - version_nhflo: "1.0.0"  # Semantic version
+      owner: HHNK
+      publication_date: "2023-12-19"
+      version_owner: "1.0.0"  # Version used by data owner
+      description_short: Seapage (Kwel) North Holland
+      description_long: Average seapage (Kwel) mm/day as calculated with the NHFLO model 08zeespiegelstijging
+      contact: o.ebbens@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent: [96750, 487250, 150750, 554750]  # minx, miny, maxx, maxy
+      paths:
+        local: seapage_nh/v1.0.0
+        nhflo_server: /data/seapage_nh/v1.0.0
+        mockup: mockup/seapage_nh/v1.0.0
+      changelog:
+        previous_version: "0.0.0"
         log: ""
   bofek:
     - version_nhflo: "1.0.0"  # Semantic version
