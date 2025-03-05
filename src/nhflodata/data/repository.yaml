@@ -595,3 +595,20 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version
+  regis:
+    - version_nhflo: 1.0.0
+      owner: TNO
+      publication_date: "2025-03-05"
+      version_owner: REGIS v02r2
+      description_short: REGIS v2r2
+      description_long: REGIS v2r2
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [96500, 151000, 487000, 555000]
+      paths:
+        local: regis/v1.0.0
+        nhflo_server: /data/regis/v1.0.0
+        mockup: mockup/regis/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
