@@ -224,9 +224,9 @@ data:
         - 103206
         - 500969
       paths:
-        local: wells_tata/v1.0.0
-        nhflo_server: /data/wells_tata/v1.0.0
-        mockup: mockup/wells_tata/v1.0.0
+        local: wells_tata/v2.0.0
+        nhflo_server: /data/wells_tata/v2.0.0
+        mockup: mockup/wells_tata/v2.0.0
       changelog:
         previous_version: 1.0.0
         log: Moved coordinates to center of Tata.
