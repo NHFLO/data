@@ -7,10 +7,10 @@ import os
 import re
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import yaml
 from yaml.loader import SafeLoader
-from zoneinfo import ZoneInfo
 
 logger = logging.getLogger(__name__)
 
