@@ -3,6 +3,7 @@ Compress the REGIS netcdf file using builtin compression.
 
 All variables are compressed with {'zlib': True, 'complevel': 5, 'fletcher32': True, 'dtype': 'float32'}
 """
+
 import nlmod
 import xarray as xr
 
