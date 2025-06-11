@@ -634,3 +634,20 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version
+  andijk_bodemlagen:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-06-11"
+      version_owner: 1.0.0
+      description_short: 12andijk v01
+      description_long: bodemlagen for 12andijk model
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [142900, 149600, 527000, 531500]
+      paths:
+        local: andijk_bodemlagen/v1.0.0
+        nhflo_server: /data/andijk_bodemlagen/v1.0.0
+        mockup: mockup/andijk_bodemlagen/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
