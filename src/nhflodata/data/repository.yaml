@@ -662,10 +662,10 @@ data:
       contact: o.ebbens@artesia-water.nl
       timezone: Europe/Amsterdam
       extent:
-      - 96750
-      - 150750
-      - 487250
-      - 554750
+        - 96750
+        - 150750
+        - 487250
+        - 554750
       paths:
         local: nhflo_zz/v1.0.0
         nhflo_server: /data/nhflo_zz/v1.0.0
