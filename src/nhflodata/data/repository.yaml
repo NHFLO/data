@@ -651,3 +651,25 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version
+  nhflo_zz:
+    - version_nhflo: 1.0.0
+      owner: Artesia
+      publication_date: "2025-07-21"
+      version_owner: 1.0.0
+      description_short: calculated heads with NHFLO zoet/zout 08zeespiegelstijging
+      description_long: heads calculated at the last time step in the top layer from the NHFLO zoet/zout
+        model 08zeepspiegelstijging. Used as starting heads in the 13berging_polder model.
+      contact: o.ebbens@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent:
+      - 96750
+      - 150750
+      - 487250
+      - 554750
+      paths:
+        local: nhflo_zz/v1.0.0
+        nhflo_server: /data/nhflo_zz/v1.0.0
+        mockup: mockup/nhflo_zz/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
