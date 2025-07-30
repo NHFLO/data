@@ -103,7 +103,6 @@ for idx, geom in enumerate(gdf_lake.geometry):
         raise ValueError(msg)
 
 # Metadata
-gdf_lake["lakeno"] = gdf_lake.index
 bounds = dict(zip(["minx", "miny", "maxx", "maxy"], gdf_lake.total_bounds, strict=False))
 print("extent:", round_bounds(bounds, rounding_interval=1000.0).values())  # noqa: T201
 
