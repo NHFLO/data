@@ -3,6 +3,23 @@ description:
   Repository of NHFLO containing the data structure of the proprietary
   data of NHFLO
 data:
+  lakes_pwn:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-07-30"
+      version_owner: 1.0.0
+      description_short: Lakes of PWN
+      description_long: Lakes of PWN
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent: [105000.0, 520000.0, 108000.0, 522000.0]
+      paths:
+        local: lakes_pwn/v1.0.0
+        nhflo_server: /data/lakes_pwn/v1.0.0
+        mockup: mockup/lakes_pwn/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version of lakes of PWN. Uses mostly data from oppervlaktewater_bergen v1.0.0.
   bodemlagen_pwn_2024:
     - version_nhflo: 1.0.0
       owner: PWN
