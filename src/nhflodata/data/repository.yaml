@@ -12,7 +12,11 @@ data:
       description_long: Lakes of PWN
       contact: bas.des.tombe@pwn.nl
       timezone: Europe/Amsterdam
-      extent: [105000.0, 520000.0, 108000.0, 522000.0]
+      extent: 
+        - 105000.0
+        - 520000.0
+        - 108000.0
+        - 522000.0
       paths:
         local: lakes_pwn/v1.0.0
         nhflo_server: /data/lakes_pwn/v1.0.0
