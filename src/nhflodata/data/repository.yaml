@@ -24,6 +24,27 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version of lakes of PWN. Uses mostly data from oppervlaktewater_bergen v1.0.0.
+  drains_pwn:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-08-04"
+      version_owner: 1.0.0
+      description_short: Drains of PWN
+      description_long: Drains of PWN
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 107000.0
+        - 521000.0
+        - 108000.0
+        - 522000.0
+      paths:
+        local: drains_pwn/v1.0.0
+        nhflo_server: /data/drains_pwn/v1.0.0
+        mockup: mockup/drains_pwn/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version of drains of PWN. Uses mostly data from drains_en_damwand_bergen v1.0.0.
   bodemlagen_pwn_2024:
     - version_nhflo: 1.0.0
       owner: PWN
