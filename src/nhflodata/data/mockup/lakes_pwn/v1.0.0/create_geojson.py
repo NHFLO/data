@@ -2,7 +2,6 @@
 
 import geopandas as gpd
 import pandas as pd
-from nhflotools.geoconverter.geoconverter import GeoConverter
 from nhflotools.geoconverter.utils import round_bounds, validate_crs, validate_geometry
 from nlmod.gwf.lake import LAKE_KWDS, OUTLET_DEFAULT
 
@@ -11,7 +10,9 @@ from nhflodata.get_paths import get_abs_data_path
 data_path_bergen_vijvers = get_abs_data_path(name="oppervlaktewater_bergen", version="latest", location="get_from_env")
 gdf_bergen_vijvers = gpd.read_file(data_path_bergen_vijvers / "oppervlaktewater_bergen.geojson")
 mask = ~gdf_bergen_vijvers["naam"].str.contains("bassin|droge stort", case=False, na=False)
-gdf_bergen_vijvers = gdf_bergen_vijvers[mask]  # Bassin is moddeled as drainage cell, not lake. Droge stort modeled as WEL.
+gdf_bergen_vijvers = gdf_bergen_vijvers[
+    mask
+]  # Bassin is moddeled as drainage cell, not lake. Droge stort modeled as WEL.
 
 # BGT identificatie - PWN identificatie koppeltabel
 bgt_id = {
