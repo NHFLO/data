@@ -485,7 +485,7 @@ data:
       description_long: Average seapage (Kwel) mm/day as calculated with the NHFLO model 08zeespiegelstijging
       contact: o.ebbens@artesia-water.nl
       timezone: Europe/Amsterdam
-      extent: [96750, 487250, 150750, 554750] # minx, miny, maxx, maxy
+      extent: [96750, 487250, 150750, 554750]  # minx, miny, maxx, maxy
       paths:
         local: seapage_nh/v1.0.0
         nhflo_server: /data/seapage_nh/v1.0.0
