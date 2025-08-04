@@ -68,19 +68,6 @@ gdf_lake = gpd.GeoDataFrame(
 
 # Fill the gdf with data from Bergen
 gdf_lake["identificatie"] = gdf_bergen_vijvers["naam"]
-gdf_lake["bgt-identificatie"] = gdf_lake.identificatie.map(bgt_id)
-gdf_lake["strt"] = gdf_bergen_vijvers["peil_circa"].replace(-9999.0, pd.NA)
-gdf_lake["clake"] = 10.0  # days
-gdf_lake["botm"] = gdf_lake.identificatie.map(botms)
-gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "lakeout"] = "Guurtjeslaan"
-gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "couttype"] = "WEIR"
-gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "outlet_invert"] = gdf_lake.loc[
-    gdf_lake.identificatie == "vijver 4", "strt"
-]
-gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "outlet_width"] = 1.0
-gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "outlet_rough"] = 0.0
-gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "outlet_slope"] = 0.0
-
 gdf_lake.replace(
     {
         "identificatie": {
@@ -94,6 +81,20 @@ gdf_lake.replace(
     inplace=True,
 )
 gdf_lake = gdf_lake.dissolve("identificatie", as_index=False, aggfunc="first", sort=True)
+
+gdf_lake["bgt-identificatie"] = gdf_lake.identificatie.map(bgt_id)
+gdf_lake["strt"] = gdf_lake.identificatie.map(strt)
+gdf_lake["clake"] = 10.0  # days
+gdf_lake["botm"] = gdf_lake.identificatie.map(botms)
+gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "lakeout"] = "Guurtjeslaan"
+gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "couttype"] = "WEIR"
+gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "outlet_invert"] = gdf_lake.loc[
+    gdf_lake.identificatie == "vijver 4", "strt"
+]
+gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "outlet_width"] = 1.0
+gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "outlet_rough"] = 0.0
+gdf_lake.loc[gdf_lake.identificatie == "vijver 4", "outlet_slope"] = 0.0
+
 
 # Checks
 validate_crs(gdf_lake)
