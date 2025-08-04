@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "drains_pwn",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.01,
+"bbox": [ 107080.87, 521548.54, 107453.90, 521643.63 ],                                                                            
+"features": [
+{ "type": "Feature", "properties": { "name": "drain_dwk", "elevation": 0.73, "comment": "wordt met pomp bemalen" }, "bbox": [ 107080.87, 521548.54, 107253.51, 521590.54 ], "geometry": { "type": "LineString", "coordinates": [ [ 107080.87, 521548.54 ], [ 107253.51, 521590.54 ] ] } },
+{ "type": "Feature", "properties": { "name": "drain_pomgebouw_ZUID", "elevation": -0.62, "comment": "via put uitloop op -0.5mNAP" }, "bbox": [ 107341.82, 521617.28, 107406.43, 521639.18 ], "geometry": { "type": "LineString", "coordinates": [ [ 107342.3, 521639.18 ], [ 107341.82, 521617.28 ], [ 107394.21, 521617.91 ], [ 107406.43, 521627.28 ] ] } },
+{ "type": "Feature", "properties": { "name": "drain_pomgebouw_NRD", "elevation": -0.8, "comment": "via put uitloop op -0.5mNAP" }, "bbox": [ 107347.06, 521635.69, 107407.07, 521643.63 ], "geometry": { "type": "LineString", "coordinates": [ [ 107347.06, 521643.15 ], [ 107398.49, 521643.63 ], [ 107407.07, 521635.69 ] ] } },
+{ "type": "Feature", "properties": { "name": "drain_dienstgebouw", "elevation": -0.844, "comment": "uitloop onder water op -0.5mNAP" }, "bbox": [ 107422.94, 521619.66, 107453.9, 521636.01 ], "geometry": { "type": "LineString", "coordinates": [ [ 107453.9, 521636.01 ], [ 107453.74, 521620.29 ], [ 107436.12, 521619.66 ], [ 107422.94, 521629.18 ] ] } }
+]
+}
