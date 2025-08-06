@@ -716,3 +716,25 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version
+  texel:
+    - version_nhflo: 1.0.0
+      owner: Artesia
+      publication_date: "2025-08-06"
+      version_owner: 1.0.0
+      description_short: shapefiles from texel
+      description_long: shapes from the Gemeente Texel, project Lonkend Perspectief en opstuwingen. Used
+        for the 14texel
+      contact: r.calje@artesia-water.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 109495
+        - 122952
+        - 555417
+        - 577744
+      paths:
+        local: texel/v1.0.0
+        nhflo_server: /data/texel/v1.0.0
+        mockup: mockup/texel/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
