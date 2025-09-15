@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Refinement_niveau_3",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"features": [
+{ "type": "Feature", "properties": { "id": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 101501.598501629094244, 502348.50473628443433 ], [ 101898.949432981549762, 502348.602993191278074 ], [ 101898.752919167847722, 501901.534066966443788 ], [ 101501.205474001646508, 501901.141039339010604 ], [ 101501.598501629094244, 502348.50473628443433 ] ] ] ] } }
+]
+}
