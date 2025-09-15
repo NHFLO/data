@@ -738,3 +738,24 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version
+  Refinement_Mensink:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-09-15"
+      version_owner: 1.0.0
+      description_short: geojason of refinement Mensink model
+      description_long: geojason of refinement Mensink model, contains 2 files, one for 2x refinement to 25x25 m and one for 4x refinement for 6,25x6,25 m
+      contact: govert.alkemade@sweco.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 101200
+        - 102100
+        - 501600
+        - 503400
+      paths:
+        local: Refinement_Mensink/v1.0.0
+        nhflo_server: /data/Refinement_Mensink/v1.0.0
+        mockup: mockup/Refinement_Mensink/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
