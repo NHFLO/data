@@ -837,9 +837,9 @@ data:
         - 496000
         - 510700
       paths:
-        local: Mensink_oppervlaktewater/v1.0.0
-        nhflo_server: /data/Mensink_oppervlaktewater/v1.0.0
-        mockup: mockup/Mensink_oppervlaktewater/v1.0.0
+        local: Mensink_oppervlaktewater/V1.0.0
+        nhflo_server: /data/Mensink_oppervlaktewater/V1.0.0
+        mockup: mockup/Mensink_oppervlaktewater/V1.0.0
       changelog:
         previous_version: 0.0.0
         log: Initial version
