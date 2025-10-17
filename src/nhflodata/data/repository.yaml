@@ -759,3 +759,87 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version
+  Mensink_putten_scenarios:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-10-17"
+      version_owner: 1.0.0
+      description_short: geojason of different wells options at HP Mensink
+      description_long: geojason of different wells options at HP Mensink used in study for new vacuumsysteem to control groundwaterlevens, also including a file for all PWN wells exclusing HP Mensink
+      contact: govert.alkemade@sweco.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 99800
+        - 107700
+        - 488300
+        - 521700
+      paths:
+        local: Mensink_putten_scenarios/v1.0.0
+        nhflo_server: /data/Mensink_putten_scenarios/v1.0.0
+        mockup: mockup/Mensink_putten_scenarios/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
+  Mensink_gebouwen:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-10-17"
+      version_owner: 1.0.0
+      description_short: geojason of three buildings that are vulnerable to high groundwaterlevels
+      description_long: geojason of three buildings that are vulnerable to high groundwaterlevels, used for plotting in 07mensink model
+      contact: govert.alkemade@sweco.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 101600
+        - 101800
+        - 502000
+        - 502300
+      paths:
+        local: Mensink_putten_scenarios/v1.0.0
+        nhflo_server: /data/Mensink_putten_scenarios/v1.0.0
+        mockup: mockup/Mensink_putten_scenarios/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
+  Mensink_metingen:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-10-17"
+      version_owner: 1.0.0
+      description_short: excel file of groundwaterlevens at 6 locations
+      description_long: excel file of groundwaterlevens at 6 locations used to calibrate and plot in 07Mensink model
+      contact: govert.alkemade@sweco.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 101200
+        - 102000
+        - 501900
+        - 502500
+      paths:
+        local: Mensink_putten_scenarios/v1.0.0
+        nhflo_server: /data/Mensink_putten_scenarios/v1.0.0
+        mockup: mockup/Mensink_putten_scenarios/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
+  Mensink_oppervlaktewater:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-10-17"
+      version_owner: 1.0.0
+      description_short: geojason of surface water for 07Mensink model
+      description_long: geojason of surface water for 07Mensink model
+      contact: govert.alkemade@sweco.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 104500
+        - 111700
+        - 496000
+        - 510700
+      paths:
+        local: Mensink_putten_scenarios/v1.0.0
+        nhflo_server: /data/Mensink_putten_scenarios/v1.0.0
+        mockup: mockup/Mensink_putten_scenarios/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
