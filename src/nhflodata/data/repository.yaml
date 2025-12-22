@@ -738,7 +738,7 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version
-  Refinement_Mensink:
+  Mensink_refinement:
     - version_nhflo: 1.0.0
       owner: PWN
       publication_date: "2025-09-15"
@@ -753,9 +753,9 @@ data:
         - 501600
         - 503400
       paths:
-        local: Refinement_Mensink/v1.0.0
-        nhflo_server: /data/Refinement_Mensink/v1.0.0
-        mockup: mockup/Refinement_Mensink/v1.0.0
+        local: Mensink_refinement/v1.0.0
+        nhflo_server: /data/Mensink_refinement/v1.0.0
+        mockup: mockup/Mensink_refinement/v1.0.0
       changelog:
         previous_version: 0.0.0
         log: Initial version
@@ -769,10 +769,10 @@ data:
       contact: govert.alkemade@sweco.nl
       timezone: Europe/Amsterdam
       extent:
-        - 99800
-        - 107700
-        - 488300
-        - 521700
+        - 101600
+        - 101800
+        - 502000
+        - 502300
       paths:
         local: Mensink_putten_scenarios/v1.0.0
         nhflo_server: /data/Mensink_putten_scenarios/v1.0.0
@@ -840,6 +840,48 @@ data:
         local: Mensink_oppervlaktewater/v1.0.0
         nhflo_server: /data/Mensink_oppervlaktewater/v1.0.0
         mockup: mockup/Mensink_oppervlaktewater/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
+  Mensink_no_drn_buffer:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-12-17"
+      version_owner: 1.0.0
+      description_short: geojason of area around HPmensink
+      description_long: geojason of 500 meter vuffer araound HP Mensink where no drains at maaiveld applied
+      contact: govert.alkemade@sweco.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 95000
+        - 109500
+        - 496000
+        - 510700
+      paths:
+        local: Mensink_no_drn_buffer/v1.0.0
+        nhflo_server: /data/Mensink_no_drn_buffer/v1.0.0
+        mockup: mockup/Mensink_no_drn_buffer/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version
+  Mensink_cropfactor:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2025-12-17"
+      version_owner: 1.0.0
+      description_short: geojason of cropfactors
+      description_long: geojason of cropfactors used in 07Mensink model
+      contact: govert.alkemade@sweco.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 95000
+        - 109500
+        - 497500
+        - 509500
+      paths:
+        local: Mensink_cropfactor/v1.0.0
+        nhflo_server: /data/Mensink_cropfactor/v1.0.0
+        mockup: mockup/Mensink_cropfactor/v1.0.0
       changelog:
         previous_version: 0.0.0
         log: Initial version
