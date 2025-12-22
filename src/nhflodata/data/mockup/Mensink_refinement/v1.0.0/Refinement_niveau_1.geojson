@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "Refinement_niveau_1",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.01,
+"bbox": [ 101200.49, 501600.73, 102099.09, 503399.52 ],                                                                            
+"features": [
+{ "type": "Feature", "properties": { "id": 1 }, "bbox": [ 101200.49, 501600.73, 102099.09, 503399.52 ], "geometry": { "type": "Polygon", "coordinates": [ [ [ 102098.7, 503399.01 ], [ 102099.09, 501600.84 ], [ 101200.49, 501600.73 ], [ 101200.69, 503399.52 ], [ 102098.7, 503399.01 ] ] ] } }
+]
+}
