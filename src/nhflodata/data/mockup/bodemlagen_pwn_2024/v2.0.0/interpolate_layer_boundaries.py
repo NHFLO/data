@@ -13,12 +13,13 @@ from nhflotools.pwnlayers2.prepare_data.interpolation_helper_functions import (
     polyline_from_points,
 )
 # TODO: Alle boring na de Koster dataset toevoegen/evalueren, zodat er meer punten zijn voor de interpolatie (get_point_values()).
-# TODO: Koster "daw_bestanden" en "kaarten_2024_voor_interpolatie" mapjes op de juiste plek zetten
+# TODO: Koster "daw_bestanden" en "kaarten_2024_voor_interpolatie" mapjes op de juiste plek zetten. DAW -> geojson. src\nhflodata\data\mockup\bodemlagen_pwn_2024\v2.0.0\koster_daw
 # TODO: "if fpath_shp_ber.exists() is True:" in get_point_values() eruit. Als laag is S11 dan skip
-# TODO: get_point_values(layer_name) label bij punten met de bron van de data
-# TODO: "daw_data_TS_DS.shp" in get_point_values() heeft 0.01m dikte voor aquitards die afwezig zijn. Check of deze punten in masks liggen
-# TODO: Waarom gdf_t = gdf_t.drop_duplicates() and gdf_d = gdf_d.drop_duplicates()
-# TODO: Verkennen. Laagdikte nul als contouren interpreteren ipv aanpak met gdf_within
+# TODO: get_point_values(layer_name) label bij punten met de bron van de data. Niet vereist voor implementatie NHFLO. Wel van toegevowegde waarde bij latere inversie stap.
+# TODO: "daw_data_TS_DS.shp" in get_point_values() heeft 0.01m dikte voor aquitards die afwezig zijn. Check of deze punten in masks liggen en andersom. Dubbel check of er geen 1cm  laagdikten in eindproduct zitten, want speciale betekenis.
+# TODO: Waarom gdf_t = gdf_t.drop_duplicates() and gdf_d = gdf_d.drop_duplicates(). Drop_duplicates kijkt naar index en velden
+# TODO: Controleer of er geen locaties zijn die meerdere keren voorkomen en verschillende waarden hebben
+# TODO: Bergen mask en Koster 0.01 mask samenvoegen tot 1 mask.
 # TODO: Sanity checks voor gdf_d en gdf_t. Geen negatieve dikten. Hoe wordt omgegaan met ontbrekende waarden? Doorsnijdt Top min dikte de top van de onderliggende laag?
 
 
