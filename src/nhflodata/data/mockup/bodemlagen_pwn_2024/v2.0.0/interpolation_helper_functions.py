@@ -3,7 +3,6 @@ from pathlib import Path
 import geopandas as gpd
 import numpy as np
 import pandas as pd
-import pyvista as pv
 from scipy.interpolate import griddata
 
 # Default CRS, Amersfoort RD
@@ -424,7 +423,7 @@ def join_contour_line_segments(gdf_ln):
     )
 
 
-def get_point_values(layer_name):
+def get_point_values(path, layer_name):
     """This function is called from interpolate_layer_boundaries.py to convert
     line segments to points and combine it with point data from the geo_daw
     data (top/thickness values for borehole interpreted by Koster, 1997) and
@@ -433,6 +432,8 @@ def get_point_values(layer_name):
 
     Parameters
     ----------
+    path : str
+        Path to the data.
     layer_name : str
         Name of the layer.
 
@@ -442,14 +443,14 @@ def get_point_values(layer_name):
         GeoDataFrame with points and their corresponding top/thickness values
     """
     # Folder with the contour lines
-    src_dir = Path("..", "gis", "kaarten_2024_voor_interpolatie")
+    # src_dir = Path("..", "gis", "kaarten_2024_voor_interpolatie")
     # Set the paths to the files to be read
     if layer_name.find("T") == 0:
-        fpath_shp = Path(src_dir, "top_aquitard", layer_name, f"{layer_name}_union_with_values_edited.shp")
-        fpath_shp_ber = Path(src_dir, "top_aquitard", layer_name, f"{layer_name}_bergen_points.shp")
+        fpath_shp = Path(path, "top_aquitard", layer_name, f"{layer_name}_union_with_values_edited.shp")
+        fpath_shp_ber = Path(path, "top_aquitard", layer_name, f"{layer_name}_bergen_points.shp")
     elif layer_name.find("D") == 0:
-        fpath_shp = Path(src_dir, "dikte_aquitard", layer_name, f"{layer_name}_union_with_values_edited.shp")
-        fpath_shp_ber = Path(src_dir, "dikte_aquitard", layer_name, f"{layer_name}_bergen_points.shp")
+        fpath_shp = Path(path, "dikte_aquitard", layer_name, f"{layer_name}_union_with_values_edited.shp")
+        fpath_shp_ber = Path(path, "dikte_aquitard", layer_name, f"{layer_name}_bergen_points.shp")
 
     # Import the contour lines
     gdf_ln = gpd.read_file(fpath_shp)
@@ -495,7 +496,7 @@ def get_point_values(layer_name):
         gdf_pts = pd.concat([gdf_pts, gdf_pts_ber])
 
     # Read the point data for the boreholes
-    fpath_daw = Path("..", "gis", "koster_1997", "daw_bestanden", "daw_data_TS_DS", "daw_data_TS_DS.shp")
+    fpath_daw = Path(path, "Koster_drilling_interpretations", "daw_data_TS_DS.geojson")
     gdf_daw = gpd.read_file(fpath_daw)
     # Select the column for the layer being processed
     gdf_daw = gdf_daw[[layer_name, "geometry"]].dropna()

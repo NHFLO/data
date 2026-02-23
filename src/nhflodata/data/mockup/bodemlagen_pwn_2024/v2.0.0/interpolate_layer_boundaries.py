@@ -6,12 +6,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import xarray as xr
-from nhflotools.pwnlayers2.prepare_data.interpolation_helper_functions import (
+from interpolation_helper_functions import (
     CRS_RD,
     get_point_values,
     interpolate_gdf,
     polyline_from_points,
 )
+
+from nhflodata.get_paths import get_abs_data_path
+
 # TODO: Alle boring na de Koster dataset toevoegen/evalueren, zodat er meer punten zijn voor de interpolatie (get_point_values()).
 # TODO: Koster "daw_bestanden" en "kaarten_2024_voor_interpolatie" mapjes op de juiste plek zetten. DAW -> geojson. src\nhflodata\data\mockup\bodemlagen_pwn_2024\v2.0.0\koster_daw
 # TODO: "if fpath_shp_ber.exists() is True:" in get_point_values() eruit. Als laag is S11 dan skip
@@ -22,12 +25,7 @@ from nhflotools.pwnlayers2.prepare_data.interpolation_helper_functions import (
 # TODO: Bergen mask en Koster 0.01 mask samenvoegen tot 1 mask.
 # TODO: Sanity checks voor gdf_d en gdf_t. Geen negatieve dikten. Hoe wordt omgegaan met ontbrekende waarden? Doorsnijdt Top min dikte de top van de onderliggende laag?
 
-
-try:
-    import pyvista as pv
-except ImportError as e:
-    msg = "pyvista is not installed. Please install it to run this script."
-    raise ImportError(msg) from e
+data_path = get_abs_data_path("bodemlagen_pwn_2024", "2.0.0")
 
 # Define the interpolation grid (to be replaced with the model grid in NHFLO)
 xmin, ymin = 95000, 496000
@@ -78,11 +76,6 @@ ln_xs = polyline_from_points(
     ])
 )
 
-# Create a plotter instance for the 3D plot
-plotter = pv.Plotter()
-# Same for the cross section
-plotter_xs = pv.Plotter()
-
 overlap = np.zeros(X.shape)
 
 da = xr.DataArray(
@@ -104,7 +97,7 @@ subdirs = ["top_aquitard", "dikte_aquitard", "bot_aquitard"]
 
 # Loop over the layers
 # TODO: omit the following line
-fpath_gpkg = os.path.join(__file__, "..", "interpolation_points.gpkg")
+# fpath_gpkg = os.path.join(__file__, "..", "interpolation_points.gpkg")
 for c, layer_name in enumerate(layer_names):
     # Create GeoDataFrames with the data points of the top and thicknesses
     gdf_t = get_point_values(f"T{layer_name}")
@@ -140,24 +133,24 @@ for c, layer_name in enumerate(layer_names):
     # )
 
     # # Store the interpolation points (layer top) so that they can be visualised in QGIS
-    fpath_shp = os.path.join(
-        __file__,
-        "..",
-        "top_aquitard",
-        f"T{layer_name}",
-        f"T{layer_name}_interpolation_points.shp",
-    )
+    # fpath_shp = os.path.join(
+    #     __file__,
+    #     "..",
+    #     "top_aquitard",
+    #     f"T{layer_name}",
+    #     f"T{layer_name}_interpolation_points.shp",
+    # )
     gdf_t.set_crs(CRS_RD)
     # gdf_t.to_file(fpath_shp)
 
     # # Store the interpolation points (layer thickness) so that they can be visualised in QGIS
-    fpath_shp = os.path.join(
-        __file__,
-        "..",
-        "dikte_aquitard",
-        f"D{layer_name}",
-        f"D{layer_name}_interpolation_points.shp",
-    )
+    # fpath_shp = os.path.join(
+    #     __file__,
+    #     "..",
+    #     "dikte_aquitard",
+    #     f"D{layer_name}",
+    #     f"D{layer_name}_interpolation_points.shp",
+    # )
     gdf_d.set_crs(CRS_RD)
     # gdf_d.to_file(fpath_shp)
 
