@@ -90,7 +90,7 @@ s12kd = gpd.read_file(folder / "s12kd.shp").set_crs("EPSG:28992")
 s13kd = gpd.read_file(folder / "s13kd.shp").set_crs("EPSG:28992")
 s21kd = gpd.read_file(folder / "s21kd.shp").set_crs("EPSG:28992")
 s22kd = gpd.read_file(folder / "s22kd.shp").set_crs("EPSG:28992")
-# src/nhflodata/data/mockup/bodemlagen_pwn_nhdz/v1.0.0/Bodemparams/Maskers_kdwaarden_aquitards/masker_aquitard12_kd.shp
+
 folder = data_path_nhdz / "Bodemparams" / "Maskers_kdwaarden_aquitards"
 ms12kd = gpd.read_file(folder / "masker_aquitard12_kd.shp").set_crs("EPSG:28992")
 ms13kd = gpd.read_file(folder / "masker_aquitard13_kd.shp").set_crs("EPSG:28992")
