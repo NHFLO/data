@@ -327,7 +327,9 @@ for layer_name, s_layer, _ in output_layers:
 
 # --- Merge and save as a single GeoJSON ---
 gdf_all = gpd.GeoDataFrame(
-    {layer: gdfi["value"] for layer, gdfi in zip(layer_order, gdfs, strict=True)},  # TODO: This creates separate columns per layer, but we want a single "value" column and a "layer" column to identify the layer. This is needed for the inversion step later.
+    {
+        layer: gdfi["value"] for layer, gdfi in zip(layer_order, gdfs, strict=True)
+    },  # TODO: This creates separate columns per layer, but we want a single "value" column and a "layer" column to identify the layer. This is needed for the inversion step later.
     geometry=gdfs[0].geometry.copy(),
     crs=crs,
 )

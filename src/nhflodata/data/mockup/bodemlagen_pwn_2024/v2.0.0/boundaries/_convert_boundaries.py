@@ -8,6 +8,7 @@ De samenvoeging is gedaan voor de slechtdoorlatende lagen S2.1, S1.3, S1.2 en S1
 gelegen lagen (S3.2, S3.1 en S2.2) bevatten de shapefiles van het Bergen model geen informatie (zie
 paragraaf 3.3.6 van report).
 """
+
 from pathlib import Path
 
 import geopandas as gpd
@@ -18,7 +19,9 @@ converter = GeoConverter()
 
 # Convert folder with all files
 input_folder = Path("/Users/bdestombe/Downloads/boundaries")
-output_folder = Path("/Users/bdestombe/Projects/NHFLO/data/src/nhflodata/data/mockup/bodemlagen_pwn_2024/v2.0.0/boundaries")
+output_folder = Path(
+    "/Users/bdestombe/Projects/NHFLO/data/src/nhflodata/data/mockup/bodemlagen_pwn_2024/v2.0.0/boundaries"
+)
 results = converter.convert_folder(
     input_folder=input_folder, output_folder=output_folder, coordinate_precision=2, overwrite_with_target_crs=True
 )

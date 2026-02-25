@@ -514,7 +514,7 @@ def get_point_values(*, path, layer_name, dx_zero_vertices_interpolation=100.0):
         gdf_pts = pd.concat([gdf_pts, gdf_pts_ber])
 
     # Read the point data for the boreholes
-    fpath_daw = Path(path, "Koster_drilling_interpretations", "daw_data_TS_DS.geojson")
+    fpath_daw = Path(path, "koster_drilling_interpretations", "daw_data_TS_DS.geojson")
     gdf_daw = gpd.read_file(fpath_daw)
     # Select the column for the layer being processed
     gdf_daw = gdf_daw[[layer_name, "geometry"]].dropna()

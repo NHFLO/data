@@ -1,3 +1,5 @@
+"""Helper functions for computing conductance parameters from polygon data."""
+
 import logging
 
 import geopandas as gpd
