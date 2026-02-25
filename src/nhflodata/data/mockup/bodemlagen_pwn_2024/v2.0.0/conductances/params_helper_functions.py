@@ -25,6 +25,9 @@ def _extract_polygons(geom):
     geom = make_valid(geom)
     if isinstance(geom, (Polygon, MultiPolygon)):
         return geom
+    # Non-polygon, non-collection types (Point, LineString, etc.)
+    if not hasattr(geom, "geoms"):
+        return None
     # GeometryCollection: keep only polygon parts
     polys = [g for g in geom.geoms if isinstance(g, (Polygon, MultiPolygon))]
     if not polys:
@@ -149,13 +152,15 @@ def _area_weighted_median(gdf, value_col):
     return float(sorted_values[min(idx, len(sorted_values) - 1)])
 
 
-def clip_polygons_to_mask(source_gdf, mask_gdf, mask_value, coefficient=1.0, value_col="VALUE"):
-    """Clip source polygons to regions where mask polygons have a specific value.
+def clip_to_mask_region(source_gdf, mask_gdf, mask_value, coefficient=1.0, value_col="VALUE"):
+    """Clip source geometries to regions where mask polygons have a specific value.
+
+    Works with both point and polygon source geometries.
 
     Parameters
     ----------
     source_gdf : GeoDataFrame
-        Source polygons with values to clip.
+        Source geometries (points or polygons) with values to clip.
     mask_gdf : GeoDataFrame
         Mask polygons with values defining regions.
     mask_value : int or float
@@ -168,13 +173,14 @@ def clip_polygons_to_mask(source_gdf, mask_gdf, mask_value, coefficient=1.0, val
     Returns
     -------
     GeoDataFrame
-        Clipped polygons with scaled values, containing only geometry and
-        value_col columns.
+        Geometries within the mask region with scaled values, containing only
+        geometry and value_col columns.
     """
     mask_filtered = mask_gdf[mask_gdf[value_col] == mask_value][["geometry"]]
     if mask_filtered.empty:
         return gpd.GeoDataFrame(columns=["geometry", value_col], geometry="geometry", crs=source_gdf.crs)
-    clipped = gpd.overlay(source_gdf[["geometry", value_col]], mask_filtered, how="intersection")
+    clipped = gpd.clip(source_gdf[["geometry", value_col]], mask_filtered)
+    clipped = clipped[~clipped.geometry.is_empty].copy()
     clipped[value_col] *= coefficient
     return clipped[["geometry", value_col]]
 
