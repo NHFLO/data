@@ -1,27 +1,31 @@
+"""Convert boundary shapefiles and produce per-layer boundary GeoJSON files.
+
+Boundaries indicate where valid data for bodemlagen_pwn_2024 is available.
+Within the boundaries, valid values for the top and thickness of the aquitards
+should be found. Grid cells outside the boundaries are assigned NaN values.
+
+The merge was done for the aquitard layers S2.1, S1.3, S1.2, and S1.1. For the
+deeper layers (S3.2, S3.1, and S2.2), the Bergen model shapefiles contain no
+information (see report section 3.3.6).
+
+This is a one-time conversion script. The source shapefiles are archived in
+boundaries.zip within the boundaries/ data directory.
 """
-Boundaries geven aan waar geldige data voor bodemlage_pwn_2024 aanwezig is.
-
-Binnen de boundaries zou je geldige waarden moeten vinden voor de top en dikte van de aquitards.
-Aan cell nodes buiten de boundaries moeten nan waarden worden toegekend.
-
-De samenvoeging is gedaan voor de slechtdoorlatende lagen S2.1, S1.3, S1.2 en S1.1. Voor de dieper
-gelegen lagen (S3.2, S3.1 en S2.2) bevatten de shapefiles van het Bergen model geen informatie (zie
-paragraaf 3.3.6 van report).
-"""
-
-from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
 from nhflotools.geoconverter.geoconverter import GeoConverter, print_results
 
+from nhflodata.get_paths import get_abs_data_path
+
 converter = GeoConverter()
 
-# Convert folder with all files
-input_folder = Path("/Users/bdestombe/Downloads/boundaries")
-output_folder = Path(
-    "/Users/bdestombe/Projects/NHFLO/data/src/nhflodata/data/mockup/bodemlagen_pwn_2024/v2.0.0/boundaries"
-)
+data_path = get_abs_data_path("bodemlagen_pwn_2024", "2.0.0")
+
+# Convert folder with all files.
+# Source shapefiles are archived in boundaries/boundaries.zip.
+input_folder = data_path / "boundaries" / "boundaries.zip"
+output_folder = data_path / "boundaries"
 results = converter.convert_folder(
     input_folder=input_folder, output_folder=output_folder, coordinate_precision=2, overwrite_with_target_crs=True
 )
