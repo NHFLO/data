@@ -41,7 +41,7 @@ test = [
 
 [tool.hatch.envs.default]
 installer = "uv"
-python = "3.11"
+python = "3.13"
 
 [tool.hatch.envs.lintformat]
 detached = true

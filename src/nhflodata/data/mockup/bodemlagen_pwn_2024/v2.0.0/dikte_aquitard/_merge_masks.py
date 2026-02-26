@@ -12,12 +12,12 @@ Open concerns from Edinsi Groundwater report (Vincent Post, Aug 2024):
   absence according to Koster (1997).
 """
 
-from pathlib import Path
-
 import geopandas as gpd
 import pandas as pd
 
-data_dir = Path("/Users/bdestombe/Projects/NHFLO/data/src/nhflodata/data/mockup/bodemlagen_pwn_2024/v1.0.0")
+from nhflodata.get_paths import get_abs_data_path
+
+data_dir = get_abs_data_path("bodemlagen_pwn_2024", "1.0.0")
 layer_names = ["S11", "S12", "S13", "S21", "S22", "S31", "S32"]
 
 # Load the masks
