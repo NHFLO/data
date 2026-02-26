@@ -46,6 +46,27 @@ data:
         previous_version: 0.0.0
         log: Initial version of drains of PWN. Uses mostly data from drains_en_damwand_bergen v1.0.0.
   bodemlagen_pwn_2024:
+    - version_nhflo: 2.0.0
+      owner: PWN
+      publication_date: "2026-02-23"
+      version_owner: "2026-02-23"
+      description_short: Bodemlagen van NHDZ en Bergen
+      description_long: Bodemlagen van NHDZ en Bergen
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - -7000
+        - 289000
+        - 300000
+        - 629000
+      paths:
+        local: bodemlagen_pwn_2024/v2.0.0
+        nhflo_server: /data/bodemlagen_pwn_2024/v2.0.0
+        mockup: mockup/bodemlagen_pwn_2024/v2.0.0
+      changelog:
+        previous_version: 1.0.0
+        log:
+          Added Koster contour interpretations to dataset. Use Vincent's interpolation script to interpolate data.
     - version_nhflo: 1.0.0
       owner: PWN
       publication_date: "2024-12-09"
