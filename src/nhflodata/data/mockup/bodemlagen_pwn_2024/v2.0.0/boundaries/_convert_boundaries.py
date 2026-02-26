@@ -33,6 +33,14 @@ bounds_koster_bergen = gpd.GeoDataFrame(
     crs=bounds_koster.crs,
 )  # into single polygon geometry
 
+# TODO: [Edinsi report 6, p.40] Edinsi recommends extending S3.2, S3.1, and S2.2 maps
+#   northward into the Bergen area. Currently these layers only use the Koster (NHDZ)
+#   boundary because the Bergen model shapefiles contain no information for layers deeper
+#   than S2.1 (see Edinsi report 3.3.6, p.30).
+# TODO: [Edinsi report 3.1.1, p.21] Edinsi notes large differences between Koster S2.1 and
+#   REGIS for the Eem clay extent. REGIS distinguishes two clay layers (eek1, eek2) while
+#   Koster treats it as a single unit. Edinsi recommends investigating whether this splitting
+#   is necessary for the groundwater model (see also Edinsi report 6, p.40).
 bounds = {
     "S11": bounds_koster_bergen,
     "S12": bounds_koster_bergen,

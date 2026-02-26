@@ -71,6 +71,42 @@ logger = logging.getLogger(__name__)
 # TODO: Sanity checks voor gdf_d en gdf_t. Geen negatieve dikten. Hoe wordt omgegaan met ontbrekende waarden? Doorsnijdt Top min dikte de top van de onderliggende laag?
 # TODO: Add points from mask polygons to gdf_d with value 0, so that these points are included in the interpolation and get a value of zero. This is currently done by creating a separate GeoDataFrame with the interpolation points and using spatial join to find the points that are within the mask polygons, but for course interpolation grids info is lost. The zero masks can be used for thickness, but the top is not known.
 # TODO: Compute gdf_t for the points created from the zero masks.
+#
+# --- Open concerns from Edinsi Groundwater report ---
+# (rapportage_lagenmodel_pwn_concept.pdf, Vincent Post, Aug 2024)
+# All recommendations below are from the Edinsi report unless stated otherwise.
+#
+# TODO: [Edinsi report 2.1, p.6-7] Borehole location differences between Dawaco and Dinoloket
+#   (up to 200m, esp. near Castricum). Erroneous registrations for B19C0239 and B19C0806.
+#   Systematic coordinate inversion west of Bergen (Uilenvangersweg). Current assumption is
+#   that Dawaco locations are correct, but this has not been verified. Edinsi recommends
+#   investigating whether these differences have consequences for REGIS.
+# TODO: [Edinsi report 3.1, p.12] Depth shapefiles extend west of the coastline (North Sea)
+#   because the old Triwaco model assumed layers continue there. Thickness contours for S1.1,
+#   S1.3, S3.2 are NOT extended that far, suggesting layers may be absent under the seabed.
+#   Edinsi recommends investigating whether layers truly exist under the North Sea and what
+#   consequences this has for the groundwater model.
+# TODO: [Edinsi report 3.2, p.22-24] Profile analysis shows interpreted borehole thicknesses
+#   are often much less than shapefile polygon values. In the deep eastern part (below -40m
+#   NAP), piezometric data is limited and layer positions are uncertain.
+# TODO: [Edinsi report 4.1, p.32] S2.1 (Eem clay): Edinsi recommends remapping the occurrence
+#   of this layer in the eastern part of the Bergen area because REGIS and Dinoloket indicate
+#   a much larger extent than Stuyfzand (1989) assumed. Koster (1997) northern boundary is a
+#   study area limit, not a geological boundary.
+# TODO: [Edinsi report 4.2, p.34-35] S1.3 (Holocene base): The northern boundary w.r.t.
+#   Bergen is NOT processed in the new shapefile. Edinsi recommends further investigation.
+#   Also, the boundary near Bergen was shifted eastward based on Dinoloket data.
+# TODO: [Edinsi report 4.3, p.35] S1.2 (Holocene): SDP 1B was NOT included because the depth
+#   polygon for BA1A.shp was missing. Edinsi recommends investigating the extent of the
+#   Holocene aquitard in this area. The DI1B polygon with 0.4m thickness was also excluded
+#   because its origin is unclear. Also recommends refining geological mapping here.
+# TODO: [Edinsi report 4.4, p.36-37] S1.1 (Duinveen): DI2A.shp thickness is 0.2m, lower than
+#   Koster's (1997) 1-2m. This causes a thickness jump from 1.5m to 0.2m at the
+#   Koster/Bergen boundary. Edinsi recommends a borehole study to connect layers properly.
+# TODO: [Edinsi report 6, p.40] Edinsi recommends investigating whether Eem clay splitting
+#   into two layers (as in REGIS) is needed instead of the single-unit approach of Koster.
+# TODO: [Edinsi report 6, p.40] Edinsi recommends extending maps of S3.2, S3.1, and S2.2
+#   northward into the Bergen area. Currently only NHDZ data exists for the deeper layers.
 
 data_path = get_abs_data_path("bodemlagen_pwn_2024", "2.0.0")
 

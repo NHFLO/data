@@ -35,6 +35,17 @@ data_path_bergen = get_abs_data_path("bodemlagen_pwn_bergen", "1.0.0")
 data_path_nhdz = get_abs_data_path("bodemlagen_pwn_nhdz", "1.0.0")
 
 layer_names = ["W11", "S11", "W12", "S12", "W13", "S13", "W21", "S21", "W22", "S22", "W31", "S31", "W32", "S32"]
+# TODO: [Edinsi report 3.2, p.24] Edinsi notes that C12AREA (S12 vertical resistance from
+#   NHDZ) has an extremely high resistance of 37800 days for a small area west of Castricum.
+#   Edinsi flags this as an item that still needs to be processed/verified.
+# TODO: [Edinsi report 3.2, p.22] Edinsi notes that S1.2 at boring 19CZW643 has 7.5m
+#   thickness and 430 day resistance (only 0.02 m/d vertical conductivity) despite sand
+#   material and no piezometric head difference. This may indicate the conductance data is
+#   unreliable for this layer in some locations.
+# TODO: [Edinsi report 3.2, p.24] Edinsi flags: S12 mapped as 17.5m thick at 19CNPCS 10
+#   but this doesn't match the boring data.
+# TODO: [Edinsi report 3.2, p.24] Edinsi flags: Profile GG shows thick clay at 19CZW718
+#   with negligible head difference between filters 2 and 3. Possible density effects?
 c_nhdz_fill_values = {  # From bodemlagen_pwn_nhdz/v1.0.0/Ontleding_model_v2.xlsx
     "S11": 1.0,
     "S12": 10.0,

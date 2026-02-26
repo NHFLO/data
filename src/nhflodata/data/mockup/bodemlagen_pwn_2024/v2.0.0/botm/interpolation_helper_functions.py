@@ -224,6 +224,13 @@ def assign_poly_values_to_linestrings(
     to the Koster (1997) shapefiles from other sources (occurs mostly in the
     southern part of the area).
 
+    Note: [Edinsi report 3.1, p.12 and Section 5, p.38] Edinsi notes that the
+    Python script cannot automatically determine values for all contour lines.
+    Causes include: (a) overlapping polygons in original shapefiles, (b) minor
+    digitization errors, (c) added polygons in the southern part that weren't in
+    the original Koster (1997) data. These are flagged with remarks and resolved
+    in a manual QGIS editing step (step 5 in the interpolation workflow).
+
     Parameters
     ----------
     gdf_ln : GeoDataFrame

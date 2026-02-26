@@ -1,6 +1,15 @@
 """Merges the masks of the aquitard thickness layers from Koster (1997) and Stuyfzand (1970) into a single file.
 
 These masks indicate the absence of an aquitard layer.
+
+Open concerns from Edinsi Groundwater report (Vincent Post, Aug 2024):
+- [Edinsi 3.1, p.12] Edinsi notes DS21.shp: the 0.01m polygon (indicating layer
+  absence) is inaccurate — it sometimes has gaps or overlaps with other polygons.
+- [Edinsi 3.1, p.12] Edinsi notes DS22.shp: the 7.5m thickness contour has a
+  strange shape and overlaps with the area where the layer doesn't exist.
+- [Edinsi 3.1, p.13] Edinsi notes DS11.shp: duplicate polygons in the north —
+  two polygons (0.13 and 0.38m) are covered by 0.01m polygons suggesting layer
+  absence according to Koster (1997).
 """
 
 from pathlib import Path
