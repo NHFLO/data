@@ -4,7 +4,8 @@ This script reads contour-line and borehole point data for the seven aquitard
 layers (S11, S12, S13, S21, S22, S31, S32) and their overlying aquifers
 (W11 … W32), runs a series of quality checks, interpolates all tops and
 thicknesses to a common set of point locations, and writes the resulting
-bottom-elevation point clouds to GeoJSON files in the ``botm/`` subdirectory.
+bottom-elevation point clouds to a single GeoJSON file ``botm.geojson`` in
+``data_path``.
 
 Workflow
 --------
@@ -38,7 +39,11 @@ Workflow
    assumed to be better known.
 6. **Save** - all layers are merged into a single
    :class:`geopandas.GeoDataFrame` (with a ``layer`` column identifying each
-   layer) and written to ``botm.geojson``.
+   layer) and written to ``botm.geojson``. Alongside each ``{layer}`` value
+   column a boolean ``{layer}_is_original`` column is emitted, which is
+   ``True`` when that point's coordinates coincide with a source data point
+   (borehole, contour, or synthetic zero-thickness mask vertex) for the
+   layer, and ``False`` when the value comes from interpolation.
 
 Notes
 -----
@@ -53,11 +58,21 @@ from pathlib import Path
 
 import geopandas as gpd
 import numpy as np
-from interpolation_helper_functions import get_point_values, interpolate_to_all_points
+from interpolation_helper_functions import (
+    combine_sources,
+    get_point_values,
+    interpolate_to_all_points,
+    report_duplicate_geometries,
+    report_points_outside_boundary,
+    report_unresolved_monotonicity,
+    report_value_validity,
+    report_zero_mask_violations,
+)
 
 from nhflodata.get_paths import get_abs_data_path
 
-# logging.basicConfig(level=logging.WARNING)
+if not logging.getLogger().hasHandlers():
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 # DONE: Alle boring na de Koster dataset toevoegen/evalueren, zodat er meer punten zijn voor de interpolatie (get_point_values()).
@@ -113,105 +128,73 @@ data_path = get_abs_data_path("bodemlagen_pwn_2024", "2.0.0")
 # Tolerance for floating point comparisons (meters)
 THICKNESS_TOL = 1e-6
 
+# Fixed thickness of S32 (deepest aquitard), meters
+S32_FIXED_THICKNESS_M = 5.0
+
 # Names of the layers to be interpolated
 layer_names = ["S11", "S12", "S13", "S21", "S22", "S31", "S32"]
 
 dict_t = {}
 dict_d = {}
+boundaries = {}
 
 for layer_name in layer_names:
     # Create GeoDataFrames with the data points of the top and thicknesses
     gdf_t = get_point_values(path=data_path, layer_name=f"T{layer_name}", dx_zero_vertices_interpolation=50.0)
     gdf_d = get_point_values(path=data_path, layer_name=f"D{layer_name}", dx_zero_vertices_interpolation=50.0)
 
-    # Test 1a: All thicknesses should be zero or positive (no negative or NaN values).
-    n_negative = int((gdf_d["value"] < 0).sum())
-    n_nan_d = int(gdf_d["value"].isna().sum())
-    if n_negative == 0 and n_nan_d == 0:
-        logger.info("Test 1a passed for %s: all gdf_d values are zero or positive.", layer_name)
-    else:
-        if n_negative > 0:
-            logger.warning("Test 1a failed for %s: %d gdf_d points have negative values.", layer_name, n_negative)
-        if n_nan_d > 0:
-            logger.warning("Test 1a failed for %s: %d gdf_d points have NaN values.", layer_name, n_nan_d)
+    # get_point_values concatenates frames without resetting, so the returned index
+    # can contain duplicate labels. Reset so later ``.loc[label, ...]`` assignments
+    # don't silently mutate unrelated rows that happen to share a label.
+    gdf_t = gdf_t.reset_index(drop=True)
+    gdf_d = gdf_d.reset_index(drop=True)
 
-    n_nan_t = int(gdf_t["value"].isna().sum())
-    if n_nan_t == 0:
-        logger.info("Test 1a passed for %s: all gdf_t values are non-NaN.", layer_name)
-    else:
-        logger.warning("Test 1a failed for %s: %d gdf_t points have NaN values.", layer_name, n_nan_t)
+    # Test 1a: gdf_t values non-NaN; gdf_d values non-NaN and non-negative.
+    report_value_validity(gdf=gdf_t, layer_name=layer_name, is_thickness=False, logger=logger)
+    report_value_validity(gdf=gdf_d, layer_name=layer_name, is_thickness=True, logger=logger)
 
     # Test 1b: All thicknesses should be zero in _mask_combined.geojson.
     mask_name = f"D{layer_name}"
     fp_zero_masks = Path(data_path, "dikte_aquitard", mask_name, f"{mask_name}_mask_combined.geojson")
     gdf_zero_masks = gpd.read_file(fp_zero_masks)
 
-    gdf_d_in_mask = gpd.sjoin(gdf_d, gdf_zero_masks, predicate="within")
-    non_zero = gdf_d_in_mask[gdf_d_in_mask["value_left"] != 0]
-
+    gdf_d_in_mask = report_zero_mask_violations(
+        gdf=gdf_d, gdf_mask=gdf_zero_masks, layer_name=layer_name, logger=logger
+    )
+    # Clamp values AND overwrite source: these points now reflect the zero-mask
+    # polygon, not their original file of origin.
+    mask_src = f"dikte_aquitard/D{layer_name}/D{layer_name}_mask_combined.geojson"
     gdf_d.loc[gdf_d_in_mask.index, "value"] = 0  # TODO: This one should not be necessary
-
-    # ax=gdf_d.plot(); non_zero.plot(ax=ax, c="red"); gdf_zero_masks.boundary.plot(ax=ax, color="blue")
-    if non_zero.empty:
-        logger.info("Test 1b passed for %s: all gdf_d points within zero masks have value 0.", layer_name)
-    else:
-        logger.warning(
-            "Test 1b failed for %s: %d gdf_d points within zero masks have non-zero values.",
-            layer_name,
-            len(non_zero),
-        )
+    gdf_d.loc[gdf_d_in_mask.index, "source"] = mask_src
 
     # Test 2: All data points should lie on or inside the boundaries.
     gdf_boundary = gpd.read_file(os.path.join(data_path, "boundaries", layer_name, f"{layer_name}.geojson"))
+    boundaries[layer_name] = gdf_boundary
 
-    gdf_t_in_boundary = gpd.sjoin(gdf_t, gdf_boundary, predicate="intersects")
-    n_t_outside = len(gdf_t) - len(gdf_t_in_boundary)
-    # ax=gdf_t.plot(); gdf_t[~gdf_t.index.isin(gdf_t_in_boundary.index)].plot(ax=ax, c="red"); gdf_boundary.boundary.plot(ax=ax, color="blue")
-    if n_t_outside == 0:
-        logger.info("Test 2 passed for %s: all gdf_t points lie on or within the boundary.", layer_name)
-    else:
-        logger.warning("Test 2 failed for %s: %d gdf_t points lie outside the boundary.", layer_name, n_t_outside)
+    gdf_t_in_boundary = report_points_outside_boundary(
+        gdf=gdf_t, boundary=gdf_boundary, layer_name=layer_name, is_thickness=False, logger=logger
+    )
+    gdf_t = gdf_t.loc[gdf_t_in_boundary.index.unique()]  # TODO: This one should not be necessary
 
-    gdf_t = gdf_t.loc[gdf_t_in_boundary.index]  # TODO: This one should not be necessary
-
-    gdf_d_in_boundary = gpd.sjoin(gdf_d, gdf_boundary, predicate="intersects")
-    n_d_outside = len(gdf_d) - len(gdf_d_in_boundary)
-    # ax=gdf_d.plot(); gdf_d[~gdf_d.index.isin(gdf_d_in_boundary.index)].plot(ax=ax, c="red"); gdf_boundary.boundary.plot(ax=ax, color="blue")
-    if n_d_outside == 0:
-        logger.info("Test 2 passed for %s: all gdf_d points lie on or within the boundary.", layer_name)
-    else:
-        logger.warning("Test 2 failed for %s: %d gdf_d points lie outside the boundary.", layer_name, n_d_outside)
-
-    gdf_d = gdf_d.loc[gdf_d_in_boundary.index]  # TODO: This one should not be necessary
+    gdf_d_in_boundary = report_points_outside_boundary(
+        gdf=gdf_d, boundary=gdf_boundary, layer_name=layer_name, is_thickness=True, logger=logger
+    )
+    gdf_d = gdf_d.loc[gdf_d_in_boundary.index.unique()]  # TODO: This one should not be necessary
 
     # Test 3: No multiple data points at the exact same location.
-    # ax=gdf_t.plot(); gdf_t[gdf_t.duplicated(subset="geometry")].plot(ax=ax, c="red")
-    # ax=gdf_d.plot(); gdf_d[gdf_d.duplicated(subset="geometry")].plot(ax=ax, c="red")
-    dup_count = int(gdf_t.duplicated(subset="geometry").sum())
-    gdf_t = gdf_t.dissolve(by=gdf_t.geometry, aggfunc="mean").reset_index(
-        drop=True
-    )  # TODO: This one should not be necessary
-    if dup_count == 0:
-        logger.info("Test 3 passed for %s: no duplicate points in gdf_t.", layer_name)
-    else:
-        logger.warning(
-            "Test 3 failed for %s: %d duplicate points in gdf_t. Taking the mean of duplicate values.",
-            layer_name,
-            dup_count,
-        )
+    # Dissolve averages the value and pipe-joins unique sources so provenance
+    # from every file that contributed to the location is preserved.
+    dissolve_agg = {"value": "mean", "source": combine_sources}
 
-    dup_count = int(gdf_d.duplicated(subset="geometry").sum())
-    gdf_d = gdf_d.dissolve(by=gdf_d.geometry, aggfunc="mean").reset_index(
+    report_duplicate_geometries(gdf=gdf_t, layer_name=layer_name, is_thickness=False, logger=logger)
+    gdf_t = gdf_t.dissolve(by=gdf_t.geometry, aggfunc=dissolve_agg).reset_index(
         drop=True
     )  # TODO: This one should not be necessary
-    if dup_count == 0:
-        logger.info("Test 3 passed for %s: no duplicate points in gdf_d.", layer_name)
-    else:
-        logger.warning(
-            "Test 3 failed for %s: %d duplicate points in gdf_d. Taking the mean of duplicate values.",
-            layer_name,
-            dup_count,
-        )
+
+    report_duplicate_geometries(gdf=gdf_d, layer_name=layer_name, is_thickness=True, logger=logger)
+    gdf_d = gdf_d.dissolve(by=gdf_d.geometry, aggfunc=dissolve_agg).reset_index(
+        drop=True
+    )  # TODO: This one should not be necessary
 
     dict_t[layer_name] = gdf_t
     dict_d[layer_name] = gdf_d
@@ -258,7 +241,7 @@ interp_t = {}
 interp_d = {}
 
 for layer_name in layer_names:
-    gdf_boundary = gpd.read_file(os.path.join(data_path, "boundaries", layer_name, f"{layer_name}.geojson"))
+    gdf_boundary = boundaries[layer_name]
     interp_t[layer_name] = interpolate_to_all_points(
         gdf=dict_t[layer_name], all_xy=all_points_unique, boundary_gdf=gdf_boundary
     )
@@ -270,6 +253,31 @@ for layer_name in layer_names:
 # --- Compute bottom elevations for all 14 layers ---
 botm_arrays = {}
 is_original_arrays = {}
+source_arrays = {}
+
+
+def _combine_ts_ds_sources(ts_src, ds_src):
+    """Element-wise combine TS and DS source arrays for aquitard Sxx bottoms.
+
+    NaN on either side → NaN (outside boundary); both ``"interp"`` collapse to
+    ``"interp"``; otherwise pipe-join the two strings.
+    """
+    out = np.empty(len(ts_src), dtype=object)
+    for i in range(len(ts_src)):
+        t = ts_src[i]
+        d = ds_src[i]
+        t_nan = not isinstance(t, str)
+        d_nan = not isinstance(d, str)
+        if t_nan or d_nan:
+            out[i] = np.nan
+        elif t == "interp" and d == "interp":
+            out[i] = "interp"
+        elif t == d:
+            out[i] = t
+        else:
+            out[i] = f"{t} | {d}"
+    return out
+
 
 for layer_name, s_layer, layer_type in output_layers:
     ts = interp_t[s_layer]
@@ -277,18 +285,23 @@ for layer_name, s_layer, layer_type in output_layers:
     if layer_type == "aquifer":
         botm_arrays[layer_name] = ts["value"].values.copy()
         is_original_arrays[layer_name] = ts["is_original"].values.copy()
+        source_arrays[layer_name] = ts["source"].values.copy()
     elif layer_type == "aquitard":
         ds = interp_d[s_layer]
         botm_arrays[layer_name] = ts["value"].values - ds["value"].values
         is_original_arrays[layer_name] = ts["is_original"].values & ds["is_original"].values
+        source_arrays[layer_name] = _combine_ts_ds_sources(ts["source"].values, ds["source"].values)
     elif layer_type == "aquitard_fixed":
-        botm_arrays[layer_name] = ts["value"].values.copy() - 5.0
+        botm_arrays[layer_name] = ts["value"].values.copy() - S32_FIXED_THICKNESS_M
         is_original_arrays[layer_name] = ts["is_original"].values.copy()
+        source_arrays[layer_name] = ts["source"].values.copy()
 
 # --- Enforce non-negative thickness ---
 # Two sweeps ensure interpolated values respect original data from both sides.
 # NaN (= outside boundary) is handled transparently: np.fmin/fmax skip NaN,
 # and NaN comparisons are False so no spurious violations are detected.
+# Zero-thickness mask points are flagged ``is_original=True`` upstream, so the
+# sweeps will never push a "layer absent" point back to a non-zero thickness.
 layer_order = [name for name, _, _ in output_layers]
 
 # Downward sweep: clamp interpolated values DOWN to respect data above.
@@ -327,46 +340,92 @@ for i in range(len(layer_order) - 2, -1, -1):
 
     running_max = np.fmax(running_max, botm_arrays[layer])
 
-# Report remaining violations (both layers original, cannot be resolved)
-for i in range(1, len(layer_order)):
-    upper = layer_order[i - 1]
-    lower = layer_order[i]
-    both_orig = is_original_arrays[upper] & is_original_arrays[lower]
-    violation = both_orig & (botm_arrays[lower] > botm_arrays[upper] + THICKNESS_TOL)
-    n = int(violation.sum())
-    if n > 0:
-        logger.warning(
-            "Unresolved: %d original data points have negative thickness between %s and %s. NOT adjusted.",
-            n,
-            upper,
-            lower,
-        )
+# Report remaining violations (both layers original, cannot be resolved).
+report_unresolved_monotonicity(
+    botm_arrays=botm_arrays,
+    is_original_arrays=is_original_arrays,
+    layer_order=layer_order,
+    tol=THICKNESS_TOL,
+    logger=logger,
+)
 
 # --- Filter to boundary and collect all layers ---
 crs = interp_t[layer_names[0]].crs
-gdfs = []
 
-for layer_name, s_layer, _ in output_layers:
-    gdf_botm = gpd.GeoDataFrame(
-        {"layer": layer_name, "value": botm_arrays[layer_name], "is_original": is_original_arrays[layer_name]},
-        geometry=gpd.points_from_xy(all_points_unique[:, 0], all_points_unique[:, 1]),
-        crs=crs,
-    )
-
-    # Keep only points within the layer boundary
-    gdf_boundary = gpd.read_file(os.path.join(data_path, "boundaries", s_layer, f"{s_layer}.geojson"))
-    within = gpd.sjoin(gdf_botm, gdf_boundary, predicate="intersects")
-    gdf_botm = gdf_botm.loc[within.index].reset_index(drop=True)
-
-    gdfs.append(gdf_botm)
-    logger.info("Filtered bottom of %s to %d points.", layer_name, len(gdf_botm))
-
-# --- Merge and save as a single GeoJSON ---
+# Build the output directly from botm_arrays to preserve spatial alignment.
+# Each botm_arrays[layer] is indexed against all_points_unique and already
+# contains NaN for points outside the layer boundary (set by
+# interpolate_to_all_points).  Per-layer boundary filtering with
+# reset_index would destroy the positional correspondence between layers
+# (different boundaries exclude different subsets of points, so reset
+# indices no longer refer to the same physical location).
+gdf_data = {layer: botm_arrays[layer] for layer in layer_order}
+gdf_data.update({f"{layer}_is_original": is_original_arrays[layer] for layer in layer_order})
+gdf_data.update({f"{layer}_source": source_arrays[layer] for layer in layer_order})
 gdf_all = gpd.GeoDataFrame(
-    {layer: gdfi["value"] for layer, gdfi in zip(layer_order, gdfs, strict=True)},
-    geometry=gdfs[0].geometry.copy(),
+    gdf_data,
+    geometry=gpd.points_from_xy(all_points_unique[:, 0], all_points_unique[:, 1]),
     crs=crs,
 )
+
+# Sanity check: a point flagged ``is_original`` must have a non-NaN value.
+# If this fires, a source point ended up outside its layer boundary (or the
+# aquitard combination of ts/ds original flags is inconsistent with their
+# values), and the invariant underpinning the sweeps no longer holds.
+for layer_name in layer_order:
+    bad = int((gdf_all[f"{layer_name}_is_original"] & gdf_all[layer_name].isna()).sum())
+    if bad:
+        msg = f"is_original/value inconsistency for {layer_name}: {bad} row(s) flagged original but value is NaN."
+        raise AssertionError(msg)
+
+# Remove points that are outside every layer boundary (all values NaN).
+# ``dropna`` is restricted to the value columns — the ``_is_original`` flag
+# columns must not influence which rows are dropped.
+gdf_all = gdf_all.dropna(subset=layer_order, how="all").reset_index(drop=True)
+
+# Drop interpolation-only rows: points where no output layer is flagged
+# ``is_original``. These come from source points that contribute to the union
+# of locations but never produce an original botm value — e.g. a DSxx-only
+# source point (no paired TSxx original), which makes neither Wxx (needs
+# TSxx original) nor Sxx (needs both TSxx and DSxx original) original at
+# that location. Such rows carry only interpolated data and would spuriously
+# inflate the point cloud.
+n_before = len(gdf_all)
+original_cols = [f"{layer}_is_original" for layer in layer_order]
+is_original_any = np.asarray(gdf_all[original_cols].to_numpy(dtype=bool).any(axis=1), dtype=bool)
+gdf_all = gdf_all.loc[is_original_any].reset_index(drop=True)
+logger.info(
+    "Dropped %d interpolation-only points (kept %d with original data in at least one layer).",
+    n_before - len(gdf_all),
+    len(gdf_all),
+)
+
+for layer_name in layer_order:
+    n_valid = int(gdf_all[layer_name].notna().sum())
+    n_original = int((gdf_all[layer_name].notna() & gdf_all[f"{layer_name}_is_original"]).sum())
+    logger.info(
+        "Layer %s: %d valid points in output, of which %d original.",
+        layer_name,
+        n_valid,
+        n_original,
+    )
+
+# --- Merge and save as GeoJSON files ---
+# The existing ``botm.geojson`` (value + ``_is_original`` columns) is kept as-is
+# so downstream consumers are unaffected. A companion
+# ``botm_incl_source.geojson`` adds per-layer ``{layer}_source`` columns for
+# provenance tracking (relative geojson path or ``"interp"``).
+source_cols = [f"{layer}_source" for layer in layer_order]
+
 fpath_out = Path(data_path, "botm.geojson")
-gdf_all.to_file(fpath_out, driver="GeoJSON")
+gdf_all.drop(columns=source_cols).to_file(fpath_out, driver="GeoJSON")
 logger.info("Saved all %d bottom points (%d layers) to %s.", len(gdf_all), len(output_layers), fpath_out)
+
+fpath_out_src = Path(data_path, "botm_incl_source.geojson")
+gdf_all.to_file(fpath_out_src, driver="GeoJSON")
+logger.info(
+    "Saved all %d bottom points (%d layers) with source provenance to %s.",
+    len(gdf_all),
+    len(output_layers),
+    fpath_out_src,
+)

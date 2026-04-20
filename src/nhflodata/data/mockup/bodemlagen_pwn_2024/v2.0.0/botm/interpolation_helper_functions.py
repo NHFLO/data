@@ -441,6 +441,180 @@ def join_contour_line_segments(gdf_ln):
     )
 
 
+def report_value_validity(*, gdf, layer_name, is_thickness, logger):
+    """Log Test 1a results: NaN counts (always) and negative counts (thickness only).
+
+    Pure reporting helper — ``gdf`` is not modified.
+
+    Parameters
+    ----------
+    gdf : gpd.GeoDataFrame
+        Point cloud with a ``value`` column.
+    layer_name : str
+        Layer identifier used in log messages (e.g. ``"S11"``).
+    is_thickness : bool
+        If True the frame holds thickness values; negative values are also
+        reported and log messages refer to ``gdf_d``. If False (top frame),
+        messages refer to ``gdf_t`` and negatives are not checked.
+    logger : logging.Logger
+        Logger used for output.
+    """
+    kind = "gdf_d" if is_thickness else "gdf_t"
+
+    n_nan = int(gdf["value"].isna().sum())
+    if n_nan == 0:
+        logger.info("Test 1a passed for %s: all %s values are non-NaN.", layer_name, kind)
+    else:
+        logger.warning("Test 1a failed for %s: %d %s points have NaN values.", layer_name, n_nan, kind)
+
+    if is_thickness:
+        n_negative = int((gdf["value"] < 0).sum())
+        if n_negative == 0:
+            logger.info("Test 1a passed for %s: all %s values are zero or positive.", layer_name, kind)
+        else:
+            logger.warning("Test 1a failed for %s: %d %s points have negative values.", layer_name, n_negative, kind)
+
+
+def report_zero_mask_violations(*, gdf, gdf_mask, layer_name, logger):
+    """Log Test 1b: thickness points within zero-mask polygons that are not zero.
+
+    Pure reporter — ``gdf`` is not modified. Returns the sjoin intermediate so
+    the caller can clamp values via its index.
+
+    Parameters
+    ----------
+    gdf : gpd.GeoDataFrame
+        Thickness point cloud (``gdf_d``) with a ``value`` column.
+    gdf_mask : gpd.GeoDataFrame
+        Zero-thickness mask polygons.
+    layer_name : str
+        Layer identifier (e.g. ``"S11"``).
+    logger : logging.Logger
+        Logger for output.
+
+    Returns
+    -------
+    gpd.GeoDataFrame
+        The within-sjoin result (points x mask polygons). ``gdf`` is not
+        modified.
+    """
+    gdf_in_mask = gpd.sjoin(gdf, gdf_mask, predicate="within")
+    non_zero = gdf_in_mask[gdf_in_mask["value_left"] != 0]
+    if non_zero.empty:
+        logger.info("Test 1b passed for %s: all gdf_d points within zero masks have value 0.", layer_name)
+    else:
+        logger.warning(
+            "Test 1b failed for %s: %d gdf_d points within zero masks have non-zero values.",
+            layer_name,
+            non_zero.index.nunique(),
+        )
+    return gdf_in_mask
+
+
+def report_points_outside_boundary(*, gdf, boundary, layer_name, is_thickness, logger):
+    """Log Test 2: points lying outside the layer boundary polygon.
+
+    Pure reporter — ``gdf`` is not modified. Returns the sjoin intermediate so
+    the caller can filter via ``result.index.unique()``.
+
+    Parameters
+    ----------
+    gdf : gpd.GeoDataFrame
+        Point cloud with a ``value`` column and point geometry.
+    boundary : gpd.GeoDataFrame
+        Layer boundary polygon(s).
+    layer_name : str
+        Layer identifier (e.g. ``"S11"``).
+    is_thickness : bool
+        If True, log messages refer to ``gdf_d``; otherwise ``gdf_t``.
+    logger : logging.Logger
+        Logger for output.
+
+    Returns
+    -------
+    gpd.GeoDataFrame
+        The intersects-sjoin result. ``gdf`` is not modified.
+    """
+    kind = "gdf_d" if is_thickness else "gdf_t"
+    gdf_in = gpd.sjoin(gdf, boundary, predicate="intersects")
+    n_outside = len(gdf) - gdf_in.index.nunique()
+    if n_outside == 0:
+        logger.info("Test 2 passed for %s: all %s points lie on or within the boundary.", layer_name, kind)
+    else:
+        logger.warning("Test 2 failed for %s: %d %s points lie outside the boundary.", layer_name, n_outside, kind)
+    return gdf_in
+
+
+def report_duplicate_geometries(*, gdf, layer_name, is_thickness, logger):
+    """Log Test 3: rows sharing a geometry.
+
+    Pure reporter — ``gdf`` is not modified.
+
+    Parameters
+    ----------
+    gdf : gpd.GeoDataFrame
+        Point cloud with a ``geometry`` column.
+    layer_name : str
+        Layer identifier (e.g. ``"S11"``).
+    is_thickness : bool
+        If True, log messages refer to ``gdf_d``; otherwise ``gdf_t``.
+    logger : logging.Logger
+        Logger for output.
+    """
+    kind = "gdf_d" if is_thickness else "gdf_t"
+    n_dup = int(gdf.duplicated(subset="geometry").sum())
+    if n_dup == 0:
+        logger.info("Test 3 passed for %s: no duplicate points in %s.", layer_name, kind)
+    else:
+        logger.warning(
+            "Test 3 failed for %s: %d duplicate points in %s. Taking the mean of duplicate values.",
+            layer_name,
+            n_dup,
+            kind,
+        )
+
+
+def report_unresolved_monotonicity(*, botm_arrays, is_original_arrays, layer_order, tol, logger):
+    """Log non-monotonic layer pairs where both values come from source data.
+
+    After downward/upward sweeps have clamped what they can, any pair
+    ``(upper, lower)`` where ``upper`` is above ``lower`` in ``layer_order``
+    and ``botm[lower] > botm[upper] + tol`` remains unresolved when both
+    points are flagged ``is_original`` (clamping would overwrite source data).
+    Every pair — not just adjacent ones — is checked so non-monotonic data
+    spanning non-adjacent layers is also surfaced. One log line per violating
+    pair with ``n > 0``.
+
+    Parameters
+    ----------
+    botm_arrays : dict[str, np.ndarray]
+        Bottom elevations keyed by layer name.
+    is_original_arrays : dict[str, np.ndarray]
+        Boolean flags keyed by layer name marking points whose values come
+        from source data (as opposed to interpolation).
+    layer_order : list[str]
+        Layer names from top to bottom.
+    tol : float
+        Floating-point tolerance for the comparison (meters).
+    logger : logging.Logger
+        Logger for output.
+    """
+    for i in range(len(layer_order) - 1):
+        for j in range(i + 1, len(layer_order)):
+            upper = layer_order[i]
+            lower = layer_order[j]
+            both_orig = is_original_arrays[upper] & is_original_arrays[lower]
+            violation = both_orig & (botm_arrays[lower] > botm_arrays[upper] + tol)
+            n = int(violation.sum())
+            if n > 0:
+                logger.warning(
+                    "Unresolved: %d original data points have %s below %s (non-monotonic). NOT adjusted.",
+                    n,
+                    upper,
+                    lower,
+                )
+
+
 def get_point_values(*, path, layer_name, dx_zero_vertices_interpolation=100.0):
     """Convert contour line segments to points and combine with borehole data.
 
@@ -463,7 +637,9 @@ def get_point_values(*, path, layer_name, dx_zero_vertices_interpolation=100.0):
     Returns
     -------
     GeoDataFrame
-        GeoDataFrame with points and their corresponding top/thickness values
+        GeoDataFrame with columns ``value``, ``source`` and point geometry.
+        ``source`` is the path of the originating geojson file relative to
+        ``path`` (POSIX-style), enabling downstream provenance tracking.
     """
     # Folder with the contour lines
     # src_dir = Path("..", "gis", "kaarten_2024_voor_interpolatie")
@@ -474,6 +650,12 @@ def get_point_values(*, path, layer_name, dx_zero_vertices_interpolation=100.0):
     elif layer_name.find("D") == 0:
         fpath_shp = Path(path, "dikte_aquitard", layer_name, f"{layer_name}_union_with_values_edited.geojson")
         fpath_shp_ber = Path(path, "dikte_aquitard", layer_name, f"{layer_name}_bergen_points.geojson")
+
+    # Source tags for each data block (relative to ``path``, POSIX-style) so the
+    # caller can trace every point back to its originating file.
+    src_contour = fpath_shp.relative_to(path).as_posix()
+    src_bergen = fpath_shp_ber.relative_to(path).as_posix()
+    src_daw = "koster_drilling_interpretations/daw_data_TS_DS.geojson"
 
     # Import the contour lines
     gdf_ln = gpd.read_file(fpath_shp)
@@ -501,9 +683,8 @@ def get_point_values(*, path, layer_name, dx_zero_vertices_interpolation=100.0):
 
     # Convert to a GeoDataFrame
     gdf_pts = gpd.GeoDataFrame(
-        data=values,
+        data={"value": values, "source": [src_contour] * len(values)},
         geometry=pts,
-        columns=["value"],
         crs=CRS_RD,
     )
 
@@ -517,6 +698,7 @@ def get_point_values(*, path, layer_name, dx_zero_vertices_interpolation=100.0):
         gdf_pts_ber = gdf_pts_ber[["geometry", "VALUE"]]
         # Rename the 'VALUE' column to 'value' to be compatible with gdf_pts
         gdf_pts_ber = gdf_pts_ber.rename(columns={"VALUE": "value"})
+        gdf_pts_ber["source"] = src_bergen
         # Add the Bergen points to gdf_pts
         gdf_pts = pd.concat([gdf_pts, gdf_pts_ber])
 
@@ -527,16 +709,29 @@ def get_point_values(*, path, layer_name, dx_zero_vertices_interpolation=100.0):
     gdf_daw = gdf_daw[[layer_name, "geometry"]].dropna()
     # Rename the column from layer name to 'value'
     gdf_daw = gdf_daw.rename(columns={layer_name: "value"})
+    gdf_daw["source"] = src_daw
 
     # Add the points to gdf_pts
     gdf_pts = pd.concat([gdf_pts, gdf_daw])
 
     if layer_name.find("D") == 0:
+        # Synthetic zero-thickness vertex points: sample the zero-mask polygon
+        # boundaries at spacing ``dx_zero_vertices_interpolation`` and inject them as
+        # data points with ``value = 0``. These are treated as ground truth ("layer
+        # absent here"), not soft interpolation hints — downstream they are flagged
+        # ``is_original=True`` and the non-negative-thickness sweeps never move them.
+        # The ``dx`` trade-off: smaller dx gives a denser, more faithful zero
+        # boundary at the cost of more interpolation points; larger dx is cheaper
+        # but risks the linear interpolator bridging across gaps between vertices.
         fp_zero_masks = Path(path, "dikte_aquitard", layer_name, f"{layer_name}_mask_combined.geojson")
+        src_zero = fp_zero_masks.relative_to(path).as_posix()
         gdf_zero_masks = gpd.read_file(fp_zero_masks)
         _gdf_zero_thickness = polygon_vertices_interpolated(gdf=gdf_zero_masks, dx=dx_zero_vertices_interpolation)
         _gdf_zero_thickness = gpd.GeoDataFrame(
-            data={"value": len(_gdf_zero_thickness) * [0.0]},
+            data={
+                "value": len(_gdf_zero_thickness) * [0.0],
+                "source": len(_gdf_zero_thickness) * [src_zero],
+            },
             geometry=_gdf_zero_thickness.geometry,
             crs=CRS_RD,
         )
@@ -640,7 +835,7 @@ def interpolate_to_all_points(*, gdf, all_xy, boundary_gdf):
     Parameters
     ----------
     gdf : gpd.GeoDataFrame
-        Source points with 'value' column and point geometry.
+        Source points with ``value``, ``source`` columns and point geometry.
     all_xy : np.ndarray
         Target locations as (N, 2) array of x, y coordinates.
     boundary_gdf : gpd.GeoDataFrame
@@ -649,12 +844,15 @@ def interpolate_to_all_points(*, gdf, all_xy, boundary_gdf):
     Returns
     -------
     gpd.GeoDataFrame
-        GeoDataFrame with interpolated 'value' and 'is_original' columns
-        at target locations, clipped to the boundary (NaN outside).
-        'is_original' is True for points that coincide with source data.
+        GeoDataFrame with ``value``, ``is_original``, and ``source`` columns at
+        target locations, clipped to the boundary (NaN outside). ``is_original``
+        is True for points that coincide with source data. ``source`` is the
+        originating source path for original points, ``"interp"`` for
+        interpolated points, and NaN for points outside the boundary.
     """
     src_xy = np.column_stack([gdf.geometry.x, gdf.geometry.y])
     src_values = gdf["value"].values
+    src_sources = gdf["source"].values
 
     # Linear interpolation
     interpolated = griddata(src_xy, src_values, all_xy, method="linear")
@@ -679,14 +877,49 @@ def interpolate_to_all_points(*, gdf, all_xy, boundary_gdf):
     # Clip: set values outside boundary to NaN
     gdf_result.loc[~mask_inside, "value"] = np.nan
 
-    # Track which points are original (coincide with source data locations)
-    # Build a set of (x, y) tuples from source for fast lookup
-    src_set = set(map(tuple, np.round(src_xy, decimals=6)))
+    # Track which points are original (coincide with source data locations).
+    # Note: for D-layers, synthetic zero-thickness mask vertex points are part of
+    # the source cloud, so they will also be flagged ``is_original=True`` here by
+    # design — they act as immutable "layer absent" constraints, not soft hints.
+    # Build a map (x, y) tuple -> source for lookup. The same rounding is used as
+    # the is_original set, so a point is "original" iff its source is resolvable.
+    src_rounded = np.round(src_xy, decimals=6)
+    src_map = {tuple(pt): src_sources[i] for i, pt in enumerate(src_rounded)}
     all_rounded = np.round(all_xy, decimals=6)
-    is_original = np.array([tuple(pt) in src_set for pt in all_rounded])
+    is_original = np.array([tuple(pt) in src_map for pt in all_rounded])
     gdf_result["is_original"] = is_original
 
+    source = np.full(len(all_rounded), "interp", dtype=object)
+    for i, pt in enumerate(all_rounded):
+        if is_original[i]:
+            source[i] = src_map[tuple(pt)]
+    gdf_result["source"] = source
+    gdf_result.loc[~mask_inside, "source"] = np.nan
+
     return gdf_result
+
+
+def combine_sources(s):
+    """Pipe-join unique non-empty string sources, preserving deterministic order.
+
+    Used as a dissolve ``aggfunc`` when merging duplicate point geometries: a
+    single output row can pull its value from multiple files (e.g. contour lines
+    + Bergen points at the same coordinate). The ``source`` column must capture
+    every contributing file without duplication.
+
+    Parameters
+    ----------
+    s : iterable of str or NaN
+        Source entries from the rows being dissolved.
+
+    Returns
+    -------
+    str
+        Pipe-joined (" | "-separated) sorted unique non-empty source strings.
+        Returns an empty string if no valid source is present.
+    """
+    vals = sorted({v for v in s if isinstance(v, str) and v})
+    return " | ".join(vals)
 
 
 def polygon_vertices_interpolated(*, gdf, dx):
