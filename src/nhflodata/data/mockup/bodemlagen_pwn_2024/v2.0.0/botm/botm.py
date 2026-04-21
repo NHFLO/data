@@ -38,12 +38,16 @@ Workflow
    warnings but left unchanged. Downward sweep first because upper layers are
    assumed to be better known.
 6. **Save** - all layers are merged into a single
-   :class:`geopandas.GeoDataFrame` (with a ``layer`` column identifying each
-   layer) and written to ``botm.geojson``. Alongside each ``{layer}`` value
-   column a boolean ``{layer}_is_original`` column is emitted, which is
-   ``True`` when that point's coordinates coincide with a source data point
-   (borehole, contour, or synthetic zero-thickness mask vertex) for the
-   layer, and ``False`` when the value comes from interpolation.
+   :class:`geopandas.GeoDataFrame` and written as two GeoJSON files:
+
+   * ``botm.geojson``: per-layer ``{layer}`` value columns only, kept
+     lean for downstream consumers that just need bottom elevations.
+   * ``botm_incl_source.geojson``: the same values plus, for each layer,
+     a boolean ``{layer}_is_original`` column (``True`` when the point
+     coincides with a source data point — borehole, contour, or synthetic
+     zero-thickness mask vertex — and ``False`` when the value comes from
+     interpolation) and a ``{layer}_source`` column with the relative
+     source file path (or ``"interp"``).
 
 Notes
 -----
@@ -411,14 +415,21 @@ for layer_name in layer_order:
     )
 
 # --- Merge and save as GeoJSON files ---
-# The existing ``botm.geojson`` (value + ``_is_original`` columns) is kept as-is
-# so downstream consumers are unaffected. A companion
-# ``botm_incl_source.geojson`` adds per-layer ``{layer}_source`` columns for
-# provenance tracking (relative geojson path or ``"interp"``).
+# ``botm.geojson`` holds only the per-layer value columns to keep the file
+# small. The companion ``botm_incl_source.geojson`` carries the full metadata
+# (``_is_original`` flags and ``_source`` provenance strings) for consumers
+# that need it.
+#
+# Values are rounded to millimetre precision (3 decimals): it shrinks the
+# GeoJSON substantially and honestly communicates that sub-mm digits from
+# interpolation are not physically meaningful.
 source_cols = [f"{layer}_source" for layer in layer_order]
+metadata_cols = original_cols + source_cols
+
+gdf_all[layer_order] = gdf_all[layer_order].round(3)
 
 fpath_out = Path(data_path, "botm.geojson")
-gdf_all.drop(columns=source_cols).to_file(fpath_out, driver="GeoJSON")
+gdf_all.drop(columns=metadata_cols).to_file(fpath_out, driver="GeoJSON")
 logger.info("Saved all %d bottom points (%d layers) to %s.", len(gdf_all), len(output_layers), fpath_out)
 
 fpath_out_src = Path(data_path, "botm_incl_source.geojson")
