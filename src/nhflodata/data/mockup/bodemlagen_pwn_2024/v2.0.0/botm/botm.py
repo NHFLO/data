@@ -428,11 +428,11 @@ metadata_cols = original_cols + source_cols
 
 gdf_all[layer_order] = gdf_all[layer_order].round(3)
 
-fpath_out = Path(data_path, "botm.geojson")
+fpath_out = Path(data_path, "botm", "botm.geojson")
 gdf_all.drop(columns=metadata_cols).to_file(fpath_out, driver="GeoJSON")
 logger.info("Saved all %d bottom points (%d layers) to %s.", len(gdf_all), len(output_layers), fpath_out)
 
-fpath_out_src = Path(data_path, "botm_incl_source.geojson")
+fpath_out_src = Path(data_path, "botm", "botm_incl_source.geojson")
 gdf_all.to_file(fpath_out_src, driver="GeoJSON")
 logger.info(
     "Saved all %d bottom points (%d layers) with source provenance to %s.",
