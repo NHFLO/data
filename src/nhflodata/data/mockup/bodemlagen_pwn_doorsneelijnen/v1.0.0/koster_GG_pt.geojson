@@ -1,0 +1,24 @@
+{
+"type": "FeatureCollection",
+"name": "koster_GG_pt",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"features": [
+{ "type": "Feature", "properties": { "code": "19CZW558" }, "geometry": { "type": "Point", "coordinates": [ 101100.0, 502600.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C061" }, "geometry": { "type": "Point", "coordinates": [ 101600.0, 502900.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZW718" }, "geometry": { "type": "Point", "coordinates": [ 101600.0, 502900.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C012" }, "geometry": { "type": "Point", "coordinates": [ 101800.0, 502800.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C054" }, "geometry": { "type": "Point", "coordinates": [ 102000.0, 502900.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZW792" }, "geometry": { "type": "Point", "coordinates": [ 102200.0, 502500.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C074" }, "geometry": { "type": "Point", "coordinates": [ 102800.0, 502800.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZW807" }, "geometry": { "type": "Point", "coordinates": [ 103100.0, 502100.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZW564" }, "geometry": { "type": "Point", "coordinates": [ 103700.0, 502200.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZW556" }, "geometry": { "type": "Point", "coordinates": [ 104600.0, 502300.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C724" }, "geometry": { "type": "Point", "coordinates": [ 105300.0, 502100.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C768" }, "geometry": { "type": "Point", "coordinates": [ 105300.0, 502200.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C722" }, "geometry": { "type": "Point", "coordinates": [ 106100.0, 502000.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C721" }, "geometry": { "type": "Point", "coordinates": [ 107200.0, 501700.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C572" }, "geometry": { "type": "Point", "coordinates": [ 107800.0, 501200.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C576" }, "geometry": { "type": "Point", "coordinates": [ 108200.0, 501800.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CZRG19C047" }, "geometry": { "type": "Point", "coordinates": [ 108700.0, 501400.0 ] } }
+]
+}

@@ -110,6 +110,27 @@ data:
       changelog:
         previous_version: 0.0.0
         log: ""
+  bodemlagen_pwn_doorsneelijnen:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2026-04-29"
+      version_owner: 1.0.0
+      description_short: Doorsneelijnen van de bodemlagen van PWN
+      description_long: Doorsneelijnen van de bodemlagen van PWN
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - -7000
+        - 289000
+        - 300000
+        - 629000
+      paths:
+        local: bodemlagen_pwn_doorsneelijnen/v1.0.0
+        nhflo_server: /data/bodemlagen_pwn_doorsneelijnen/v1.0.0
+        mockup: mockup/bodemlagen_pwn_doorsneelijnen/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: "Initial commit"
   bodemlagen_pwn_nhdz:
     - version_nhflo: 1.0.0
       owner: PWN
