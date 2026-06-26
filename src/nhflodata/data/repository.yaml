@@ -45,6 +45,27 @@ data:
       changelog:
         previous_version: 0.0.0
         log: Initial version of drains of PWN. Uses mostly data from drains_en_damwand_bergen v1.0.0.
+  rivers_pwn:
+    - version_nhflo: 1.0.0
+      owner: PWN
+      publication_date: "2026-04-23"
+      version_owner: 1.0.0
+      description_short: Rivers of PWN
+      description_long: Rivers of PWN
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 105000.0
+        - 520000.0
+        - 108000.0
+        - 522000.0
+      paths:
+        local: rivers_pwn/v1.0.0
+        nhflo_server: /data/rivers_pwn/v1.0.0
+        mockup: mockup/rivers_pwn/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log: Initial version of rivers of PWN.
   bodemlagen_pwn_2024:
     - version_nhflo: 2.0.0
       owner: PWN
