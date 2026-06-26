@@ -37,17 +37,16 @@ Workflow
    thicknesses. Conflicts between two original data points are logged as
    warnings but left unchanged. Downward sweep first because upper layers are
    assumed to be better known.
-6. **Save** - all layers are merged into a single
-   :class:`geopandas.GeoDataFrame` and written as two GeoJSON files:
+6. **Save** - all layers are merged at every source TS/DS location into a
+   single :class:`geopandas.GeoDataFrame` and written as two GeoJSON files:
 
    * ``botm.geojson``: per-layer ``{layer}`` value columns only, kept
      lean for downstream consumers that just need bottom elevations.
    * ``botm_incl_source.geojson``: the same values plus, for each layer,
-     a boolean ``{layer}_is_original`` column (``True`` when the point
-     coincides with a source data point — borehole, contour, or synthetic
-     zero-thickness mask vertex — and ``False`` when the value comes from
-     interpolation) and a ``{layer}_source`` column with the relative
-     source file path (or ``"interp"``).
+     a boolean ``{layer}_is_original`` column (``True`` when that layer's
+     bottom value is derived entirely from source inputs and ``False`` when
+     any component comes from interpolation) and a ``{layer}_source`` column
+     with the relative source file path (or ``"interp"``).
 
 Notes
 -----
@@ -385,25 +384,15 @@ for layer_name in layer_order:
 # Remove points that are outside every layer boundary (all values NaN).
 # ``dropna`` is restricted to the value columns — the ``_is_original`` flag
 # columns must not influence which rows are dropped.
-gdf_all = gdf_all.dropna(subset=layer_order, how="all").reset_index(drop=True)
-
-# Drop interpolation-only rows: points where no output layer is flagged
-# ``is_original``. These come from source points that contribute to the union
-# of locations but never produce an original botm value — e.g. a DSxx-only
-# source point (no paired TSxx original), which makes neither Wxx (needs
-# TSxx original) nor Sxx (needs both TSxx and DSxx original) original at
-# that location. Such rows carry only interpolated data and would spuriously
-# inflate the point cloud.
 n_before = len(gdf_all)
-original_cols = [f"{layer}_is_original" for layer in layer_order]
-is_original_any = np.asarray(gdf_all[original_cols].to_numpy(dtype=bool).any(axis=1), dtype=bool)
-gdf_all = gdf_all.loc[is_original_any].reset_index(drop=True)
+gdf_all = gdf_all.dropna(subset=layer_order, how="all").reset_index(drop=True)
 logger.info(
-    "Dropped %d interpolation-only points (kept %d with original data in at least one layer).",
+    "Dropped %d points outside every layer boundary (kept %d source TS/DS locations).",
     n_before - len(gdf_all),
     len(gdf_all),
 )
 
+original_cols = [f"{layer}_is_original" for layer in layer_order]
 for layer_name in layer_order:
     n_valid = int(gdf_all[layer_name].notna().sum())
     n_original = int((gdf_all[layer_name].notna() & gdf_all[f"{layer_name}_is_original"]).sum())
