@@ -21,7 +21,7 @@ license = { file = "LICENSE.txt" }
 maintainers = [{ name = "Bas des Tombe", email = "bas.des.tombe@pwn.nl" }]
 name = "nhflodata"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 version = "1.2.0"
 
 dependencies = ["pyyaml>=6.0.1"]
@@ -41,7 +41,7 @@ test = [
 
 [tool.hatch.envs.default]
 installer = "uv"
-python = "3.13"
+python = "3.14"
 
 [tool.hatch.envs.lintformat]
 detached = true
