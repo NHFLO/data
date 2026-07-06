@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "hfb_pwn",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"xy_coordinate_resolution": 0.01,
+"bbox": [ 107034.61, 521536.91, 107511.14, 521642.41 ],                                                                            
+"features": [
+{ "type": "Feature", "properties": { "name": "damwand_pompgebouw", "hydchr": 0.01, "depth": 5.0, "elevation": null, "comment": "" }, "bbox": [ 107280.34, 521589.56, 107511.14, 521619.63 ], "geometry": { "type": "LineString", "coordinates": [ [ 107280.34, 521589.56 ], [ 107511.14, 521619.63 ] ] } },
+{ "type": "Feature", "properties": { "name": "damwand_dwk", "hydchr": 0.01, "depth": 5.0, "elevation": null, "comment": "tot in veenlaag (0mNAP) OF SDL dieper (-5mNAP)" }, "bbox": [ 107034.61, 521536.91, 107280.34, 521642.41 ], "geometry": { "type": "LineString", "coordinates": [ [ 107034.61, 521642.41 ], [ 107058.75, 521592.47 ], [ 107070.99, 521536.91 ], [ 107280.34, 521589.56 ] ] } }
+]
+}
