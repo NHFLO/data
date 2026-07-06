@@ -44,7 +44,8 @@ dataset_version:
   timezone: str(required=True)
   
   # Spatial extent [minx, miny, maxx, maxy]
-  extent: list(num(), length=4, required=True)
+  # Note: yamale ignores `length=` on list(); use min/max to enforce exactly 4 elements.
+  extent: list(num(), min=4, max=4, required=True)
   
   # Path information
   paths: include('paths', required=True)

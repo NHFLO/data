@@ -22,15 +22,24 @@ columns_to_keep = [
 gdf_dir = get_abs_data_path("drains_en_damwand_bergen")
 gdf = gpd.read_file(gdf_dir / "drains_en_damwand_bergen.geojson")
 gdf = gdf.loc[gdf.naam.str.startswith("drain")]
-gdf["elevation"] = gdf[["diepte_van", "diepte_tot"]].min(axis=1)
 gdf = gdf.rename(columns={"naam": "name", "opmerking": "comment"})
+
+# Drain stage = the controlling drainage (outlet/weir) level, following the Bergen model
+# (04v2pwnbergenmodel). This is the DRN elevation, NOT the pipe invert min(diepte_van, diepte_tot).
+# The pump-building drains discharge via an outlet ("uitloop") at -0.5 m NAP (see the 'comment'
+# field), while drain_dwk is pumped and discharges at +0.73 m NAP.
+gdf["elevation"] = -0.5
+gdf.loc[gdf["name"] == "drain_dwk", "elevation"] = 0.73
 
 # Add conductances
 # m3/day per meter head difference per meter drain length
 gdf["conductance_per_meter"] = 1.0  # Default conductance
 gdf["conductance_per_squared_meter"] = np.nan  # Default conductance for open water
 gdf["bgt-identificatie"] = ""  # Placeholder for BGT identification
-gdf["mover_lake_name"] = ""  # Placeholder for mover lake boundary name, to move drained water to.
+# Route drained water to a lake via the MVR (mover) package, following the Bergen model:
+# drain_dwk -> "vijver 1, 2 en 3"; the pump-building drains -> "vijver 4".
+gdf["mover_lake_name"] = "vijver 4"
+gdf.loc[gdf["name"] == "drain_dwk", "mover_lake_name"] = "vijver 1, 2 en 3"
 gdf = gdf[columns_to_keep]
 
 # %% Add open water drainage

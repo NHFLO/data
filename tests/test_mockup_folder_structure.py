@@ -38,7 +38,9 @@ def test_mockup_folder_structure():
                     location="mockup",
                 )
             )
-            if not path.endswith(version["paths"]["mockup"]):
+            # Normalize separators so the comparison also holds on Windows, where
+            # str(Path(...)) uses backslashes while the mockup path literal uses "/".
+            if not os.path.normpath(path).endswith(os.path.normpath(version["paths"]["mockup"])):
                 pytest.fail(f"Path in repository.yaml does not match the expected path: {version['paths']['mockup']}")
 
             assert os.path.exists(path), f"Path {path} does not exist"
