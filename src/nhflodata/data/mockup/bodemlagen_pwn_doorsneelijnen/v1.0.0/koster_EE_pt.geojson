@@ -1,0 +1,21 @@
+{
+"type": "FeatureCollection",
+"name": "koster_EE_pt",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"features": [
+{ "type": "Feature", "properties": { "code": "19CNW582" }, "geometry": { "type": "Point", "coordinates": [ 102000.0, 507300.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNW618" }, "geometry": { "type": "Point", "coordinates": [ 102200.0, 507300.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNW619" }, "geometry": { "type": "Point", "coordinates": [ 102500.0, 507200.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNW094" }, "geometry": { "type": "Point", "coordinates": [ 102700.0, 507200.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNPCS 10" }, "geometry": { "type": "Point", "coordinates": [ 102900.0, 507200.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNW071" }, "geometry": { "type": "Point", "coordinates": [ 103500.0, 507200.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNPCG 04" }, "geometry": { "type": "Point", "coordinates": [ 103700.0, 507100.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNW095" }, "geometry": { "type": "Point", "coordinates": [ 104200.0, 507100.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNW072" }, "geometry": { "type": "Point", "coordinates": [ 105000.0, 507000.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNRG19C026" }, "geometry": { "type": "Point", "coordinates": [ 105500.0, 506500.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNRG19C730" }, "geometry": { "type": "Point", "coordinates": [ 106400.0, 506600.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNRG19C749" }, "geometry": { "type": "Point", "coordinates": [ 107600.0, 508200.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNRG19C150" }, "geometry": { "type": "Point", "coordinates": [ 108100.0, 508100.0 ] } },
+{ "type": "Feature", "properties": { "code": "19CNRG19C742" }, "geometry": { "type": "Point", "coordinates": [ 109500.0, 507200.0 ] } }
+]
+}
