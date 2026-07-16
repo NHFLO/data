@@ -38,7 +38,7 @@ for name in layer_names:
         pd.concat((koster_mask, stuyfzand_mask)).to_file(
             data_dir / "dikte_aquitard" / f"D{name}" / f"D{name}_mask_combined.geojson",
             driver="GeoJSON",
-        )
+        )  # pyright: ignore[reportCallIssue]
 
     else:
         koster_mask.to_file(
