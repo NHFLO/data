@@ -9,9 +9,13 @@ GeoDataFrames:
 - ``kd_nhdz``: horizontal transmissivity [m2/d] of the aquitard layers from
   the NHDZ model, computed from KD shapefiles and mask-based formulas.
 
-Where the NHDZ and Bergen model boundaries overlap, NHDZ data takes priority.
-The Bergen model only covers the shallower layers (W11-W21, S11-S21); deeper
-layers use NHDZ data exclusively.
+Where both regions provide data and their boundaries overlap, NHDZ takes priority.
+The Bergen model only covers the shallower layers (W11-W21B, S11-S21); deeper
+layers use NHDZ data exclusively. W21 is split into W21A and W21B. NHDZ uses
+the original KW21 source for both, while Bergen uses 15 and 20 m/d respectively.
+S21A uses Bergen C1D as a separate resistance, not subtracted from S13 or S21.
+It is filled and merged like the other aquitards, using the available regional
+sources. There is no NHDZ resistance source for S21A.
 
 The remaining horizontal and vertical conductivities required by MODFLOW (e.g.
 kv of aquifers, kh/kv of aquitards) are not produced here. They need to be
@@ -30,11 +34,28 @@ from nhflodata.get_paths import get_abs_data_path
 # logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-data_path = get_abs_data_path("bodemlagen_pwn_2024", "2.0.0")
-data_path_bergen = get_abs_data_path("bodemlagen_pwn_bergen", "1.0.0")
-data_path_nhdz = get_abs_data_path("bodemlagen_pwn_nhdz", "1.0.0")
+data_path = get_abs_data_path(name="bodemlagen_pwn_2024", version="3.0.0")
+data_path_bergen = get_abs_data_path(name="bodemlagen_pwn_bergen", version="1.0.0")
+data_path_nhdz = get_abs_data_path(name="bodemlagen_pwn_nhdz", version="1.0.0")
 
-layer_names = ["W11", "S11", "W12", "S12", "W13", "S13", "W21", "S21", "W22", "S22", "W31", "S31", "W32", "S32"]
+layer_names = [
+    "W11",
+    "S11",
+    "W12",
+    "S12",
+    "W13",
+    "S13",
+    "W21A",
+    "S21A",
+    "W21B",
+    "S21",
+    "W22",
+    "S22",
+    "W31",
+    "S31",
+    "W32",
+    "S32",
+]
 # TODO: [Edinsi report 3.2, p.24] Edinsi notes that C12AREA (S12 vertical resistance from
 #   NHDZ) has an extremely high resistance of 37800 days for a small area west of Castricum.
 #   Edinsi flags this as an item that still needs to be processed/verified.
@@ -58,20 +79,23 @@ c_nhdz_fill_values = {  # From bodemlagen_pwn_nhdz/v1.0.0/Ontleding_model_v2.xls
 
 kh_bergen_fill_values = {
     "W11": 7.0,  # Triwaco Excel uses 7.0, but prior nhflo implementations used 8.0.
-    "W12": 7.0,
-    "W13": 12.0,
-    "W21": 15.0,
+    "W12": 7.0,  # Ontleding_model.xlsx Aquifer 2
+    "W13": 12.0,  # Ontleding_model.xlsx Aquifer 3
+    "W21A": 15.0,  # Ontleding_model.xlsx Aquifer 4
+    "W21B": 20.0,  # Ontleding_model.xlsx Aquifer 5
 }
 c_bergen_fill_values = {
     "S11": 1.0,
     "S12": 100.0,
     "S13": 100.0,
+    "S21A": 1000.0,  # SPD1H SWE 87.001 Tabel 3.1 p27.
     "S21": 1.0,
 }
 bergen_name_mapping = {
     "11": "1A",
     "12": "1B",
     "13": "1C",
+    "21A": "1D",  # SPD 1D is Kreftenheye. 
     "21": "2",
 }
 
@@ -83,7 +107,8 @@ gdf_nhdz = gpd.read_file(data_path / "boundaries" / "triwaco_model_nhdz.geojson"
 kh_nhdz = {}
 for name in layer_names:
     if name.startswith("W"):
-        fp = data_path_nhdz / "Bodemparams" / "Kwaarden_aquifers" / f"K{name}.shp"
+        source_name = "W21" if name in {"W21A", "W21B"} else name
+        fp = data_path_nhdz / "Bodemparams" / "Kwaarden_aquifers" / f"K{source_name}.shp"
         k = gpd.read_file(fp).set_crs("EPSG:28992")
         kh_nhdz[name], _, _ = fill_boundary_with_polygons(
             boundary_gdf=gdf_nhdz,
@@ -139,37 +164,36 @@ kd_formulas = {
 
 for name, terms in kd_formulas.items():
     parts = [clip_to_mask_region(src, mask, mask_value=val, coefficient=coeff) for src, mask, val, coeff in terms]
-    kd_nhdz[name] = gpd.GeoDataFrame(pd.concat(parts, ignore_index=True), crs="EPSG:28992")
+    kd_nhdz[name] = gpd.GeoDataFrame(pd.concat(parts, ignore_index=True), crs="EPSG:28992").astype({"VALUE": "float64"})
     kd_nhdz[name].to_file(data_path / "conductances" / f"KD{name}_NHDZ.geojson", driver="GeoJSON")
 
 c_nhdz = {}
-for name in layer_names:
-    if name.startswith("S"):
-        fp = data_path_nhdz / "Bodemparams" / "Cwaarden_aquitards" / f"C{name[1:]}AREA.shp"
-        c = gpd.read_file(fp).set_crs("EPSG:28992")
-        if name == "S22":
-            c["VALUE"] *= 1.02  # From bodemlagen_pwn_nhdz/v1.0.0/Ontleding_model_v2.xlsx
+for name, fill_value in c_nhdz_fill_values.items():
+    fp = data_path_nhdz / "Bodemparams" / "Cwaarden_aquitards" / f"C{name[1:]}AREA.shp"
+    c = gpd.read_file(fp).set_crs("EPSG:28992")
+    if name == "S22":
+        c["VALUE"] *= 1.02  # From bodemlagen_pwn_nhdz/v1.0.0/Ontleding_model_v2.xlsx
 
-        c_nhdz[name], overlaps_gdf, fill_gdf = fill_boundary_with_polygons(
-            boundary_gdf=gdf_nhdz,
-            source_gdf=c,
-            value_col="VALUE",
-            fill_value=c_nhdz_fill_values[name],
-            fill_method="fill_value",
-            overlap_priority="last",
-            override_gdf=None,
-        )
-        # overlaps_gdf.to_file(data_path / "conductances" / f"C{name}_NHDZ_overlaps.geojson", driver="GeoJSON")
-        # fill_gdf.to_file(data_path / "conductances" / f"C{name}_NHDZ_fill.geojson", driver="GeoJSON")
+    c_nhdz[name], overlaps_gdf, fill_gdf = fill_boundary_with_polygons(
+        boundary_gdf=gdf_nhdz,
+        source_gdf=c,
+        value_col="VALUE",
+        fill_value=fill_value,
+        fill_method="fill_value",
+        overlap_priority="last",
+        override_gdf=None,
+    )
+    # overlaps_gdf.to_file(data_path / "conductances" / f"C{name}_NHDZ_overlaps.geojson", driver="GeoJSON")
+    # fill_gdf.to_file(data_path / "conductances" / f"C{name}_NHDZ_fill.geojson", driver="GeoJSON")
 
 # Bergen
 kh_bergen = {}
-for name in bergen_name_mapping:
-    kh_bergen[f"W{name}"], _, _ = fill_boundary_with_polygons(
+for name, fill_value in kh_bergen_fill_values.items():
+    kh_bergen[name], _, _ = fill_boundary_with_polygons(
         boundary_gdf=gdf_bergen,
         source_gdf=None,  # Are constants for Bergen, so use fill value only
         value_col="VALUE",  # Not used as source_gdf is None
-        fill_value=kh_bergen_fill_values[f"W{name}"],
+        fill_value=fill_value,
         fill_method="fill_value",
         overlap_priority="last",  # Not used as source_gdf is None
         override_gdf=None,
@@ -188,7 +212,7 @@ for name, bergen_name in bergen_name_mapping.items():
         overlap_priority="last",  # Not used as source_gdf is None
         override_gdf=None,
     )
-    # overlaps_gdf.to_file(data_path / "conductances" / f"C{bergen_name}_Bergen_overlaps.geojson", driver="GeoJSON")
+    overlaps_gdf.to_file(data_path / "conductances" / f"C{bergen_name}_Bergen_overlaps.geojson", driver="GeoJSON")
     # fill_gdf.to_file(data_path / "conductances" / f"C{bergen_name}_Bergen_fill.geojson", driver="GeoJSON")
 
 # Merge NHDZ and Bergen: NHDZ takes priority where they overlap.
@@ -209,6 +233,9 @@ for name in layer_names:
         )
     elif name in kh_nhdz:
         kh[name] = kh_nhdz[name]
+    else:
+        msg = f"No conductance data available for layer {name}"
+        raise ValueError(msg)
 
     kh[name].to_file(data_path / "conductances" / f"K{name}_combined.geojson", driver="GeoJSON")
 
@@ -225,5 +252,10 @@ for name in layer_names:
         )
     elif name in c_nhdz:
         c[name] = c_nhdz[name]
+    elif name in c_bergen:
+        c[name] = c_bergen[name]
+    else:
+        msg = f"No conductance data available for layer {name}"
+        raise ValueError(msg)
 
     c[name].to_file(data_path / "conductances" / f"C{name}_combined.geojson", driver="GeoJSON")
