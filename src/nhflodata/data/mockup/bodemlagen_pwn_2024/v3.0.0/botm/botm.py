@@ -59,16 +59,13 @@ but are tracked for future improvement.
 import logging
 import os
 from pathlib import Path
-import sys
-
-# Add src directory to path so nhflodata module can be found
-src_path = Path(__file__).resolve().parents[6]
-if str(src_path) not in sys.path:
-    sys.path.insert(0, str(src_path))
 
 import geopandas as gpd
 import numpy as np
-from interpolation_helper_functions import (
+
+from nhflodata.get_paths import get_abs_data_path
+
+from .interpolation_helper_functions import (
     combine_sources,
     get_point_values,
     interpolate_to_all_points,
@@ -78,8 +75,6 @@ from interpolation_helper_functions import (
     report_value_validity,
     report_zero_mask_violations,
 )
-
-from nhflodata.get_paths import get_abs_data_path
 
 if not logging.getLogger().hasHandlers():
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")

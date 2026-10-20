@@ -95,7 +95,7 @@ bergen_name_mapping = {
     "11": "1A",
     "12": "1B",
     "13": "1C",
-    "21A": "1D",  # SPD 1D is Kreftenheye. 
+    "21A": "1D",  # SPD 1D is Kreftenheye.
     "21": "2",
 }
 
@@ -162,6 +162,10 @@ kd_formulas = {
     ],
 }
 
+# Obtains the transmissivity of the aquitards from the NHDZ data. `sXXkd` contains the values,
+# `msXXkd` contains the corresponding mask polygons. The mask gdfs contain several polygons with 
+# mask_value referring to regions that were calibrated separately. The mask masks the source data.
+# The source data is multiplied by the coefficients listed here in kd_formulas, derived from ontledingstabel.xlsx
 for name, terms in kd_formulas.items():
     parts = [clip_to_mask_region(src, mask, mask_value=val, coefficient=coeff) for src, mask, val, coeff in terms]
     kd_nhdz[name] = gpd.GeoDataFrame(pd.concat(parts, ignore_index=True), crs="EPSG:28992").astype({"VALUE": "float64"})
@@ -212,7 +216,7 @@ for name, bergen_name in bergen_name_mapping.items():
         overlap_priority="last",  # Not used as source_gdf is None
         override_gdf=None,
     )
-    overlaps_gdf.to_file(data_path / "conductances" / f"C{bergen_name}_Bergen_overlaps.geojson", driver="GeoJSON")
+    # overlaps_gdf.to_file(data_path / "conductances" / f"C{bergen_name}_Bergen_overlaps.geojson", driver="GeoJSON")
     # fill_gdf.to_file(data_path / "conductances" / f"C{bergen_name}_Bergen_fill.geojson", driver="GeoJSON")
 
 # Merge NHDZ and Bergen: NHDZ takes priority where they overlap.
