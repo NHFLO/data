@@ -310,7 +310,7 @@ data:
           Only p50 made available. p25 and p75 are omitted for now. Precision reduced
           to 0.1mg/l using the acompanying Python file, thereby reduced the file size
           from gigabytes to 30-40 megabytes.
-  rech_evt_pwn:
+  rch_fluxpark:
     - version_nhflo: 1.0.0
       owner: PWN, HHNK, Waternet.
       publication_date: "2026-10-21"
@@ -331,9 +331,9 @@ data:
         - 152000
         - 580000
       paths:
-        local: rech_evt_pwn/v1.0.0
-        nhflo_server: /data/rech_evt_pwn/v1.0.0
-        mockup: mockup/rech_evt_pwn/v1.0.0
+        local: rch_fluxpark/v1.0.0
+        nhflo_server: /data/rch_fluxpark/v1.0.0
+        mockup: mockup/rch_fluxpark/v1.0.0
       changelog:
         previous_version: 0.0.0
         log:
