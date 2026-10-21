@@ -34,6 +34,7 @@ lintformat = [
   "types-PyYAML", # for pyyaml types
 ]
 test = [
+  "geopandas>=1.0",
   "pytest",
   "yamale",
   "yamllint",

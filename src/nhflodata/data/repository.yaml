@@ -88,6 +88,27 @@ data:
         previous_version: 0.0.0
         log: Initial version of rivers of PWN.
   bodemlagen_pwn_2024:
+    - version_nhflo: 3.0.0
+      owner: PWN
+      publication_date: "2026-10-02"
+      version_owner: "2026-10-02"
+      description_short: Bodemlagen van NHDZ en Bergen
+      description_long: Bodemlagen van NHDZ en Bergen
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - -7000
+        - 289000
+        - 300000
+        - 629000
+      paths:
+        local: bodemlagen_pwn_2024/v3.0.0
+        nhflo_server: /data/bodemlagen_pwn_2024/v3.0.0
+        mockup: mockup/bodemlagen_pwn_2024/v3.0.0
+      changelog:
+        previous_version: 2.0.0
+        log:
+          Various manual edits to geojson files to correct topology errors. Introduced S21A (Kreftenheye Fm k1).
     - version_nhflo: 2.0.0
       owner: PWN
       publication_date: "2026-02-23"

@@ -56,6 +56,14 @@ def get_abs_data_path(name="", version="latest", location="get_from_env", local_
         Parent folder of the local data set. Required if location is "local".
         Must be left empty if location is "get_from_env".
 
+
+    Notes
+    -----
+    - If the location is "get_from_env" and the environment variable NHFLODATA_LOCATION is not set,
+      the function will fall back to using the "mockup" location.
+    - If the location is "local", the local_parent_folder must be specified.
+    - Setting environment variables:
+
     Returns
     -------
     str

@@ -166,3 +166,6 @@ cython_debug/
 **/~$*
 
 .DS_Store
+src/nhflodata/data/mockup/bodemlagen_pwn_2024/v3.0.0/botm/test/
+src/nhflodata/data/mockup/bodemlagen_pwn_2024/v3.0.0/botm/interpolate_to_regular_grid.py
+src/nhflodata/data/mockup/bodemlagen_pwn_2024/v3.0.0/aquitard_top&thickness.qgz

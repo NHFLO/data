@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "DS21A_mask",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::28992" } },
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 109000.0, 497000.0 ], [ 100000.0, 497000.0 ], [ 100000.0, 515000.0 ], [ 102529.853405528643634, 515000.0 ], [ 102526.0, 512496.0 ], [ 109000.0, 512470.066096602706239 ], [ 109000.0, 497000.0 ] ] ] } }
+]
+}
