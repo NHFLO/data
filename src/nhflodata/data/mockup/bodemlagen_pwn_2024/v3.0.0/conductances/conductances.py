@@ -17,6 +17,12 @@ S21A uses Bergen C1D as a separate resistance, not subtracted from S13 or S21.
 It is filled and merged like the other aquitards, using the available regional
 sources. There is no NHDZ resistance source for S21A.
 
+After merging, K and c polygons are extended to each revised v3 layer boundary.
+Existing polygons are retained; only uncovered areas are added. Shallow layers
+use the existing Bergen layer defaults for these additions, and deeper layers
+use the NHDZ resistance defaults or the area-weighted mean K of the merged source.
+The original regional coverage and NHDZ overlap priority are unchanged.
+
 The remaining horizontal and vertical conductivities required by MODFLOW (e.g.
 kv of aquifers, kh/kv of aquitards) are not produced here. They need to be
 computed downstream by NHFLO/tools using an anisotropy factor and layer
@@ -26,6 +32,7 @@ thicknesses of the MODFLOW grid.
 import logging
 
 import geopandas as gpd
+import numpy as np
 import pandas as pd
 from params_helper_functions import clip_to_mask_region, fill_boundary_with_polygons
 
@@ -33,6 +40,45 @@ from nhflodata.get_paths import get_abs_data_path
 
 # logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
+
+
+def extend_to_layer_boundary(source, boundary, *, fill_value, parameter_name):
+    """Add hydraulic coverage inside a layer boundary without changing source values.
+
+    Parameters
+    ----------
+    source : gpd.GeoDataFrame
+        Merged K [m/d] or c [d] polygons in EPSG:28992, with a ``VALUE`` column.
+    boundary : shapely.Geometry
+        Revised layer footprint in the same CRS.
+    fill_value : float
+        Existing regional layer default, or area-weighted mean source K.
+    parameter_name : str
+        Hydraulic parameter identifier for warnings and errors.
+
+    Returns
+    -------
+    gpd.GeoDataFrame
+        Original polygons plus a non-overlapping polygon covering any gaps.
+    """
+    if not (np.isfinite(source["VALUE"]) & (source["VALUE"] > 0.0)).all():
+        msg = f"{parameter_name}: source hydraulic values must be positive and finite"
+        raise ValueError(msg)
+    uncovered = boundary.difference(source.geometry.union_all())
+    if uncovered.is_empty:
+        return source
+    if not np.isfinite(fill_value) or fill_value <= 0.0:
+        msg = f"{parameter_name}: cannot extend hydraulic coverage without a positive, finite fill value"
+        raise ValueError(msg)
+    logger.warning(
+        "%s: extending hydraulic coverage by %.3f km2 using fill value %.6g.",
+        parameter_name,
+        uncovered.area / 1e6,
+        fill_value,
+    )
+    addition = gpd.GeoDataFrame({"VALUE": [fill_value]}, geometry=[uncovered], crs=source.crs)
+    return gpd.GeoDataFrame(pd.concat([source, addition], ignore_index=True), crs=source.crs)
+
 
 data_path = get_abs_data_path(name="bodemlagen_pwn_2024", version="3.0.0")
 data_path_bergen = get_abs_data_path(name="bodemlagen_pwn_bergen", version="1.0.0")
@@ -103,6 +149,12 @@ bergen_name_mapping = {
 gdf_bergen = gpd.read_file(data_path / "boundaries" / "triwaco_model_bergen.geojson")
 gdf_nhdz = gpd.read_file(data_path / "boundaries" / "triwaco_model_nhdz.geojson")
 
+layer_boundaries = {}
+for name in layer_names:
+    if name.startswith("S"):
+        boundary = gpd.read_file(data_path / "boundaries" / name / f"{name}.geojson").to_crs(gdf_nhdz.crs)
+        layer_boundaries[name[1:]] = boundary.geometry.union_all()
+
 # NHDZ
 kh_nhdz = {}
 for name in layer_names:
@@ -163,7 +215,7 @@ kd_formulas = {
 }
 
 # Obtains the transmissivity of the aquitards from the NHDZ data. `sXXkd` contains the values,
-# `msXXkd` contains the corresponding mask polygons. The mask gdfs contain several polygons with 
+# `msXXkd` contains the corresponding mask polygons. The mask gdfs contain several polygons with
 # mask_value referring to regions that were calibrated separately. The mask masks the source data.
 # The source data is multiplied by the coefficients listed here in kd_formulas, derived from ontledingstabel.xlsx
 for name, terms in kd_formulas.items():
@@ -241,6 +293,15 @@ for name in layer_names:
         msg = f"No conductance data available for layer {name}"
         raise ValueError(msg)
 
+    unit = "21" if name == "W21B" else name[1:]
+    fill_value = (
+        kh_bergen_fill_values[name]
+        if name in kh_bergen
+        else np.average(kh[name]["VALUE"], weights=kh[name].geometry.area)
+    )
+    kh[name] = extend_to_layer_boundary(
+        kh[name], layer_boundaries[unit], fill_value=fill_value, parameter_name=f"K{name}"
+    )
     kh[name].to_file(data_path / "conductances" / f"K{name}_combined.geojson", driver="GeoJSON")
 
 c = {}
@@ -262,4 +323,8 @@ for name in layer_names:
         msg = f"No conductance data available for layer {name}"
         raise ValueError(msg)
 
+    fill_value = c_bergen_fill_values[name] if name in c_bergen else c_nhdz_fill_values[name]
+    c[name] = extend_to_layer_boundary(
+        c[name], layer_boundaries[name[1:]], fill_value=fill_value, parameter_name=f"C{name}"
+    )
     c[name].to_file(data_path / "conductances" / f"C{name}_combined.geojson", driver="GeoJSON")
