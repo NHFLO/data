@@ -310,6 +310,37 @@ data:
           Only p50 made available. p25 and p75 are omitted for now. Precision reduced
           to 0.1mg/l using the acompanying Python file, thereby reduced the file size
           from gigabytes to 30-40 megabytes.
+  rech_evt_pwn:
+    - version_nhflo: 1.0.0
+      owner: PWN, HHNK, Waternet.
+      publication_date: "2026-10-21"
+      version_owner: FluxPark output 2016-2024
+      description_short: FluxPark drainage and transpiration deficit time series
+      description_long:
+        Daily FluxPark output (PWN_HHNK_Waternet_2016_2024) for 2016-01-01
+        to 2025-03-03 on a 100 m grid, stored in a single netCDF with the
+        variables drain_mm_d (drainage) and trans_def_pot_mm_d (transpiration
+        deficit w.r.t. the potential transpiration), both in mm/d. Dimensions are
+        (time, y, x) in EPSG:28992. Only these two variables were selected from the
+        original GeoTIFFs.
+      contact: bas.des.tombe@pwn.nl
+      timezone: Europe/Amsterdam
+      extent:
+        - 81000
+        - 454000
+        - 152000
+        - 580000
+      paths:
+        local: rech_evt_pwn/v1.0.0
+        nhflo_server: /data/rech_evt_pwn/v1.0.0
+        mockup: mockup/rech_evt_pwn/v1.0.0
+      changelog:
+        previous_version: 0.0.0
+        log:
+          The GeoTIFFs (float32) were combined into one netCDF per dataset. Values are
+          stored as int16 with scale_factor 0.02 mm/d, so the precision is reduced to
+          0.01 mm/d. The mockup contains 11 days (2020-08-02 to 2020-08-12) on a 4 times
+          coarser grid with random perturbations, and should not be used for analysis.
   wells_pwn:
     - version_nhflo: 1.0.0
       owner: PWN
